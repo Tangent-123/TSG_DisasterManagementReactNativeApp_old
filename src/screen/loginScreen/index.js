@@ -14,7 +14,6 @@ import LoginStyle from './style';
 import LoginApi from '../../util/ApiCollection';
 import Toast from 'react-native-simple-toast';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { sha256 } from 'react-native-sha256';
 import qs from 'qs';
 import PasswordInputText from 'react-native-hide-show-password-input';
 import ColorCode from '../../util/Color_Value';
