@@ -7,18 +7,23 @@ import ColorCode from '../../util/Color_Value';
 
 const slides = [
     {
-        image: require('../../images/DMS_IMG0.jpg'),
+        image: require('../../images/imgone.jpg'),
         backgroundColor: '#3386FF',
-
+       // imageStyle:{styles}
 
     },
     {
-        image: require('../../images/DMS_IMG1.jpg'),
+        image: require('../../images/img_2.jpg'),
         backgroundColor: '#3386FF',
 
     },
     {
-        image: require('../../images/DMS_IMG2.jpg'),
+        image: require('../../images/img_3.jpg'),
+        backgroundColor: '#3386FF',
+
+    },
+    {
+        image: require('../../images/img_4.jpg'),
         backgroundColor: '#3386FF',
     },
 ];
@@ -38,7 +43,7 @@ export default class SplashScreen extends React.Component {
     _renderDoneButton = () => {
         AsyncStorage.getItem('FIRST_NAME')
             .then(FIRST_NAME => {
-                console.log('rohit jaoj'+FIRST_NAME)
+                console.log('rohit jaoj' + FIRST_NAME)
                 if (FIRST_NAME == null) {
                     this.props.navigation.navigate('AuthStart')
                 } else {
@@ -52,6 +57,7 @@ export default class SplashScreen extends React.Component {
             <View style={{ flex: 1 }}>
                 <AppIntroSlider
                     slides={slides}
+               
                     showNextButton={false}
                     renderDoneButton={this._renderDoneButton}
                 />
@@ -68,4 +74,7 @@ const styles = StyleSheet.create({
     viewPager: {
         flex: 1,
     },
+
+    image:{
+        width:'90%' ,height:'90%',alignItems:'center' ,justifyContent:'center'  }
 });

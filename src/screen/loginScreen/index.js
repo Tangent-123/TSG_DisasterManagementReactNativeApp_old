@@ -18,6 +18,7 @@ import qs from 'qs';
 import PasswordInputText from 'react-native-hide-show-password-input';
 import ColorCode from '../../util/Color_Value';
 export default class LoginActivity extends React.Component {
+    _isMounted = false;
     static navigationOptions = {
         header: null
     }
@@ -26,10 +27,16 @@ export default class LoginActivity extends React.Component {
         this.state = {
             Name: '',
             password: '',
-            SHAPassword: '',
             spinner: false,
         }
     }
+componentDidMount(){
+    this._isMounted = true;
+}
+
+    componentWillUnmount() {
+        this._isMounted = false;
+      }
     submitbtn = async () => {
         if (this.state.Name !== '') {
             if (this.state.password !== '') {
@@ -46,7 +53,7 @@ export default class LoginActivity extends React.Component {
                 };
                 Axios.post(LoginApi.LoginUrl,
                     data,
-                    headers
+                    {headers}
                 ).then(p => {
                     if (p.data.status == 'TRUE') {
                         // AsyncStorage.setItem('ProfileData',p.data.access_token);
@@ -83,13 +90,16 @@ export default class LoginActivity extends React.Component {
                         });
 
                     } else {
-                        Toast.show(p.data.response);
+                        Toast.show(p.data.error_description);
                         this.setState({
                             spinner: false,
                         });
                     }
-                }).catch();
-                // const formData = new FormData();
+                }).catch(function (error) {
+                    Toast.show(error)
+
+                })
+                    // const formData = new FormData();
                 // formData.append('username', this.state.Name);
                 // formData.append('password', this.state.SHAPassword);
                 // formData.append('grant_type', 'password');

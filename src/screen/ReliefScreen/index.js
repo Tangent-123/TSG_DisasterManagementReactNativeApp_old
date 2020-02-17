@@ -100,12 +100,14 @@ export default class ReliefScreen extends React.Component {
 
     // }
     getback = () => {
-        this.props.navigation.navigate('DashboardStack')
+        this.props.navigation.navigate('DashboardStack');
     }
-
+    getbeneficial = () => {
+        this.props.navigation.navigate('BeneficiallistStack');
+    }
     render() {
         return (
-            <View style={RegStyle.container}>
+            <View style={{ flex: 1 }}>
                 {/* <Spinner
                     visible={this.state.spinner}
                     textContent={'Loading...'}
@@ -117,157 +119,72 @@ export default class ReliefScreen extends React.Component {
                         <Image source={require('../../images/arrow.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'column' }}>
-                        <Text style={RegStyle.headerItem}>Profile</Text>
+                        <Text style={RegStyle.headerItem}>Relief Phase</Text>
                     </View>
                 </View>
                 <ScrollView style={{ flex: 1, padding: 10 }}>
-                    <View style={RegStyle.containersecond}>
+                    <View style={{ flex: 1 }}>
 
-                        <TextField
-                            label="First Name"
-                            value={this.state.firstName}
-                            returnKeyType='next'
-                            labelFontSize={14}
-                            labelTextStyle={{ fontFamily: 'Gilroy-Medium' }}
-                            tintColor={'#70AFA7'}
-                            style={{ color: '#001630', fontSize: 14 }}
-                            onChangeText={(firstName) => { this.setState({ firstName: firstName }) }} />
-                        <TextField
-                            label="Middle Name"
-                            value={this.state.MiddleName}
-                            returnKeyType='next'
-                            labelFontSize={14}
-                            labelTextStyle={{ fontFamily: 'Gilroy-Medium' }}
-                            tintColor={'#70AFA7'}
-                            style={{ color: '#001630', fontSize: 14 }}
-                            onChangeText={(MiddleName) => { this.setState({ MiddleName: MiddleName }) }} />
-                        <TextField
-                            label="Last Name"
-                            value={this.state.LastNAme}
-                            returnKeyType='next'
-                            labelFontSize={14}
-                            labelTextStyle={{ fontFamily: 'Gilroy-Medium' }}
-                            tintColor={'#70AFA7'}
-                            style={{ color: '#001630', fontSize: 14 }}
-                            onChangeText={(LastNAme) => { this.setState({ LastNAme: LastNAme }) }} />
+                        <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
 
+                            <TouchableOpacity
+                                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                onPress={() => this.getbeneficial()}>
+                                <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
 
-                        <View style={{ marginLeft: 4, marginTop: 4 }}>
-                            <RadioForm
-                                radio_props={radio_props}
-                                initial={0}
-                                buttonSize={10}
+                                    <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
 
-                                selectedButtonColor={'#70AFA7'}
-                                buttonColor={'#dddedb'}
-                                labelStyle={{ fontSize: 19, marginRight: 16, color: '#001630', fontFamily: "Gilroy-Medium", alignItems: 'center', marginRight: 48 }}
-                                formHorizontal={true}
-                                animation={true}
-                                onPress={(Value) => { this.getRedio(Value) }}>
-                            </RadioForm>
+                                    <Text style={{ fontSize: 16, color: '#000' }}>Beneficiary list</Text>
+
+                                </View>
+
+                            </TouchableOpacity>
                         </View>
 
-                        <TextField
-                            label="Blood Group"
-                            value={this.state.bloodgroup}
-                            returnKeyType='next'
-                            keyboardType='numeric'
-                            maxLength={16}
-                            labelFontSize={14}
-                            labelTextStyle={{ fontFamily: 'Gilroy-Medium' }}
-                            tintColor={'#70AFA7'}
-                            style={{ color: '#001630', fontSize: 14 }}
-                            underlineColorAndroid="transparent"
-                            onChangeText={(Mobile) => { this.setState({ Mobile: Mobile }) }} />
-                        <TextField
-                            value={this.state.email}
-                            label="Email"
-                            returnKeyType='next'
-                            labelFontSize={14}
-                            labelTextStyle={{ fontFamily: 'Gilroy-Medium' }}
-                            tintColor={'#70AFA7'}
-                            style={{ color: '#001630', fontSize: 14 }}
-                            keyboardType={'email-address'}
-                            onChangeText={(email) => { this.setState({ email: email }) }} />
-                        <TextField
-                            label="Phone Number"
-                            value={this.state.Mobile}
-                            returnKeyType='next'
-                            keyboardType='numeric'
-                            maxLength={16}
-                            labelFontSize={14}
-                            labelTextStyle={{ fontFamily: 'Gilroy-Medium' }}
-                            tintColor={'#70AFA7'}
-                            style={{ color: '#001630', fontSize: 14 }}
-                            underlineColorAndroid="transparent"
-                            onChangeText={(Mobile) => { this.setState({ Mobile: Mobile }) }} />
-                        {/* <TextField
-                            label="Company name"
-                            value={this.state.Companyname}
-                            returnKeyType='next'
-                            labelFontSize={14}
-                            labelTextStyle={{fontFamily:'Gilroy-Medium'}}
-                            tintColor={'#70AFA7'}
-                            style={{color:'#001630',fontSize:14}}
-                            onChangeText={(City) => { this.setState({ City: City }) }} /> */}
+
+                        <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
+
+<TouchableOpacity
+    hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+    onPress={() => this.getbeneficial()}>
+    <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
+
+        <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+
+        <Text style={{ fontSize: 16, color: '#000' }}>Verify List</Text>
+
+    </View>
+
+</TouchableOpacity>
+</View>
+
+<View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
+
+<TouchableOpacity
+    hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+    onPress={() => this.getbeneficial()}>
+    <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
+
+        <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+
+        <Text style={{ fontSize: 16, color: '#000' }}>Final List</Text>
+
+    </View>
+
+</TouchableOpacity>
+</View>
 
 
 
-                        <TextField
-                            value={this.state.EmergencyName}
-                            label="Emergency Conatct Name"
-                            returnKeyType='next'
-                            labelFontSize={14}
-                            labelTextStyle={{ fontFamily: 'Gilroy-Medium' }}
-                            tintColor={'#70AFA7'}
-                            style={{ color: '#001630', fontSize: 14 }}
-                            keyboardType={'email-address'}
-                            onChangeText={(email) => { this.setState({ email: email }) }} />
-                        <TextField
-                            value={this.state.EmergencyConatct}
-                            label="Emergency Conatct Number"
-                            returnKeyType='next'
-                            labelFontSize={14}
-                            labelTextStyle={{ fontFamily: 'Gilroy-Medium' }}
-                            tintColor={'#70AFA7'}
-                            style={{ color: '#001630', fontSize: 14 }}
-                            keyboardType={'email-address'}
-                            onChangeText={(email) => { this.setState({ email: email }) }} />
+
 
                     </View>
-                    <View style={RegStyle.container2}>
-                        <TouchableOpacity
-                            style={RegStyle.AddToCardBtn}
-                            onPress={this.getReg} >
-                            <Text style={RegStyle.TextStyle}>UPDATE PROFILE </Text>
-                        </TouchableOpacity>
-                    </View>
-
                     <StatusBar
                         backgroundColor="#3386FF"
                         barStyle='dark-content'
                     />
                 </ScrollView>
-                {/* <AwesomeAlert
-                    show={this.state.showAlert}
-                    showProgress={false}
-                    title="Thank You"
-                    message="We have received your signup request.Our team will get back to you within 24 hours"
-                    closeOnTouchOutside={false}
-                    titleStyle={RegStyle.text}
-                    messageStyle={RegStyle.textheader}
-                    closeOnHardwareBackPress={false}
-                    showCancelButton={false}
-                    showConfirmButton={true}
-                    confirmText="Continue"
-                    confirmButtonColor={Colors.Appcolor}
-                    onConfirmPressed={() => {
-                        this.props.navigation.navigate('login');
-                        this.setState({
-                            showAlert: false
-                        })
-                    }}
-                /> */}
+
             </View>
         );
     }

@@ -79,6 +79,10 @@ export default class DashboardScreen extends React.Component {
         } else if (ValueBrand == 'Notice') {
             this.props.navigation.navigate('NoticeBoardStack')
 
+
+        }else if(ValueBrand == 'Relief'){
+            this.props.navigation.navigate('ReliefStack')
+
         } else if (ValueBrand == 'Close') {
             RNExitApp.exitApp();
         } else if (ValueBrand == 'IncomeTax') {

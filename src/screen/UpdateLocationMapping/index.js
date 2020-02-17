@@ -74,7 +74,7 @@ export default class UpdateLocationMapping extends React.Component {
         console.log('hearvgdh' + headers)
         Axios.post(BaseUrl.UpadateMapping,
             data,
-            { headers }
+        headers
         ).then(p => {
             console.log('Kapil j ' + (p.data))
             if (p.data.status == true) {

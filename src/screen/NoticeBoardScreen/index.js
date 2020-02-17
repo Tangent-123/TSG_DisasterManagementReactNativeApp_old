@@ -67,7 +67,7 @@ export default class NoticeScreen extends React.Component {
                                     }
                                 }).then((response) => {
                                     console.log('rohit jain aa' + response.data);
-                                    console.log('rohit jain aa' + response);
+                                    console.log('rohit jain aa' + response.data.status);
                                     if (response.data.status == 'true') {
                                         console.log('rohit jain aaxad' + response.data.response);
                                         this.setState({
@@ -75,6 +75,10 @@ export default class NoticeScreen extends React.Component {
                                             spinner:false,
                                         })
 
+                                    }else{
+                                        this.setState({
+                                            spinner:false
+                                        })
                                     }
                                 })
                             })
@@ -105,27 +109,26 @@ export default class NoticeScreen extends React.Component {
         console.log('repov'+item.RESPONSE_CODE)
         const data = JSON.stringify({
             NOTICE_SYS_ID: '1',
-            DESCRIPTION: item.DESCRIPTION,
-            CREATED_BY: item.POSTED_BY,
+            MODIFIED_BY: '1',
         });
         const headers = {
             'content-type': 'application/json; charset=utf-8',
             'Authorization': 'bearer ' + this.state.AccessToken
         };
-        Axios.post('http://Devapi.tatadisasterresponse.com/api/delete-notice-comment',
+        Axios.post('http://Devapi.tatadisasterresponse.com/api/delete-notice-notice-board',
             data,
             {headers}
         ).then(p => {
-            console.log('riohrigh' + p.data.status)
-            if (p.data.status == true) {
-                Toast.show(p.data.Message);
+            console.log('riohrigh' + JSON.stringify(p.data))
+            if (p.data.status == 'true') {
+                Toast.show(p.data.response);
                 this.props.navigation.navigate('Dashboard');
                 this.setState({
                     spinner: false,
                 });
 
             } else {
-                Toast.show(p.data.Message);
+                Toast.show(p.data.response);
                 this.setState({
                     spinner: false,
                 });
@@ -133,6 +136,9 @@ export default class NoticeScreen extends React.Component {
 
         }).catch(function (error) {
             if (error.response) {
+                this.setState({
+                    spinner:false
+                })
                 // The request was made and the server responded with a status code
                 // that falls out of the range of 2xx
                 console.log(error.response.data);

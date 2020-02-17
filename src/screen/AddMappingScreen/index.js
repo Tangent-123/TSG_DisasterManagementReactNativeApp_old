@@ -262,7 +262,7 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
             })
     }
     HamletView(itemvalue) {
-        this.setState({  
+        this.setState({
             HamletID: itemvalue.HAMLET_SYS_ID,
             HamletName: itemvalue.HAMLET_NAME,
             HamletNameList: '',
@@ -301,7 +301,7 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
             })
     }
     PartnerView(itemvalue) {
-        this.setState({  
+        this.setState({
             PartnerID: itemvalue.HAMLET_SYS_ID,
             PartnerName: itemvalue.HAMLET_NAME,
             PartnerNameList: '',
@@ -313,17 +313,27 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
     }
 
     AddMappingData() {
-this.setState({
-    spinner:true
-})
+        this.setState({
+            spinner: true
+        })
+
+       
         const data = JSON.stringify({
+            RESPONSE_CODE:this.state.ResponseCode,
             PARTNER_SYS_ID: this.state.PartnerID,
+           // PARTNER_NAME: this.state.PartnerName,
             STATE_SYS_ID: this.state.StateID,
+           // STATE_NAME: this.state.StateName,
             DISTRICT_SYS_ID: this.state.DistricID,
+           DISTRICT_NAME: this.state.DistricName,
             BLOCK_SYS_ID: this.state.BlockID,
+           BLOCK_NAME: this.state.BlockName,
             GRAM_PANCHAYAT_SYS_ID: this.state.GramPanchayatID,
+          GRAM_PANCHAYAT_NAME: this.state.GramPanchayatName,
             VILLAGE_SYS_ID: this.state.VillageID,
+           VILLAGE_NAME: this.state.VillageName,
             HEMLET_SYS_ID: this.state.HamletID,
+            HAMLET_NAME: this.state.HamletName,
             CREATED_BY: 2
         });
         console.log('rohit jain' + data)
@@ -336,7 +346,7 @@ this.setState({
             data,
             { headers }
         ).then(p => {
-            console.log('Kapil j ' + (p.data))
+            console.log('Kapil j ' + JSON.stringify(p))
             if (p.data.status == true) {
                 Toast.show(p.data.response);
                 this.props.navigation.navigate('MappingListStack')
@@ -514,7 +524,7 @@ this.setState({
                                 <View style={{ margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, }}>
                                     <TouchableOpacity
                                         hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-                                        style={BuyNFOStyle.AddToCardBtn}     
+                                        style={BuyNFOStyle.AddToCardBtn}
                                         onPress={() => this.HamletView(item)}>
                                         <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginLeft: 6, marginRight: 8 }}>
                                             <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold' }}>{item.HAMLET_NAME}</Text>

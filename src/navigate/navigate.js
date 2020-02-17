@@ -15,6 +15,10 @@ import AddNoticeScreen from '../screen/AddNoticeScreen';
 import MappingListScreen from '../screen/MappingListScreen';
 import AddMappingScreen from '../screen/AddMappingScreen';
 import UpdateLocationMappingScreen from '../screen/UpdateLocationMapping';
+import ReliefScreen from '../screen/ReliefScreen';
+
+import BeneficiallistScreen from '../screen/BeneficialList';
+
 import React from 'react';
 const AuthStart = createStackNavigator({
   LoginScreen: {
@@ -69,6 +73,12 @@ const GuidlineStack = createStackNavigator({
 
 }
 );
+
+const ReliefStack = createStackNavigator({
+  ReliefScreen:{
+    screen:ReliefScreen
+  },
+});
 const UpdateLocationMappingStack = createStackNavigator({
   UpdateLocationMappingScreen:{
     screen:UpdateLocationMappingScreen
@@ -88,6 +98,11 @@ const TeamStack = createStackNavigator({
 
 }
 );
+const BeneficiallistStack = createStackNavigator({
+  BeneficiallistScreen :{
+    screen:BeneficiallistScreen
+  }
+})
 const MappingListStack = createStackNavigator({
   MappingListScreen:{
     screen:MappingListScreen
@@ -121,6 +136,8 @@ const AuthStack = createSwitchNavigator(
     TeamStack:TeamStack,
     EmergencyStack:EmergencyStack,
     UpdateLocationMappingStack:UpdateLocationMappingStack,
+    ReliefStack:ReliefStack,
+    BeneficiallistStack:BeneficiallistStack,
   },
   {
     initialRouteName: 'AuthLoading',

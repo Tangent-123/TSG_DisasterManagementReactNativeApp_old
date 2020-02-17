@@ -142,7 +142,7 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
                         onPress={this.getback} >
                         <Image source={require('../../images/arrow.png')} style={{  width: 30, height: 20, marginRight:10}} />
                     </TouchableOpacity>
-                    <Text style={{fontSize:18,marginLeft:10,color:'white'}}>Buy NFO</Text>
+                    <Text style={{fontSize:18,marginLeft:10,color:'white'}}>Add Notice</Text>
                 </View>
                 <ScrollView style={{ flex: 1 }}>
                     <Text style={{fontSize:16,color:'black',marginTop:10,padding:10}}>Notice Discription</Text>
