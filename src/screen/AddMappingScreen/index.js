@@ -317,21 +317,21 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
             spinner: true
         })
 
-       
+
         const data = JSON.stringify({
-            RESPONSE_CODE:this.state.ResponseCode,
+            RESPONSE_CODE: this.state.ResponseCode,
             PARTNER_SYS_ID: this.state.PartnerID,
-           // PARTNER_NAME: this.state.PartnerName,
+            PARTNER_NAME: this.state.PartnerName,
             STATE_SYS_ID: this.state.StateID,
-           // STATE_NAME: this.state.StateName,
+            // STATE_NAME: this.state.StateName,
             DISTRICT_SYS_ID: this.state.DistricID,
-           DISTRICT_NAME: this.state.DistricName,
+            DISTRICT_NAME: this.state.DistricName,
             BLOCK_SYS_ID: this.state.BlockID,
-           BLOCK_NAME: this.state.BlockName,
+            BLOCK_NAME: this.state.BlockName,
             GRAM_PANCHAYAT_SYS_ID: this.state.GramPanchayatID,
-          GRAM_PANCHAYAT_NAME: this.state.GramPanchayatName,
+            GRAM_PANCHAYAT_NAME: this.state.GramPanchayatName,
             VILLAGE_SYS_ID: this.state.VillageID,
-           VILLAGE_NAME: this.state.VillageName,
+            VILLAGE_NAME: this.state.VillageName,
             HEMLET_SYS_ID: this.state.HamletID,
             HAMLET_NAME: this.state.HamletName,
             CREATED_BY: 2

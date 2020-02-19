@@ -28,7 +28,7 @@ export default class NoticeScreen extends React.Component {
             subbrokerId: 'all',
             clientId: '',
             item: '',
-             spinner: true,
+            spinner: true,
             text: '',
             IsonValue: '2',
             picked: 'Search Client',
@@ -72,12 +72,12 @@ export default class NoticeScreen extends React.Component {
                                         console.log('rohit jain aaxad' + response.data.response);
                                         this.setState({
                                             ViewNoticeboard: response.data.response,
-                                            spinner:false,
+                                            spinner: false,
                                         })
 
-                                    }else{
+                                    } else {
                                         this.setState({
-                                            spinner:false
+                                            spinner: false
                                         })
                                     }
                                 })
@@ -106,7 +106,7 @@ export default class NoticeScreen extends React.Component {
         // "POSTED_BY": 1,
         // "CREATED_DATE": "2020-01-22T15:56:27.980"
 
-        console.log('repov'+item.RESPONSE_CODE)
+        console.log('repov' + item.RESPONSE_CODE)
         const data = JSON.stringify({
             NOTICE_SYS_ID: '1',
             MODIFIED_BY: '1',
@@ -117,7 +117,7 @@ export default class NoticeScreen extends React.Component {
         };
         Axios.post('http://Devapi.tatadisasterresponse.com/api/delete-notice-notice-board',
             data,
-            {headers}
+            { headers }
         ).then(p => {
             console.log('riohrigh' + JSON.stringify(p.data))
             if (p.data.status == 'true') {
@@ -137,7 +137,7 @@ export default class NoticeScreen extends React.Component {
         }).catch(function (error) {
             if (error.response) {
                 this.setState({
-                    spinner:false
+                    spinner: false
                 })
                 // The request was made and the server responded with a status code
                 // that falls out of the range of 2xx
@@ -155,7 +155,7 @@ export default class NoticeScreen extends React.Component {
                 <Spinner
                     visible={this.state.spinner}
                     textContent={'Loading...'}
-                    textStyle={{color:'#fff'}}
+                    textStyle={{ color: '#fff' }}
                 />
                 <View style={SOAStyle.HeaderBackground}>
                     <TouchableOpacity
@@ -170,7 +170,7 @@ export default class NoticeScreen extends React.Component {
                         data={this.state.ViewNoticeboard}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item }) =>
-                            <View style={{elevation:10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%',marginEnd:10 }}>
+                            <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
                                 <View style={{ flexDirection: 'column', marginLeft: 6, marginRight: 8, width: '90%' }}>
                                     <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignItems: 'center', marginRight: 8 }}>
                                         <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', width: '90%' }}>CREATED_DATE: {item.CREATED_DATE}</Text>
@@ -200,11 +200,11 @@ export default class NoticeScreen extends React.Component {
                     <TouchableOpacity
                         hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
                         onPress={() => this.NoticeData()}>
-                          <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', marginEnd: 10, padding: 10 }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', marginEnd: 10, padding: 10 }}>
                             <Text style={{ backgroundColor: '#008800', fontSize: 14, color: '#fff', justifyContent: 'center', marginLeft: 40, padding: 10, alignItems: 'center', borderRadius: 10 }}>
                                 Add
                        </Text>
-                       </View>
+                        </View>
                     </TouchableOpacity>
                 </View>
                 <StatusBar

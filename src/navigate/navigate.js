@@ -16,7 +16,7 @@ import MappingListScreen from '../screen/MappingListScreen';
 import AddMappingScreen from '../screen/AddMappingScreen';
 import UpdateLocationMappingScreen from '../screen/UpdateLocationMapping';
 import ReliefScreen from '../screen/ReliefScreen';
-
+import AddBeneFicialScreen from '../screen/AddbeneficialScreen';
 import BeneficiallistScreen from '../screen/BeneficialList';
 
 import React from 'react';
@@ -73,6 +73,11 @@ const GuidlineStack = createStackNavigator({
 
 }
 );
+const AddBeneFicialStack = createStackNavigator({
+  AddBeneFicialScreen :{
+    screen:AddBeneFicialScreen
+  }
+})
 
 const ReliefStack = createStackNavigator({
   ReliefScreen:{
@@ -137,6 +142,7 @@ const AuthStack = createSwitchNavigator(
     EmergencyStack:EmergencyStack,
     UpdateLocationMappingStack:UpdateLocationMappingStack,
     ReliefStack:ReliefStack,
+    AddBeneFicialStack:AddBeneFicialStack,
     BeneficiallistStack:BeneficiallistStack,
   },
   {

@@ -25,8 +25,8 @@ export default class LoginActivity extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            Name: '',
-            password: '',
+            Name: 'aahnas@tata.com',
+            password: 'Abc@123456',
             spinner: false,
         }
     }

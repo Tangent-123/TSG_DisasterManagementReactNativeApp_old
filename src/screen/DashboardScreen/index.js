@@ -154,6 +154,7 @@ export default class DashboardScreen extends React.Component {
                         }
                     </Picker>
                     {/* <RNPickerSelect
+                    placeholder = {label : }
                         onValueChange={(itemValue) =>
                             this.resposecode(itemValue)}
                         items={

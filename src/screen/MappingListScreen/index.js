@@ -76,7 +76,7 @@ export default class MappingListScreen extends Component {
                             <TouchableOpacity
                                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
                                 onPress={() => this.props.navigation.navigate('UpdateLocationMappingStack', {
-                                    UpdateMappingData: item.DISTRICT_NAME
+                                    UpdateMappingData: item
                                 })
                                 }>
                                 <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, }}>

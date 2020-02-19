@@ -30,7 +30,7 @@ export default class MappingListScreen extends Component {
                             AccessToken: access_token,
                             ResponseCode: ResponseCode,
                         })
-                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-response-beneficiary?beneficiary_sys_id=1&response_code="+this.state.ResponseCode +"&location_mapping_id=1&status=Registered", {
+                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-response-beneficiary?beneficiary_sys_id=1&response_code=" + this.state.ResponseCode + "&location_mapping_id=1&status=Registered", {
                             headers: {
                                 'Authorization': 'bearer ' + this.state.AccessToken
                             }
@@ -43,8 +43,8 @@ export default class MappingListScreen extends Component {
                                     MappingListArray: response.data.response
                                 })
 
-                            }else{
-                            Toast.show(response.data.response)
+                            } else {
+                                Toast.show(response.data.response)
                             }
                         })
                     })
@@ -55,7 +55,7 @@ export default class MappingListScreen extends Component {
         this.props.navigation.navigate('DashboardStack')
     }
     AddMapping = () => {
-        this.props.navigation.navigate('AddMappingStack');
+        this.props.navigation.navigate('AddBeneFicialStack');
     }
     render() {
         return (
@@ -76,8 +76,8 @@ export default class MappingListScreen extends Component {
                         <View>
                             <TouchableOpacity
                                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-                                onPress={() => this.props.navigation.navigate('UpdateLocationMappingStack',{
-                                    UpdateMappingData:item.DISTRICT_NAME
+                                onPress={() => this.props.navigation.navigate('UpdateLocationMappingStack', {
+                                    UpdateMappingData: item
                                 })
                                 }>
                                 <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, }}>
@@ -102,7 +102,7 @@ export default class MappingListScreen extends Component {
                 />
 
                 <View>
-                    {/* <TouchableOpacity
+                    <TouchableOpacity
                         hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
                         onPress={() => this.AddMapping()}>
                         <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', marginEnd: 10, padding: 10 }}>
@@ -110,7 +110,7 @@ export default class MappingListScreen extends Component {
                                 Add
                        </Text>
                         </View>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
                 </View>
             </View>
         );
