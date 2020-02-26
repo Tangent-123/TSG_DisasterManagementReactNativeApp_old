@@ -25,19 +25,46 @@ export default class LoginActivity extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            Name: 'aahnas@tata.com',
-            password: 'Abc@123456',
+            Name: 'saurabh.mishra@tangenttechsolutions.com',
+            password: 'Abc@1234567',
             spinner: false,
         }
     }
-componentDidMount(){
-    this._isMounted = true;
-}
 
+    componentDidMount() {
+        this._isMounted = true;
+    }
+    //     componentWillMount() {
+    //         Axios.get("http://Devapi.tatadisasterresponse.com/api/view-generate-team?responce_code=GUJ_EA_FEB_2020", {
+    //             headers: {
+    //                 'Authorization': 'bearer PuuKMShsI2skl2IVDJ8_ExzC3a_-jXmirFmhZltlB4EJ02DvFQzQAzpS2Wixvyv8MBGPp1Ap8NDZumVFglZaoFZGsZimvj_zEAVaVPD15odvVG8mQ-TR6VdsuLK3qbAUCC14Y9kzHWfkAYrdQK8Axeohys5NjwzP1Z6eTzt-2JerlppB0VoOEY5nGgHxqxPhyvvq0Yb2R6ZqxuDSbolfveg8_cPeNazdynZSbueOv80F4nRUxhCgf5675Tf-FVFfOjjDsWFZyFWXZ4ujA6LGSavlB4rU9H1QHvGMUDsOZOxB8kKTUc__Aawipp_8XswOfMmCKmWklaTE23GiBMNC5pTtrfwVbcEahW4CpmHac4wjFlerSnWjPWwFANsmdiUNPH0lH_gg4EHLGIrbH6B4qhptoYyUo8TqbAADA8aQeagvhHcbIazP-3THd4xnqAqK6CYhHPLK9PjjDeK_fqhy4QGAmf6Wl-ECZokW2KTRXrQ'
+    //             }
+    //         }).then((response) => {
+    //             console.log('rohit jain aa' + response.data);
+    //             console.log('rohit jain aa' + response);
+    //             if (response.data.status == 'true') {
+    //                 console.log('rohit jain aaxad' + response.data.response);
+    //                 this.props.navigation.navigate('DashboardStack');
+
+    //                 this.setState({
+    //                     TeamArray: response.data.response,
+    //                     spinner: false
+    //                 })
+
+    //             } else {
+    //                 this.setState({
+    //                     spinner: false
+    //                 })
+
+    //             }
+
+    //         })
+    // }
     componentWillUnmount() {
         this._isMounted = false;
-      }
-    submitbtn = async () => {
+    }
+    submitbtn=()=> {
+
         if (this.state.Name !== '') {
             if (this.state.password !== '') {
                 this.setState({
@@ -49,12 +76,15 @@ componentDidMount(){
                     grant_type: 'password',
                 });
                 const headers = {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                    // 'Accept': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 };
                 Axios.post(LoginApi.LoginUrl,
                     data,
-                    {headers}
+                    headers
                 ).then(p => {
+                    // Toast.show(JSON.stringify(p));
+
                     if (p.data.status == 'TRUE') {
                         // AsyncStorage.setItem('ProfileData',p.data.access_token);
                         AsyncStorage.setItem('access_token', p.data.access_token);
@@ -67,24 +97,24 @@ componentDidMount(){
                         AsyncStorage.setItem('SYSTEM_ROLE_ID', p.data.SYSTEM_ROLE_ID);
                         this.props.navigation.navigate('DashboardStack');
 
-                        //             // "access_token": "IFt6R5VqdzQYRZxiAbEDA1AgT50cudCaUgXZ6yS8W2Noo_iUksFnXzMzOEa3eVLxBGkdJMESsZfJ3d3H8cI-_ofkf65sg0q_a-cSxzHgetoex8yYe2C8YzdlQzCa_S9qU6kMnoctzKdvtTuTzIgaiPi30jfoisGEdPY0ACox9SRLPNtQT_umRX1rAn0Iz1fF3jSJbh30Yl3CizB5bL3upSoGcmazoXC-F9I-i0Sp6YikTEfZPlAV0X_vJiQ4PPGA861u06tydB16zsQXq2M3fItF1PcXBlVgSo8zdUzHBc7TODZ8rn0WIMEqeQvSFKFU-Tdi4XD61CHexVlO-o_blWHc8TCAZ1WU1ZemYNxFH___95BBGsI2Lu1PKFIyriK7FsjsGyVeGFJjE-kfX6Hfr0KdRu7f7i9UHpCiHNh1f-iGrn51l8lqJkWwN1E3CLdz0i-3YeAd1Gpc_R1tNEU5rp_whwq5U4wSg-bbTrZjba4",
-                        //             // "token_type": "bearer",
-                        //             // "expires_in": 86399,
-                        //             // "status": "TRUE",
-                        //             // "response": "User login is successful.",
-                        //             // "USER_ID": "1",
-                        //             // "FIRST_NAME": "Saurabh",
-                        //             // "INITIAL_LOGIN": "1",
-                        //             // "TEMP_LOGIN": "0",
-                        //             // "PASSWORD_EXPIRE": "0",
-                        //             // "SYSTEM_ROLE_ID": "19",
-                        //             // "SYSTEM_ROLE_CODE": "DV",
-                        //             // "SYSTEM_ROLE_NAME": "Developer",
-                        //             // "PASSWORD_CHANGE_HOUR_COUNT": "1392",
-                        //             // "USER_ORGANISATION_ID": "1",
-                        //             // "USER_ORGANISATION_NAME": "Tangent Tech Solutions",
-                        //             // ".issued": "Mon, 06 Jan 2020 11:25:30 GMT",
-                        //             // ".expires": "Tue, 07 Jan 2020 11:25:30 GMT"
+                        // "access_token": "IFt6R5VqdzQYRZxiAbEDA1AgT50cudCaUgXZ6yS8W2Noo_iUksFnXzMzOEa3eVLxBGkdJMESsZfJ3d3H8cI-_ofkf65sg0q_a-cSxzHgetoex8yYe2C8YzdlQzCa_S9qU6kMnoctzKdvtTuTzIgaiPi30jfoisGEdPY0ACox9SRLPNtQT_umRX1rAn0Iz1fF3jSJbh30Yl3CizB5bL3upSoGcmazoXC-F9I-i0Sp6YikTEfZPlAV0X_vJiQ4PPGA861u06tydB16zsQXq2M3fItF1PcXBlVgSo8zdUzHBc7TODZ8rn0WIMEqeQvSFKFU-Tdi4XD61CHexVlO-o_blWHc8TCAZ1WU1ZemYNxFH___95BBGsI2Lu1PKFIyriK7FsjsGyVeGFJjE-kfX6Hfr0KdRu7f7i9UHpCiHNh1f-iGrn51l8lqJkWwN1E3CLdz0i-3YeAd1Gpc_R1tNEU5rp_whwq5U4wSg-bbTrZjba4",
+                        // "token_type": "bearer",
+                        // "expires_in": 86399,
+                        // "status": "TRUE",
+                        // "response": "User login is successful.",
+                        // "USER_ID": "1",
+                        // "FIRST_NAME": "Saurabh",
+                        // "INITIAL_LOGIN": "1",
+                        // "TEMP_LOGIN": "0",
+                        // "PASSWORD_EXPIRE": "0",
+                        // "SYSTEM_ROLE_ID": "19",
+                        // "SYSTEM_ROLE_CODE": "DV",
+                        // "SYSTEM_ROLE_NAME": "Developer",
+                        // "PASSWORD_CHANGE_HOUR_COUNT": "1392",
+                        // "USER_ORGANISATION_ID": "1",
+                        // "USER_ORGANISATION_NAME": "Tangent Tech Solutions",
+                        // ".issued": "Mon, 06 Jan 2020 11:25:30 GMT",
+                        // ".expires": "Tue, 07 Jan 2020 11:25:30 GMT"
                         this.setState({
                             spinner: false,
                         });
@@ -95,61 +125,8 @@ componentDidMount(){
                             spinner: false,
                         });
                     }
-                }).catch(function (error) {
-                    Toast.show(error)
-
-                })
-                    // const formData = new FormData();
-                // formData.append('username', this.state.Name);
-                // formData.append('password', this.state.SHAPassword);
-                // formData.append('grant_type', 'password');
-                // Axios.post(LoginApi.LoginUrl, formData,
-                //     { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
-                //     .then(p => {
-                //         if (p.data.status == 'TRUE') {
-                //             console.log('[rohigrjkbvfjkvbj')
-                //             this.props.navigation.navigate('DashboardStack')
-                //             // "access_token": "IFt6R5VqdzQYRZxiAbEDA1AgT50cudCaUgXZ6yS8W2Noo_iUksFnXzMzOEa3eVLxBGkdJMESsZfJ3d3H8cI-_ofkf65sg0q_a-cSxzHgetoex8yYe2C8YzdlQzCa_S9qU6kMnoctzKdvtTuTzIgaiPi30jfoisGEdPY0ACox9SRLPNtQT_umRX1rAn0Iz1fF3jSJbh30Yl3CizB5bL3upSoGcmazoXC-F9I-i0Sp6YikTEfZPlAV0X_vJiQ4PPGA861u06tydB16zsQXq2M3fItF1PcXBlVgSo8zdUzHBc7TODZ8rn0WIMEqeQvSFKFU-Tdi4XD61CHexVlO-o_blWHc8TCAZ1WU1ZemYNxFH___95BBGsI2Lu1PKFIyriK7FsjsGyVeGFJjE-kfX6Hfr0KdRu7f7i9UHpCiHNh1f-iGrn51l8lqJkWwN1E3CLdz0i-3YeAd1Gpc_R1tNEU5rp_whwq5U4wSg-bbTrZjba4",
-                //             // "token_type": "bearer",
-                //             // "expires_in": 86399,
-                //             // "status": "TRUE",
-                //             // "response": "User login is successful.",
-                //             // "USER_ID": "1",
-                //             // "FIRST_NAME": "Saurabh",
-                //             // "INITIAL_LOGIN": "1",
-                //             // "TEMP_LOGIN": "0",
-                //             // "PASSWORD_EXPIRE": "0",
-                //             // "SYSTEM_ROLE_ID": "19",
-                //             // "SYSTEM_ROLE_CODE": "DV",
-                //             // "SYSTEM_ROLE_NAME": "Developer",
-                //             // "PASSWORD_CHANGE_HOUR_COUNT": "1392",
-                //             // "USER_ORGANISATION_ID": "1",
-                //             // "USER_ORGANISATION_NAME": "Tangent Tech Solutions",
-                //             // ".issued": "Mon, 06 Jan 2020 11:25:30 GMT",
-                //             // ".expires": "Tue, 07 Jan 2020 11:25:30 GMT"
-                //             console.log('')
-                //             // AsyncStorage.setItem('Arn_id', JSON.stringify(p.data.data.arn_id))
-                //             // AsyncStorage.setItem('NAME', p.data.data.name)
-                //             // AsyncStorage.setItem('mobile', p.data.data.mobile)
-                //           //  this.props.navigation.navigate('RootStack')
-                //             this.setState({
-                //                 spinner: false,
-                //             });
-                //         } else {
-                //             Toast.show('please enter vaild Email and Password ');
-                //             this.setState({
-                //                 spinner: false,
-                //             });
-                //         }
-                //     }).catch(error => {
-                //         console.log("api error:" + error);
-                //         Toast.show('responce' + error)
-                //         this.setState({
-                //             spinner: false,
-                //         });
-                //     });
-
-                //console.log('rohit' + this.state.SHAPassword)
+                }).catch(Error); 
+                
             } else {
                 Toast.show('Please Enter Vaild Password');
             }
@@ -198,7 +175,7 @@ componentDidMount(){
                             style={{ color: '#001630', fontSize: 14 }}
                             onChangeText={(password) => {
                                 this.setState({ password })
-                            }} /> 
+                            }} />
                         {/* <View>
                             <PasswordInputText
                                 value={this.state.password}

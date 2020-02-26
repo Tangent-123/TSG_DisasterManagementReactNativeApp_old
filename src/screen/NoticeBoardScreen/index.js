@@ -7,6 +7,8 @@ import Toast from 'react-native-simple-toast';
 import SOAStyle from './style';
 import BaseUrl from '../../util/ApiCollection';
 import Spinner from 'react-native-loading-spinner-overlay';
+import CommanStyle from '../../util/Header';
+
 
 var folio_number = [];
 export default class NoticeScreen extends React.Component {
@@ -44,6 +46,7 @@ export default class NoticeScreen extends React.Component {
             selectedFruits: [],
             arn_no: [],
             urlvalue: '',
+            ResponseCode: '',
         }
         this.arrayholder = [];
 
@@ -55,34 +58,37 @@ export default class NoticeScreen extends React.Component {
                     .then(USER_ID => {
                         AsyncStorage.getItem('FIRST_NAME')
                             .then(FIRST_NAME => {
-                                this.setState({
-                                    AccessToken: access_token,
-                                    USER_ID: USER_ID,
-                                    FIRST_NAME: FIRST_NAME,
-                                });
-                                console.log('tolekn' + this.state.AccessToken)
-                                Axios.get("http://Devapi.tatadisasterresponse.com/api/view-notice-board?notice_sys_id=1", {
-                                    headers: {
-                                        'Authorization': 'bearer ' + this.state.AccessToken
-                                    }
-                                }).then((response) => {
-                                    console.log('rohit jain aa' + response.data);
-                                    console.log('rohit jain aa' + response.data.status);
-                                    if (response.data.status == 'true') {
-                                        console.log('rohit jain aaxad' + response.data.response);
+                                AsyncStorage.getItem('ResponseCode')
+                                    .then(ResponseCode => {
                                         this.setState({
-                                            ViewNoticeboard: response.data.response,
-                                            spinner: false,
-                                        })
+                                            AccessToken: access_token,
+                                            USER_ID: USER_ID,
+                                            FIRST_NAME: FIRST_NAME,
+                                            ResponseCode: ResponseCode,
+                                        });
+                                        console.log('tolekn' + this.state.AccessToken)
+                                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-notice-board?response_code=" + this.state.ResponseCode, {
+                                            headers: {
+                                                'Authorization': 'bearer ' + this.state.AccessToken
+                                            }
+                                        }).then((response) => {
+                                            console.log('rohit jain aa' + response.data);
+                                            console.log('rohit jain aa' + response.data.status);
+                                            if (response.data.status == 'true') {
+                                                console.log('rohit jain aaxad' + JSON.stringify(response.data.response));
+                                                this.setState({
+                                                    ViewNoticeboard: response.data.response,
+                                                    spinner: false,
+                                                })
 
-                                    } else {
-                                        this.setState({
-                                            spinner: false
+                                            } else {
+                                                this.setState({
+                                                    spinner: false
+                                                })
+                                            }
                                         })
-                                    }
-                                })
+                                    })
                             })
-
                     })
 
             })
@@ -106,10 +112,10 @@ export default class NoticeScreen extends React.Component {
         // "POSTED_BY": 1,
         // "CREATED_DATE": "2020-01-22T15:56:27.980"
 
-        console.log('repov' + item.RESPONSE_CODE)
+        console.log('repov' + JSON.stringify(item))
         const data = JSON.stringify({
-            NOTICE_SYS_ID: '1',
-            MODIFIED_BY: '1',
+            ResponseCode: item.RESPONSE_CODE,
+            MODIFIED_BY: '2',
         });
         const headers = {
             'content-type': 'application/json; charset=utf-8',
@@ -117,7 +123,7 @@ export default class NoticeScreen extends React.Component {
         };
         Axios.post('http://Devapi.tatadisasterresponse.com/api/delete-notice-notice-board',
             data,
-            { headers }
+            headers
         ).then(p => {
             console.log('riohrigh' + JSON.stringify(p.data))
             if (p.data.status == 'true') {
@@ -134,61 +140,56 @@ export default class NoticeScreen extends React.Component {
                 });
             }
 
-        }).catch(function (error) {
-            if (error.response) {
-                this.setState({
-                    spinner: false
-                })
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-            }
-        })
-
+        }).catch()
 
     }
     render() {
         return (
-            <View style={{ flex: 1 }}>
+            <View style={CommanStyle.MainView}>
                 <Spinner
                     visible={this.state.spinner}
                     textContent={'Loading...'}
                     textStyle={{ color: '#fff' }}
                 />
-                <View style={SOAStyle.HeaderBackground}>
+                <View style={CommanStyle.HeaderBackground}>
                     <TouchableOpacity
                         hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
                         onPress={this.getback} >
-                        <Image source={require('../../images/arrow.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+                        <Image source={require('../../images/back.png')} style={{ width: 20, height: 20, marginRight: 20 }} />
                     </TouchableOpacity>
-                    <Text style={SOAStyle.headerItem}>Notice Screen</Text>
+                    <Text style={CommanStyle.headerItem}>Notice Screen</Text>
                 </View>
                 <View style={{ flex: 1, }}>
                     <FlatList
                         data={this.state.ViewNoticeboard}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item }) =>
-                            <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
-                                <View style={{ flexDirection: 'column', marginLeft: 6, marginRight: 8, width: '90%' }}>
-                                    <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignItems: 'center', marginRight: 8 }}>
-                                        <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', width: '90%' }}>CREATED_DATE: {item.CREATED_DATE}</Text>
-                                        <TouchableOpacity
-                                            hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-                                            onPress={() => this.DeleteNotice(item)}>
-                                            <Text style={{ fontSize: 16, color: '#000' }}>Delete</Text>
-                                        </TouchableOpacity>
+                            <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 8, }}>
+                                <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginLeft: 6, marginRight: 8 }}>
+                                <View style={{ flexDirection: 'row', marginBottom: 4, justifyContent: 'space-between', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 14, color: '#000', fontWeight: 'bold'}}>{item.CREATED_DATE}</Text>
+                                    <TouchableOpacity
+                                        hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                        onPress={() => this.DeleteNotice(item)}>
+                                        <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', }}>
+                                            <Text style={{ backgroundColor: '#3386FF', fontSize: 10, color: '#fff', justifyContent: 'center', padding: 8, alignItems: 'center', borderRadius: 8 }}>
+                                                Delete  </Text>
+                                        </View>
+                                    </TouchableOpacity>
                                     </View>
-
-
-                                    <Text style={{ fontSize: 16, color: '#000' }}>POSTED_BY: {item.POSTED_BY}</Text>
-                                    <Text style={{ fontSize: 16, color: '#000' }}>RESPONSE_CODE:{item.RESPONSE_CODE}</Text>
-                                </View>
-
-                                <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', marginLeft: 6, alignItems: 'center', marginRight: 8 }}>
-                                    <Text style={{ fontSize: 14, color: '#000', fontWeight: '200' }}>DESCRIPTION:{item.DESCRIPTION}</Text>
-                                    {/* // <Text style={{ fontSize: 14, color: '#000', fontWeight: '200' }}>{item.EMAIL}</Text> */}
+                                    <View style={{ flexDirection: 'row',width:'99%' }}>
+                                        <Text style={{ fontSize: 15, color: '#000', fontWeight: 'bold' ,width:'40%'}}>Posted By  </Text>
+                                        <Text style={{ fontSize: 14, color: '#000',width:'60%'}}>: {item.POSTED_BY}</Text>
+                                    </View>
+                                    <View style={{ flexDirection: 'row' ,width:'99%' }}>
+                                        <Text style={{ fontSize: 15, color: '#000', fontWeight: 'bold',width:'40%' }}>Response Code  </Text>
+                                        <Text style={{ fontSize: 14, color: '#000',width:'60%' }}>: {item.RESPONSE_CODE}</Text>
+                                    </View>
+                                    <View style={{ flexDirection: 'row',width:'99%' }}>
+                                        <Text style={{ fontSize: 15, color: '#000', fontWeight: 'bold',width:'40%' }}>Description</Text>
+                                        {/* <Image source={require('../../images/portfolio.png')} style={{ width: 4?0, height: 25 ,padding: 5 }} /> */}
+                                        <Text style={{ fontSize: 14, color: '#000', width:'60%'}} numberOfLines={4}>: {item.DESCRIPTION}</Text>
+                                    </View>
                                 </View>
                             </View>
                         }>

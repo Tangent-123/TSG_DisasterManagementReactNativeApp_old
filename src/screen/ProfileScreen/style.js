@@ -17,17 +17,15 @@ export default RegStyle = StyleSheet.create({
     HeaderBackground: {
         flexDirection: 'row',
         alignItems: 'center',
-      //  marginTop: 4,
-      //elevation:10,
         backgroundColor:'#3386FF',
-        padding: 14,
+        padding: 10,
         height: 50
     },
     headerItem: {
-        fontSize: 20,
+        fontSize: 19,
         color: '#FFFFFF',
-        fontFamily: "Gilroy-Bold",
-        fontWeight: '400',
+        fontFamily: "Gilroy-SemiBold",
+        
     },
     headerItemSecond: {
         fontSize: 30,
@@ -57,7 +55,7 @@ export default RegStyle = StyleSheet.create({
         borderRadius: 4,
         alignItems: 'center',
        marginTop: 10,
-        marginBottom: 20,
+       // marginBottom: 20,
 
     },
     containerView: {
@@ -133,10 +131,7 @@ export default RegStyle = StyleSheet.create({
     },
     containersecond: {
         flex: 1,
-       // paddingTop: 20,
-        paddingLeft: 20,
-       // marginTop:10,
-        paddingRight: 20,
+      padding:10,
         backgroundColor: '#fff',
     },
     ButtonLogin: {

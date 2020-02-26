@@ -5,8 +5,8 @@ import {
 } from 'react-native';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
-import URLLINK from '../../util/ApiCollection';
 import Spinner from 'react-native-loading-spinner-overlay';
+import CommanStyle from '../../util/Header';
 export default class TeamScreen extends Component {
     static navigationOptions = { header: null };
     constructor(props) {
@@ -17,7 +17,7 @@ export default class TeamScreen extends Component {
             FIRST_NAME: '',
             TeamArray: [],
             ResponseCode: '',
-            spinner:true,
+            spinner: true,
         }
     }
     componentWillMount() {
@@ -41,12 +41,12 @@ export default class TeamScreen extends Component {
                                 console.log('rohit jain aaxad' + response.data.response);
                                 this.setState({
                                     TeamArray: response.data.response,
-                                    spinner:false
+                                    spinner: false
                                 })
 
-                            }else{
+                            } else {
                                 this.setState({
-                                    spinner:false
+                                    spinner: false
                                 })
                             }
                         })
@@ -59,36 +59,53 @@ export default class TeamScreen extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-                 <Spinner
+            <View style={CommanStyle.MainView}>
+                <Spinner
                     visible={this.state.spinner}
                     textContent={'Loading...'}
-                    textStyle={{color:'#fff'}}
+                    textStyle={{ color: '#fff' }}
                 />
-                <View style={styles.HeaderBackground}>
+                <View style={CommanStyle.HeaderBackground}>
                     <TouchableOpacity
                         onPress={this.getback} >
-                        <Image source={require('../../images/arrow.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+                        <Image source={require('../../images/back.png')} style={{ width: 24, height: 22, padding: 5, marginRight: 20 }} />
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'column' }}>
-                        <Text style={styles.HeaderText}>Team</Text>
+                        <Text style={CommanStyle.headerItem}>Team</Text>
                     </View>
                 </View>
+
+
                 <FlatList
                     data={this.state.TeamArray}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) =>
-                        <View style={{elevation:10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, }}>
+                        <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 8, }}>
                             <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginLeft: 6, marginRight: 8 }}>
-                                <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold' }}>{item.PERSON_NAME}</Text>
-                                <Text style={{ fontSize: 16, color: '#000' }}>{item.PERSON_ORGANISATION}</Text>
-                                <Text style={{ fontSize: 16, color: '#000' }}>{item.PERSON_PROFILE}</Text>
-                            </View>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold' }}>Person Name </Text>
+                                    <Text style={{ fontSize: 15, color: '#000', fontWeight: '200' }}>: {item.PERSON_NAME}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold' }}>Organisation  </Text>
+                                    <Text style={{ fontSize: 15, color: '#000' }}>: {item.PERSON_ORGANISATION}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold' }}>Profile</Text>
+                                    {/* <Image source={require('../../images/portfolio.png')} style={{ width: 4?0, height: 25 ,padding: 5 }} /> */}
+                                    <Text style={{ fontSize: 15, color: '#000',marginLeft:54 }}>: {item.PERSON_PROFILE}</Text>
+                                </View>
+                          
 
-                            <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between',marginLeft:6, alignItems: 'center', marginRight: 8 }}>
-                                <Text style={{fontSize:14,color:'#000',fontWeight:'200'}}>{item.MOBILE_NO}</Text>
-                                <Text style={{fontSize:14,color:'#000',fontWeight:'200'}}>{item.EMAIL}</Text>
-                            </View>
+                                <View style={{ flexDirection: 'row' }}>
+                                <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold' }}>Contact No.</Text>
+                                    <Text style={{ fontSize: 15, color: '#000',marginLeft:16  }}>: {item.MOBILE_NO}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row' }}>
+                                <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold' }}>Email ID</Text>
+                                    <Text style={{ fontSize: 15, color: '#000',  marginLeft:42 }}>: {item.EMAIL}</Text>
+                                </View>
+                                </View>
                         </View>
                     }
                 // "RESPONSE_TEAM_SYS_ID": 9,
@@ -111,29 +128,3 @@ export default class TeamScreen extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    item: {
-        padding: 10,
-        fontSize: 18,
-        height: 44,
-    },
-    HeaderBackground: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 14,
-        backgroundColor: '#3386FF',
-        //  marginLeft: 4,
-        height: 60,
-
-    },
-    HeaderText: {
-        fontSize: 20,
-        color: '#FFFFFF',
-        marginLeft: 10,
-        fontFamily: "Gilroy-Bold",
-    },
-})  

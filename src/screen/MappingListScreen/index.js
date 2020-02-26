@@ -34,8 +34,8 @@ export default class MappingListScreen extends Component {
                                 'Authorization': 'bearer ' + this.state.AccessToken
                             }
                         }).then((response) => {
-                            console.log('rohit jain aa' +JSON.stringify(response.data));
-                            console.log('rohit jain aa' +JSON.stringify(response));
+                            console.log('rohit jain aa' + JSON.stringify(response.data));
+                            console.log('rohit jain aa' + JSON.stringify(response));
                             if (response.data.status == 'true') {
                                 console.log('rohit jain aaxad' + response.data.response);
                                 this.setState({
@@ -54,6 +54,12 @@ export default class MappingListScreen extends Component {
         this.props.navigation.navigate('DashboardStack')
     }
     AddMapping = () => {
+        this.props.navigation.navigate('AddMappingStack'
+
+        );
+    }
+    UpdateData(item) {
+        AsyncStorage.setItem('UpdateData', item);
         this.props.navigation.navigate('AddMappingStack');
     }
     render() {
@@ -75,51 +81,79 @@ export default class MappingListScreen extends Component {
                         <View>
                             <TouchableOpacity
                                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-                                onPress={() => this.props.navigation.navigate('UpdateLocationMappingStack', {
-                                    UpdateMappingData: item
-                                })
-                                }>
-                                <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, }}>
+                                onPress={() => this.UpdateData(item)}
+                            >
+                                <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 8, }}>
                                     <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginLeft: 6, marginRight: 8 }}>
-                                        <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold' }}>{item.STATE_NAME}</Text>
-                                        <Text style={{ fontSize: 16, color: '#000' }}>{item.DISTRICT_NAME}</Text>
-                                        <Text style={{ fontSize: 16, color: '#000' }}>{item.BLOCK_NAME}</Text>
-                                        <Text style={{ fontSize: 16, color: '#000' }}>{item.GRAM_PANCHAYAT_NAME}</Text>
-                                        <Text style={{ fontSize: 16, color: '#000' }}>{item.VILLAGE_NAME}</Text>
-                                        <Text style={{ fontSize: 16, color: '#000' }}>{item.HAMLET_NAME}</Text>
-                                        <Text style={{ fontSize: 16, color: '#000' }}>{item.PARTNER_NAME}</Text>
+                                        <View style={{ flexDirection: 'row', marginBottom: 4, justifyContent: 'space-between', alignItems: 'center' }}>
+                                
+                                            <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', }}>{item.STATE_NAME}</Text>
+                                            <TouchableOpacity
+                                                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                                onPress={() => this.DeleteNotice(item)}>
+                                                <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', }}>
+                                                    <Text style={{ backgroundColor: '#3386FF', fontSize: 10, color: '#fff', justifyContent: 'center', padding: 8, alignItems: 'center', borderRadius: 8 }}>
+                                                        Delete  </Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', width: '99%' }}>
+                                            <Text style={{ fontSize: 14, color: '#000', fontWeight: 'bold', width: '50%' }}>District Name</Text>
+                                            <Text style={{ fontSize: 13, color: '#000', width: '50%' }}>: {item.DISTRICT_NAME}</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', width: '99%' }}>
+                                            <Text style={{ fontSize: 14, color: '#000', fontWeight: 'bold', width: '50%' }}>Block Name  </Text>
+                                            <Text style={{ fontSize: 13, color: '#000', width: '50%' }}>: {item.BLOCK_NAME}</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', width: '99%' }}>
+                                            <Text style={{ fontSize: 14, color: '#000', fontWeight: 'bold', width: '50%' }}>Gram Panchayat Name</Text>
+                                            {/* <Image source={require('../../images/portfolio.png')} style={{ width: 4?0, height: 25 ,padding: 5 }} /> */}
+                                            <Text style={{ fontSize: 13, color: '#000', width: '50%' }} numberOfLines={4}>: {item.GRAM_PANCHAYAT_NAME}</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', width: '99%' }}>
+                                            <Text style={{ fontSize: 14, color: '#000', fontWeight: 'bold', width: '50%' }}>Village Name</Text>
+                                            {/* <Image source={require('../../images/portfolio.png')} style={{ width: 4?0, height: 25 ,padding: 5 }} /> */}
+                                            <Text style={{ fontSize: 13, color: '#000', width: '50%' }} numberOfLines={4}>: {item.VILLAGE_NAME}</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', width: '99%' }}>
+                                            <Text style={{ fontSize: 14, color: '#000', fontWeight: 'bold', width: '50%' }}>Hamlet Name</Text>
+                                            {/* <Image source={require('../../images/portfolio.png')} style={{ width: 4?0, height: 25 ,padding: 5 }} /> */}
+                                            <Text style={{ fontSize: 13, color: '#000', width: '50%' }} numberOfLines={4}>: {item.HAMLET_NAME}</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', width: '99%' }}>
+                                            <Text style={{ fontSize: 14, color: '#000', fontWeight: 'bold', width: '50%' }}>Response Code</Text>
+                                            {/* <Image source={require('../../images/portfolio.png')} style={{ width: 4?0, height: 25 ,padding: 5 }} /> */}
+                                            <Text style={{ fontSize: 13, color: '#000', width: '50%' }} numberOfLines={4}>: {item.RESPONSE_CODE}</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', width: '99%' }}>
+                                            <Text style={{ fontSize: 14, color: '#000', fontWeight: 'bold', width: '50%' }}>Partner Name</Text>
+                                            {/* <Image source={require('../../images/portfolio.png')} style={{ width: 4?0, height: 25 ,padding: 5 }} /> */}
+                                            <Text style={{ fontSize: 13, color: '#000', width: '50%' }} numberOfLines={4}>: {item.PARTNER_NAME}</Text>
+                                        </View>
                                     </View>
-
-                                    {/* "PARTNER_NAME": "TITAN",
-            "STATE_NAME": "Andhra Pradesh",
-            "DISTRICT_NAME": "ABC",
-            "BLOCK_NAME": "ASD",
-            "GRAM_PANCHAYAT_NAME": "FER",
-            "VILLAGE_NAME": "SAS",
-            "HAMLET_NAME": "DER",
-            "RESPONSE_CODE": "NEF_1245_56" */}
                                 </View>
+
                             </TouchableOpacity>
                         </View>
                     }
                 />
-
-                <StatusBar
-                    backgroundColor="#3386FF"
-                    barStyle='dark-content'
-                />
-
-                <View>
+ <View style={{marginBottom:10}}>
                     <TouchableOpacity
                         hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
                         onPress={() => this.AddMapping()}>
                         <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', marginEnd: 10, padding: 10 }}>
-                            <Text style={{ backgroundColor: '#008800', fontSize: 14, color: '#fff', justifyContent: 'center', marginLeft: 40, padding: 10, alignItems: 'center', borderRadius: 10 }}>
+                            <Text style={{ backgroundColor: '#3386FF', fontSize: 14, color: '#fff', justifyContent: 'center', marginLeft: 40, padding: 10, alignItems: 'center', borderRadius: 10 }}>
                                 Add
                        </Text>
                         </View>
                     </TouchableOpacity>
                 </View>
+                <StatusBar
+                    backgroundColor="#3386FF"
+                    barStyle='dark-content'
+                />
+
+               
             </View>
         );
     }

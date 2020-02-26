@@ -1,56 +1,101 @@
 import React, { Component } from 'react';
 import {
-    AppRegistry, FlatList,StatusBar,
-    StyleSheet, Text, TouchableOpacity, Image, View, Alert
+    FlatList, StatusBar,
+    StyleSheet, Text, TouchableOpacity, Image, View
 } from 'react-native';
-
+import Axios from 'axios';
+import Toast from 'react-native-simple-toast';
+import AsyncStorage from '@react-native-community/async-storage';
+import URLLINK from '../../util/ApiCollection';
+import CommonStyle from '../../util/Header';
 export default class MyActivityScreen extends Component {
     static navigationOptions = { header: null };
-    renderSeparator = () => {
-        return (
-            <View
-                style={{
-                    height: 1,
-                    //  width: "100%",  
-                    backgroundColor: "#000",
-                }}
-            />
-        );
-    };
-    //handling onPress action  
-    getListViewItem = (item) => {
-        Alert.alert(item.key);
+    constructor(props) {
+        super(props);
+        this.state = {
+            AccessToken: '',
+            USER_ID: '',
+            FIRST_NAME: '',
+            MappingListArray: [],
+            ResponseCode: '',
+        }
+    }
+    componentWillMount() {
+        AsyncStorage.getItem('access_token')
+            .then(access_token => {
+                AsyncStorage.getItem('ResponseCode')
+                    .then(ResponseCode => {
+                        console.log('jajaj' + ResponseCode)
+                        this.setState({
+                            AccessToken: access_token,
+                            ResponseCode: ResponseCode,
+                        })
+                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-response-location-mapping-details?response_code=" + this.state.ResponseCode, {
+                            headers: {
+                                'Authorization': 'bearer ' + this.state.AccessToken
+                            }
+                        }).then((response) => {
+                            console.log('rohit jain aa' + JSON.stringify(response.data));
+                            console.log('rohit jain aa' + JSON.stringify(response));
+                            if (response.data.status == 'true') {
+                                console.log('rohit jain aaxad' + response.data.response);
+                                this.setState({
+                                    MappingListArray: response.data.response
+                                })
+
+                            } else {
+                                Toast.show(response.data.response)
+                            }
+                        })
+                    })
+            })
+
     }
     getback = () => {
         this.props.navigation.navigate('DashboardStack')
     }
+    AddMapping = () => {
+        this.props.navigation.navigate('AddMappingStack'
+
+        );
+    }
+    UpdateData(item) {
+        AsyncStorage.setItem('UpdateData', item);
+        this.props.navigation.navigate('AddMappingStack');
+    }
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.HeaderBackground}>
+            <View style={CommonStyle.MainView}>
+                <View style={CommonStyle.HeaderBackground}>
                     <TouchableOpacity
                         onPress={this.getback} >
-                        <Image source={require('../../images/arrow.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+                        <Image source={require('../../images/back.png')} style={{ width: 20, height: 20, marginRight: 20 }} />
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'column' }}>
-                        <Text style={styles.HeaderText}>My Activities</Text>
+                        <Text style={CommonStyle.headerItem}>My Activity</Text>
                     </View>
                 </View>
-                <FlatList
-                    data={[
-                        { key: 'Android' }, { key: 'iOS' }, { key: 'Java' }, { key: 'Swift' },
-                        { key: 'Php' }, { key: 'Hadoop' }, { key: 'Sap' },
-                        { key: 'Python' }, { key: 'Ajax' }, { key: 'C++' },
-                        { key: 'Ruby' }, { key: 'Rails' }, { key: '.Net' },
-                        { key: 'Perl' }, { key: 'Sap' }, { key: 'Python' },
-                        { key: 'Ajax' }, { key: 'C++' }, { key: 'Ruby' },
-                        { key: 'Rails' }, { key: '.Net' }, { key: 'Perl' }
-                    ]}
+                {/* <FlatList
+                    data={this.state.MappingListArray}
+                    keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) =>
-                        <Text style={styles.item}
-                            onPress={this.getListViewItem.bind(this, item)}>{item.key}</Text>}
-                    ItemSeparatorComponent={this.renderSeparator}
-                />
+                        <View>
+                            <TouchableOpacity
+                                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                onPress={() => this.UpdateData(item)}
+                            > */}
+                <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
+                    <View style={{ flexDirection: 'column', marginLeft: 6, marginRight: 8, width: '90%' }}>
+
+                        <Text style={{ fontSize: 15, color: '#000', fontWeight: 'bold', width: '90%' }}>Emergency Kit Distribution</Text>
+                        <Text style={{ fontSize: 15, color: '#000',padding:2 }}>4-5-2019</Text>
+                        <Text style={{ fontSize: 15, color: '#000',padding:2 }}>Update Statistics</Text>
+                    </View>
+                </View>
+
+
+                {/* }
+        /> */}
 
                 <StatusBar
                     backgroundColor="#3386FF"
@@ -60,29 +105,3 @@ export default class MyActivityScreen extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    item: {
-        padding: 10,
-        fontSize: 18,
-        height: 44,
-    },
-    HeaderBackground: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 14,
-        backgroundColor: '#3386FF',
-      //  marginLeft: 4,
-        height: 60,
-
-    },
-    HeaderText: {
-        fontSize: 20,
-        color: '#FFFFFF',
-        marginLeft: 10,
-        fontFamily: "Gilroy-Bold",
-    },
-})  

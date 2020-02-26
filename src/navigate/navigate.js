@@ -18,6 +18,8 @@ import UpdateLocationMappingScreen from '../screen/UpdateLocationMapping';
 import ReliefScreen from '../screen/ReliefScreen';
 import AddBeneFicialScreen from '../screen/AddbeneficialScreen';
 import BeneficiallistScreen from '../screen/BeneficialList';
+import BeneficalDetailsScreen from '../screen/BeneficalDetailscScreen';
+
 
 import React from 'react';
 const AuthStart = createStackNavigator({
@@ -79,6 +81,11 @@ const AddBeneFicialStack = createStackNavigator({
   }
 })
 
+const BeneficalDetailsStack = createStackNavigator({
+  BeneficalDetailsScreen:{
+    screen:BeneficalDetailsScreen
+  }
+})
 const ReliefStack = createStackNavigator({
   ReliefScreen:{
     screen:ReliefScreen
@@ -144,6 +151,7 @@ const AuthStack = createSwitchNavigator(
     ReliefStack:ReliefStack,
     AddBeneFicialStack:AddBeneFicialStack,
     BeneficiallistStack:BeneficiallistStack,
+    BeneficalDetailsStack:BeneficalDetailsStack,
   },
   {
     initialRouteName: 'AuthLoading',

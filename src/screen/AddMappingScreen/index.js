@@ -42,6 +42,33 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
     }
 
     componentWillMount() {
+        AsyncStorage.getItem('UpdateData')
+        .then(UpdateData => {
+            this.setState({
+                StateName: UpdateData.sta,
+                StateID: '0',
+                StateNameList: [],
+                DistricID: '0',
+                DistricName: '',
+                DistricNameList: [],
+                BlockID: '0',
+                BlockName: '',
+                BlockNameList: [],
+                GramPanchayatID: '',
+                GramPanchayatName: '',
+                GramPanchayatNameList: [],
+                VillageID: '0',
+                VillageName: '',
+                VillageNameList: [],
+                HamletID: '0',
+                HamletName: '',
+                HamletNameList: [],
+                PartnerName: '',
+            })
+
+
+
+        })
 
     }
     StateList() {
@@ -338,13 +365,14 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
         });
         console.log('rohit jain' + data)
         const headers = {
-            'content-type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             'Authorization': 'bearer ' + this.state.AccessToken
         };
         console.log('hearvgdh' + headers)
         Axios.post(BaseUrl.AddMappingData,
             data,
             { headers }
+        
         ).then(p => {
             console.log('Kapil j ' + JSON.stringify(p))
             if (p.data.status == true) {

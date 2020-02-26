@@ -30,7 +30,7 @@ export default class MappingListScreen extends Component {
                             AccessToken: access_token,
                             ResponseCode: ResponseCode,
                         })
-                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-response-beneficiary?beneficiary_sys_id=1&response_code=" + this.state.ResponseCode + "&location_mapping_id=1&status=Registered", {
+                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-response-beneficiary?beneficiary_sys_id=1&response_code=MAH_DR_FEB_2019&location_mapping_id=2&status=Approved", {
                             headers: {
                                 'Authorization': 'bearer ' + this.state.AccessToken
                             }
@@ -76,21 +76,35 @@ export default class MappingListScreen extends Component {
                         <View>
                             <TouchableOpacity
                                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-                                onPress={() => this.props.navigation.navigate('UpdateLocationMappingStack', {
-                                    UpdateMappingData: item
+                                onPress={() => this.props.navigation.navigate('BeneficalDetailsStack', {
+                                    BeneficalDetail: item
                                 })
                                 }>
-                                <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, }}>
-                                    <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginLeft: 6, marginRight: 8 }}>
-                                        <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold' }}>{item.STATE_NAME}</Text>
-                                        <Text style={{ fontSize: 16, color: '#000' }}>{item.DISTRICT_NAME}</Text>
-                                        <Text style={{ fontSize: 16, color: '#000' }}>{item.BLOCK_NAME}</Text>
-                                        <Text style={{ fontSize: 16, color: '#000' }}>{item.GRAM_PANCHAYAT_NAME}</Text>
-                                        <Text style={{ fontSize: 16, color: '#000' }}>{item.VILLAGE_NAME}</Text>
-                                        <Text style={{ fontSize: 16, color: '#000' }}>{item.HAMLET_NAME}</Text>
-                                        <Text style={{ fontSize: 16, color: '#000' }}>{item.PARTNER_NAME}</Text>
+                                <View style={{ margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 10, borderWidth: .5, borderStartColor: '#3386FF' }}>
+                                    <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginRight: 8 }}>
+
+                                        <View style={{ flexDirection: 'row', width: '98%', justifyContent: 'flex-start', paddingTop: 4, paddingHorizontal: 4, paddingVertical: 4 }}>
+                                            <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', marginRight: 10 }}>Family Head Male Name:</Text>
+                                            <Text style={{ fontSize: 14, color: '#000', fontWeight: '400' }}>{item.FAMILY_HEAD_MALE}</Text>
+
+
+                                        </View>
+                                        <View style={{ flexDirection: 'row', width: '98%', justifyContent: 'flex-start', paddingHorizontal: 4, paddingVertical: 4 }}>
+                                            <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', marginRight: 10 }}>Identity Type:</Text>
+                                            <Text style={{ fontSize: 14, color: '#000', fontWeight: '400' }}>{item.ID_TYPE}</Text>
+                                        </View>
+
+                                        <View style={{ flexDirection: 'row', width: '98%', justifyContent: 'flex-start', paddingHorizontal: 4, paddingVertical: 4 }}>
+                                            <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', marginRight: 10 }}>Mobile Number:</Text>
+                                            <Text style={{ fontSize: 14, color: '#000', fontWeight: '400' }}>{item.MOBILE_NO}</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', width: '98%', justifyContent: 'flex-start', paddingHorizontal: 4, paddingVertical: 4 }}>
+                                            <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', marginRight: 10 }}>Status:</Text>
+                                            <Text style={{ fontSize: 15, color: 'green', fontWeight: 'bold' }}>{item.STATUS}</Text>
+                                        </View>
                                     </View>
                                 </View>
+
                             </TouchableOpacity>
                         </View>
                     }

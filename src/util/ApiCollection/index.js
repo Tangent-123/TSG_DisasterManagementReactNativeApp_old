@@ -1,6 +1,6 @@
 let BasicUrl = 'http://Devapi.tatadisasterresponse.com/'
 export default BASEURLS = {
-    LoginUrl: BasicUrl + 'api/app-user-login',
+    LoginUrl: BasicUrl + 'api/app-user-temp-login',
     UpdateUser: BasicUrl + 'api/update-user-profile',
     GenrateCode: BasicUrl + 'api/view-generate-code?userid=',
     ResponceCode: BasicUrl + 'api/view-generate-team?responce_code=',

@@ -80,7 +80,7 @@ export default class DashboardScreen extends React.Component {
             this.props.navigation.navigate('NoticeBoardStack')
 
 
-        }else if(ValueBrand == 'Relief'){
+        } else if (ValueBrand == 'Relief') {
             this.props.navigation.navigate('ReliefStack')
 
         } else if (ValueBrand == 'Close') {
@@ -111,9 +111,9 @@ export default class DashboardScreen extends React.Component {
         this.props.navigation.goBack(null);
     }
     setlog = () => {
-        // AsyncStorage.clear();
-        // AsyncStorage.setItem('NAME', '');
-        // AsyncStorage.setItem('mobile', '');
+        AsyncStorage.clear();
+        AsyncStorage.setItem('NAME', '');
+        AsyncStorage.setItem('mobile', '');
         this.props.navigation.navigate('AuthStart');
     }
     resposecode = (value) => {

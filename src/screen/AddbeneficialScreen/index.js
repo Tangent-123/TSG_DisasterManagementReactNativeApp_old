@@ -82,7 +82,7 @@ export default class AddBeneficialScreen extends React.Component {
                                 this.setState({
                                     spinner: true
                                 })
-                                const data = qs.stringify({
+                                const data = JSON.stringify({
                                     FAMILY_HEAD_MALE: this.state.FAMILYHEADFEMALE,
                                     FAMILY_HEAD_FEMALE: this.state.FAMILYHEADFEMALE,
                                     ID_TYPE: this.state.IDTYPE,
@@ -90,26 +90,27 @@ export default class AddBeneficialScreen extends React.Component {
                                     MOBILE_NO:this.state.MOBILENO,
                                     RESPONSE_LOCATION_MAPPING_SYS_ID:'4',
                                     IMAGE:this.state.IMAGE,
-                                    CREATED_BY:'2',
+                                    CREATED_BY:2,
 
                                 });
                                 const headers = {
-                                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                                    'content-type': 'application/json',
                                     'Authorization': 'bearer ' + this.state.AccessToken
                                 };
                                 Axios.post(LoginApi.AddBeneficialData,
                                     data,
-                                    headers 
+                                    {headers} 
                                 ).then(p => {
-                                    console.log('kfnnk'+JSON.stringify(p))
-                                    if (p.data.status == 'TRUE') {
+                                    console.log('kfnnk'+JSON.stringify(p.data.response))
+                                    if (p.data.status == 'true') {
                                         this.props.navigation.navigate('BeneficiallistStack');
+                                        Toast.show(p.data.response)
                                         this.setState({
                                             spinner: false,
                                         });
 
                                     } else {
-                                        Toast.show(p.data.error_description);
+                                       // Toast.show(p.data.error_description);
                                         this.setState({
                                             spinner: false,
                                         });
@@ -117,7 +118,7 @@ export default class AddBeneficialScreen extends React.Component {
                                 }).catch(function (error) {
                                     Toast.show(error)
                                     this.setState({
-                                        spinner:true
+                                        spinner:false
                                     })
 
                                 })
@@ -228,6 +229,7 @@ export default class AddBeneficialScreen extends React.Component {
                     backgroundColor='#3386FF'
                     barStyle='dark-content'
                 />
+
             </View>
         )
     }
