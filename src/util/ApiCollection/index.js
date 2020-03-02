@@ -20,6 +20,7 @@ export default BASEURLS = {
     AddMappingData: BasicUrl + 'api/add-response-location-mapping',
     UpadateMapping:BasicUrl + 'api/update-response-location-mapping',
     AddBeneficialData : BasicUrl + 'api/add-response-beneficiary-list',
+    UpdateNotice : BasicUrl + 'api/update-notice-board',
 
 }
 

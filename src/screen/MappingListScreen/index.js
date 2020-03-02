@@ -6,6 +6,8 @@ import {
 import Axios from 'axios';
 import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-community/async-storage';
+import Spinner from 'react-native-loading-spinner-overlay';
+import CommanStyle from '../../util/Header';
 import URLLINK from '../../util/ApiCollection';
 export default class MappingListScreen extends Component {
     static navigationOptions = { header: null };
@@ -17,6 +19,7 @@ export default class MappingListScreen extends Component {
             FIRST_NAME: '',
             MappingListArray: [],
             ResponseCode: '',
+            Spinner:true,
         }
     }
     componentWillMount() {
@@ -39,11 +42,15 @@ export default class MappingListScreen extends Component {
                             if (response.data.status == 'true') {
                                 console.log('rohit jain aaxad' + response.data.response);
                                 this.setState({
-                                    MappingListArray: response.data.response
+                                    MappingListArray: response.data.response,
+                                    spinner:false
                                 })
 
                             } else {
                                 Toast.show(response.data.response)
+                                this.setState({
+                                    spinner:false
+                                })
                             }
                         })
                     })
@@ -54,24 +61,33 @@ export default class MappingListScreen extends Component {
         this.props.navigation.navigate('DashboardStack')
     }
     AddMapping = () => {
-        this.props.navigation.navigate('AddMappingStack'
-
-        );
+        AsyncStorage.setItem('MappingUpdateData','')
+        this.props.navigation.navigate('AddMappingStack');
     }
     UpdateData(item) {
-        AsyncStorage.setItem('UpdateData', item);
+        console.log('rohit Mapping'+JSON.stringify(item))
+        AsyncStorage.setItem('MappingUpdateData', JSON.stringify(item));
         this.props.navigation.navigate('AddMappingStack');
+    }
+    DeleteMapping(item){
+        console.log(item.RESPONSE_LOCATION_MAPPING_SYS_ID)
+
     }
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.HeaderBackground}>
+            <View style={CommanStyle.MainView}>
+                  <Spinner
+                    visible={this.state.spinner}
+                    textContent={'Loading...'}
+                    textStyle={styles.spinnerTextStyle}
+                />
+                <View style={CommanStyle.HeaderBackground}>
                     <TouchableOpacity
                         onPress={this.getback} >
-                        <Image source={require('../../images/arrow.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+                        <Image source={require('../../images/back.png')} style={{ width: 20, height: 20, marginRight: 20 }} />
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'column' }}>
-                        <Text style={styles.HeaderText}>Location Mapping </Text>
+                        <Text style={CommanStyle.headerItem}>Location Mapping </Text>
                     </View>
                 </View>
                 <FlatList
@@ -86,16 +102,16 @@ export default class MappingListScreen extends Component {
                                 <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 8, }}>
                                     <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginLeft: 6, marginRight: 8 }}>
                                         <View style={{ flexDirection: 'row', marginBottom: 4, justifyContent: 'space-between', alignItems: 'center' }}>
-                                
+
                                             <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', }}>{item.STATE_NAME}</Text>
-                                            <TouchableOpacity
+                                            {/* <TouchableOpacity
                                                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-                                                onPress={() => this.DeleteNotice(item)}>
+                                                onPress={() => this.DeleteMapping(item)}>
                                                 <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', }}>
                                                     <Text style={{ backgroundColor: '#3386FF', fontSize: 10, color: '#fff', justifyContent: 'center', padding: 8, alignItems: 'center', borderRadius: 8 }}>
                                                         Delete  </Text>
                                                 </View>
-                                            </TouchableOpacity>
+                                            </TouchableOpacity> */}
                                         </View>
                                         <View style={{ flexDirection: 'row', width: '99%' }}>
                                             <Text style={{ fontSize: 14, color: '#000', fontWeight: 'bold', width: '50%' }}>District Name</Text>
@@ -137,7 +153,7 @@ export default class MappingListScreen extends Component {
                         </View>
                     }
                 />
- <View style={{marginBottom:10}}>
+                <View style={{ marginBottom: 10 }}>
                     <TouchableOpacity
                         hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
                         onPress={() => this.AddMapping()}>
@@ -153,7 +169,7 @@ export default class MappingListScreen extends Component {
                     barStyle='dark-content'
                 />
 
-               
+
             </View>
         );
     }

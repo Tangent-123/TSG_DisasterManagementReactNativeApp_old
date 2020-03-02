@@ -4,6 +4,8 @@ import Colors from '../../util/Color_Value';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import RNExitApp from 'react-native-exit-app';
 import AsyncStorage from '@react-native-community/async-storage';
+import Spinner from 'react-native-loading-spinner-overlay';
+
 import Axios from 'axios';
 import RNPickerSelect from 'react-native-picker-select';
 export default class DashboardScreen extends React.Component {
@@ -16,6 +18,7 @@ export default class DashboardScreen extends React.Component {
             FIRST_NAME: '',
             ResponseArray: [],
             ResponseCode: '',
+          //  spinner: true,
         }
     }
 
@@ -118,23 +121,49 @@ export default class DashboardScreen extends React.Component {
     }
     resposecode = (value) => {
         console.log('jkfbebfe' + value)
-        AsyncStorage.setItem('ResponseCode', value)
+        AsyncStorage.setItem('ResponseCode', value);
         this.setState({ ResponseCode: value })
+
     }
     render() {
         return (
             <View style={{ flex: 1 }}>
-                {/* <Spinner
+                <Spinner
                     visible={this.state.spinner}
                     textContent={'Loading...'}
                     textStyle={MFStyle.spinnerTextStyle}
-                /> */}
+                />
                 <View style={MFStyle.HeaderBackground}>
                     <View style={{ flexDirection: 'row', width: '90%', }}>
                         <Text style={MFStyle.header}>Hi {this.state.FIRST_NAME}</Text>
                     </View>
                 </View>
-                <View style={{ padding: 10 }}>
+                <View style={{ padding: 8 }}>
+                    {/* <View style={{ flex: 1, margin: 4, padding: 8 }}>
+                        <TextInput
+                            style={{ padding: 8, fontSize: 16, }}
+                            onTouchStart={() => this.StateList()}
+                            placeholder="State"
+                            onChangeText={(ResponseCode) => this.setState({ ResponseCode:ResponseCode })}
+                            value={this.state.ResponseCode}
+                        />
+                        <View style={{ width: '99%', backgroundColor: '#3386FF', height: 1, marginLeft: 4 }}></View>
+                        <FlatList
+                            data={this.state.ResponseArray}
+                            keyExtractor={(item, index) => index.toString()}
+                            renderItem={({ item }) =>
+                                <View style={{ margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, }}>
+                                    <TouchableOpacity
+                                        hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                        // style={BuyNFOStyle.AddToCardBtn}
+                                        onPress={() => this.resposecode(item)}>
+                                        <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginLeft: 6, marginRight: 8 }}>
+                                            <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold' }}>{item.STATE_NAME}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            }
+                        /> */}
                     <Picker
                         mode='dropdown'
                         selectedValue={this.state.ResponseCode}

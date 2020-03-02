@@ -245,7 +245,7 @@ export default BuyStyle = StyleSheet.create({
         width: '95%',
         height: 50,
         padding: 10,
-        backgroundColor: '#4E5764',
+        backgroundColor: '#3386FF',
         justifyContent: 'center',
         borderRadius: 4,
         alignItems: 'center',

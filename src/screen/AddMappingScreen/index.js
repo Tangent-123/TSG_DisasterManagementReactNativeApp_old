@@ -37,39 +37,44 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
             PartnerName: '',
             PartnerID: '0',
             PartnerNameList: '',
-
+            BtnLevel:'Add Mapping Location',
         }
     }
 
     componentWillMount() {
-        AsyncStorage.getItem('UpdateData')
-        .then(UpdateData => {
-            this.setState({
-                StateName: UpdateData.sta,
-                StateID: '0',
-                StateNameList: [],
-                DistricID: '0',
-                DistricName: '',
-                DistricNameList: [],
-                BlockID: '0',
-                BlockName: '',
-                BlockNameList: [],
-                GramPanchayatID: '',
-                GramPanchayatName: '',
-                GramPanchayatNameList: [],
-                VillageID: '0',
-                VillageName: '',
-                VillageNameList: [],
-                HamletID: '0',
-                HamletName: '',
-                HamletNameList: [],
-                PartnerName: '',
-            })
+        
+        AsyncStorage.getItem('MappingUpdateData')
+            .then(MappingUpdateData => {
+                Toast.show(JSON.stringify(MappingUpdateData.st))
+                if (MappingUpdateData == null) {
 
-
-
-        })
-
+                } else {
+                    console.log('rhgirgkjbgj' + MappingUpdateData)
+                    this.setState({
+                        BtnLevel:'Update Mapping Location',
+                        StateName: UpdateData,
+                        StateID: '0',
+                        StateNameList: [],
+                        DistricID: '0',
+                        DistricName: '',
+                        DistricNameList: [],
+                        BlockID: '0',
+                        BlockName: '',
+                        BlockNameList: [],
+                        GramPanchayatID: '',
+                        GramPanchayatName: '',
+                        GramPanchayatNameList: [],
+                        VillageID: '0',
+                        VillageName: '',
+                        VillageNameList: [],
+                        HamletID: '0',
+                        HamletName: '',
+                        HamletNameList: [],
+                        PartnerName: '',
+                    })
+                }
+                })
+            
     }
     StateList() {
         AsyncStorage.getItem('access_token')
@@ -350,7 +355,7 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
             PARTNER_SYS_ID: this.state.PartnerID,
             PARTNER_NAME: this.state.PartnerName,
             STATE_SYS_ID: this.state.StateID,
-            // STATE_NAME: this.state.StateName,
+            //STATE_NAME: this.state.StateName,
             DISTRICT_SYS_ID: this.state.DistricID,
             DISTRICT_NAME: this.state.DistricName,
             BLOCK_SYS_ID: this.state.BlockID,
@@ -372,7 +377,7 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
         Axios.post(BaseUrl.AddMappingData,
             data,
             { headers }
-        
+
         ).then(p => {
             console.log('Kapil j ' + JSON.stringify(p))
             if (p.data.status == true) {
@@ -411,7 +416,7 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
                         onPress={this.getback}>
                         <Image source={require('../../images/arrow.png')} style={{ width: 30, height: 20, }} />
                     </TouchableOpacity>
-                    <Text style={BuyNFOStyle.headerItem}>Add Mapping Location</Text>
+        <Text style={BuyNFOStyle.headerItem}>{this.state.BtnLevel}</Text>
                 </View>
                 <ScrollView
                     style={{ flex: 1 }}>
@@ -594,7 +599,7 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
                         hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
                         style={BuyNFOStyle.AddToCardBtn}
                         onPress={() => this.AddMappingData()}>
-                        <Text style={BuyNFOStyle.TextStyle}>Add Mapping</Text>
+                        <Text style={BuyNFOStyle.TextStyle}>{this.state.BtnLevel}</Text>
                     </TouchableOpacity>
 
                 </View>

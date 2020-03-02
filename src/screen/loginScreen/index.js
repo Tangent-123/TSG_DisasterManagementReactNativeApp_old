@@ -83,8 +83,6 @@ export default class LoginActivity extends React.Component {
                     data,
                     headers
                 ).then(p => {
-                    // Toast.show(JSON.stringify(p));
-
                     if (p.data.status == 'TRUE') {
                         // AsyncStorage.setItem('ProfileData',p.data.access_token);
                         AsyncStorage.setItem('access_token', p.data.access_token);
@@ -148,7 +146,7 @@ export default class LoginActivity extends React.Component {
                 </View>
                 <ScrollView style={{ flex: 1, marginTop: 10 }}>
                     <View style={LoginStyle.containersecond}>
-                        <Image style={{ alignItems: 'center', width: '99%', justifyContent: 'center', height: 68 }} resizeMode={'stretch'} source={require('../../images/tsg_logo.png')} />
+                        <Image style={{ alignItems: 'center', width: '99%', justifyContent: 'center', height: 68 }} resizeMode={'stretch'} source={require('../../images/logoTSG.jpg')} />
                         <Text style={{ fontSize: 22, alignItems: 'center', color: '#001630', fontFamily: "Gilroy-Bold", }}>Login</Text>
                         <TextField
                             label="Enter Username"

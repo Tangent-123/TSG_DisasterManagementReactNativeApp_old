@@ -1,0 +1,336 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200302.165648.1692.0.001.json",
+    "dumpEventTime": "2020-03-02T16:56:50Z",
+    "dumpEventTimeStamp": "1583148410884",
+    "processId": 1692,
+    "cwd": "F:\\FinalAppCode\\TSGAPP",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Rohit Jain\\AppData\\Roaming\\npm/node_modules/react-native-cli/index.js",
+      "run-android"
+    ],
+    "nodejsVersion": "v12.15.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.15.0",
+      "v8": "7.7.299.13-node.16",
+      "uv": "1.33.1",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.4",
+      "http_parser": "2.9.3",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.15.0/node-v12.15.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.15.0/node-v12.15.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.15.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.16299",
+    "osVersion": "Windows 10 Pro N",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i3-2328M CPU @ 2.20GHz",
+        "speed": 2195,
+        "user": 1266328,
+        "nice": 0,
+        "sys": 1211421,
+        "idle": 3977046,
+        "irq": 52359
+      },
+      {
+        "model": "Intel(R) Core(TM) i3-2328M CPU @ 2.20GHz",
+        "speed": 2195,
+        "user": 1299984,
+        "nice": 0,
+        "sys": 1147062,
+        "idle": 4007546,
+        "irq": 6406
+      },
+      {
+        "model": "Intel(R) Core(TM) i3-2328M CPU @ 2.20GHz",
+        "speed": 2195,
+        "user": 1426781,
+        "nice": 0,
+        "sys": 1210437,
+        "idle": 3817375,
+        "irq": 5859
+      },
+      {
+        "model": "Intel(R) Core(TM) i3-2328M CPU @ 2.20GHz",
+        "speed": 2195,
+        "user": 1400718,
+        "nice": 0,
+        "sys": 1233781,
+        "idle": 3820093,
+        "irq": 4515
+      }
+    ],
+    "host": "DESKTOP-5G2O1UL"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff756621759",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff756625b7c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff756624b38",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff75671446b",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff756f18d9e",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff756f00de1",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff756dce6ac",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff756dd67b1",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff756dcbe13",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff756dca5e4",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff756deb8b5",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff756b57b89",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff757344d3d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff757345c71",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff757380577",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7573318e5",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00000342eceeda5c",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 14557184,
+    "totalCommittedMemory": 14557184,
+    "usedMemory": 12010408,
+    "availableMemory": 2186630680,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 261872,
+        "used": 32296,
+        "available": 229576
+      },
+      "new_space": {
+        "memorySize": 1048576,
+        "committedMemory": 1048576,
+        "capacity": 1047488,
+        "used": 1047480,
+        "available": 8
+      },
+      "old_space": {
+        "memorySize": 10072064,
+        "committedMemory": 10072064,
+        "capacity": 10000768,
+        "used": 8373288,
+        "available": 1627480
+      },
+      "code_space": {
+        "memorySize": 425984,
+        "committedMemory": 425984,
+        "capacity": 339040,
+        "used": 318816,
+        "available": 20224
+      },
+      "map_space": {
+        "memorySize": 1052672,
+        "committedMemory": 1052672,
+        "capacity": 1050752,
+        "used": 602960,
+        "available": 447792
+      },
+      "large_object_space": {
+        "memorySize": 1646592,
+        "committedMemory": 1646592,
+        "capacity": 1632016,
+        "used": 1632016,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 3552,
+        "used": 3552,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 1047488,
+        "used": 0,
+        "available": 1047488
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 2.921,
+    "kernelCpuSeconds": 2.046,
+    "cpuConsumptionPercent": 2.05248,
+    "maxRss": 37089280,
+    "pageFaults": {
+      "IORequired": 35813,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 525,
+      "writes": 5
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "=C:": "C:\\",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "ANDROID_HOME": "C:\\Users\\Rohit Jain\\AppData\\Local\\Android\\Sdk",
+    "APPDATA": "C:\\Users\\Rohit Jain\\AppData\\Roaming",
+    "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
+    "ChocolateyLastPathUpdate": "132262633240760669",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "DESKTOP-5G2O1UL",
+    "ComSpec": "C:\\Windows\\system32\\cmd.exe",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\Rohit Jain",
+    "JAVA_HOME": "C:\\Program Files\\Java\\jdk-11.0.6",
+    "LOCALAPPDATA": "C:\\Users\\Rohit Jain\\AppData\\Local",
+    "LOGONSERVER": "\\\\DESKTOP-5G2O1UL",
+    "NUMBER_OF_PROCESSORS": "4",
+    "OneDrive": "C:\\Users\\Rohit Jain\\OneDrive",
+    "OS": "Windows_NT",
+    "Path": "C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\Java\\jdk-11.0.6\\bin;C:\\ProgramData\\chocolatey\\bin;C:\\Users\\Rohit Jain\\AppData\\Local\\Microsoft\\WindowsApps;;C:\\Users\\Rohit Jain\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\Rohit Jain\\AppData\\Roaming\\npm",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 42 Stepping 7, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "2a07",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PSModulePath": "C:\\Users\\Rohit Jain\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PUBLIC": "C:\\Users\\Public",
+    "SESSIONNAME": "Console",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\Windows",
+    "TEMP": "C:\\Users\\ROHITJ~1\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\ROHITJ~1\\AppData\\Local\\Temp",
+    "USERDOMAIN": "DESKTOP-5G2O1UL",
+    "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-5G2O1UL",
+    "USERNAME": "Rohit Jain",
+    "USERPROFILE": "C:\\Users\\Rohit Jain",
+    "windir": "C:\\Windows",
+    "TERM_PROGRAM": "vscode",
+    "TERM_PROGRAM_VERSION": "1.42.1",
+    "LANG": "en_US.UTF-8",
+    "COLORTERM": "truecolor"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Windows\\SYSTEM32\\ntdll.dll",
+    "C:\\Windows\\System32\\KERNEL32.DLL",
+    "C:\\Windows\\System32\\KERNELBASE.dll",
+    "C:\\Windows\\SYSTEM32\\apphelp.dll",
+    "C:\\Windows\\System32\\WS2_32.dll",
+    "C:\\Windows\\System32\\RPCRT4.dll",
+    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
+    "C:\\Windows\\System32\\ADVAPI32.dll",
+    "C:\\Windows\\System32\\ucrtbase.dll",
+    "C:\\Windows\\System32\\msvcrt.dll",
+    "C:\\Windows\\System32\\sechost.dll",
+    "C:\\Windows\\System32\\USER32.dll",
+    "C:\\Windows\\System32\\win32u.dll",
+    "C:\\Windows\\System32\\GDI32.dll",
+    "C:\\Windows\\System32\\gdi32full.dll",
+    "C:\\Windows\\System32\\msvcp_win.dll",
+    "C:\\Windows\\System32\\PSAPI.DLL",
+    "C:\\Windows\\System32\\CRYPT32.dll",
+    "C:\\Windows\\System32\\MSASN1.dll",
+    "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\Windows\\SYSTEM32\\USERENV.dll",
+    "C:\\Windows\\SYSTEM32\\bcrypt.dll",
+    "C:\\Windows\\SYSTEM32\\WINMM.dll",
+    "C:\\Windows\\System32\\profapi.dll",
+    "C:\\Windows\\SYSTEM32\\winmmbase.dll",
+    "C:\\Windows\\System32\\cfgmgr32.dll",
+    "C:\\Windows\\System32\\IMM32.DLL",
+    "C:\\Windows\\System32\\combase.dll",
+    "C:\\Windows\\System32\\bcryptPrimitives.dll",
+    "C:\\Windows\\System32\\powrprof.dll",
+    "C:\\Windows\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\Windows\\system32\\uxtheme.dll",
+    "C:\\Windows\\system32\\mswsock.dll",
+    "C:\\Windows\\System32\\kernel.appcore.dll",
+    "C:\\Windows\\System32\\NSI.dll",
+    "C:\\Windows\\system32\\pnrpnsp.dll",
+    "C:\\Windows\\SYSTEM32\\DNSAPI.dll",
+    "C:\\Windows\\System32\\winrnr.dll",
+    "C:\\Windows\\system32\\NLAapi.dll"
+  ]
+}

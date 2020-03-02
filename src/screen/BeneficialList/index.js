@@ -5,10 +5,10 @@ import {
 } from 'react-native';
 import Axios from 'axios';
 import Toast from 'react-native-simple-toast';
-
+import CommanStyle from '../../util/Header';
 import AsyncStorage from '@react-native-community/async-storage';
 import URLLINK from '../../util/ApiCollection';
-export default class MappingListScreen extends Component {
+export default class BeneficialListScreen extends Component {
     static navigationOptions = { header: null };
     constructor(props) {
         super(props);
@@ -59,14 +59,14 @@ export default class MappingListScreen extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.HeaderBackground}>
+            <View style={CommanStyle.MainView}>
+                <View style={CommanStyle.HeaderBackground}>
                     <TouchableOpacity
                         onPress={this.getback} >
-                        <Image source={require('../../images/arrow.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+                        <Image source={require('../../images/back.png')} style={{ width: 20, height: 20, marginRight: 20 }} />
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'column' }}>
-                        <Text style={styles.HeaderText}>Beneficiary List</Text>
+                        <Text style={CommanStyle.headerItem}>Beneficiary List</Text>
                     </View>
                 </View>
                 <FlatList
@@ -76,24 +76,20 @@ export default class MappingListScreen extends Component {
                         <View>
                             <TouchableOpacity
                                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-                                onPress={() => this.props.navigation.navigate('BeneficalDetailsStack', {
+                                onPress={() => this.props.navigation.navigate('AddBeneFicialStack', {
                                     BeneficalDetail: item
                                 })
                                 }>
                                 <View style={{ margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 10, borderWidth: .5, borderStartColor: '#3386FF' }}>
                                     <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginRight: 8 }}>
-
                                         <View style={{ flexDirection: 'row', width: '98%', justifyContent: 'flex-start', paddingTop: 4, paddingHorizontal: 4, paddingVertical: 4 }}>
                                             <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', marginRight: 10 }}>Family Head Male Name:</Text>
                                             <Text style={{ fontSize: 14, color: '#000', fontWeight: '400' }}>{item.FAMILY_HEAD_MALE}</Text>
-
-
                                         </View>
                                         <View style={{ flexDirection: 'row', width: '98%', justifyContent: 'flex-start', paddingHorizontal: 4, paddingVertical: 4 }}>
                                             <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', marginRight: 10 }}>Identity Type:</Text>
                                             <Text style={{ fontSize: 14, color: '#000', fontWeight: '400' }}>{item.ID_TYPE}</Text>
                                         </View>
-
                                         <View style={{ flexDirection: 'row', width: '98%', justifyContent: 'flex-start', paddingHorizontal: 4, paddingVertical: 4 }}>
                                             <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', marginRight: 10 }}>Mobile Number:</Text>
                                             <Text style={{ fontSize: 14, color: '#000', fontWeight: '400' }}>{item.MOBILE_NO}</Text>

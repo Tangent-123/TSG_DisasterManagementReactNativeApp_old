@@ -14,7 +14,7 @@ import EmergencyScreen from '../screen/EmergencyScreen';
 import AddNoticeScreen from '../screen/AddNoticeScreen';
 import MappingListScreen from '../screen/MappingListScreen';
 import AddMappingScreen from '../screen/AddMappingScreen';
-import UpdateLocationMappingScreen from '../screen/UpdateLocationMapping';
+//import UpdateLocationMappingScreen from '../screen/UpdateLocationMapping';
 import ReliefScreen from '../screen/ReliefScreen';
 import AddBeneFicialScreen from '../screen/AddbeneficialScreen';
 import BeneficiallistScreen from '../screen/BeneficialList';
@@ -91,11 +91,11 @@ const ReliefStack = createStackNavigator({
     screen:ReliefScreen
   },
 });
-const UpdateLocationMappingStack = createStackNavigator({
-  UpdateLocationMappingScreen:{
-    screen:UpdateLocationMappingScreen
-  }
-})
+// const UpdateLocationMappingStack = createStackNavigator({
+//   UpdateLocationMappingScreen:{
+//     screen:UpdateLocationMappingScreen
+//   }
+// })
 const NoticeBoardStack = createStackNavigator({
   NoticeBoardScreen: {
     screen: NoticeBoardScreen
@@ -147,7 +147,7 @@ const AuthStack = createSwitchNavigator(
     AddMappingStack:AddMappingStack,
     TeamStack:TeamStack,
     EmergencyStack:EmergencyStack,
-    UpdateLocationMappingStack:UpdateLocationMappingStack,
+    //UpdateLocationMappingStack:UpdateLocationMappingStack,
     ReliefStack:ReliefStack,
     AddBeneFicialStack:AddBeneFicialStack,
     BeneficiallistStack:BeneficiallistStack,

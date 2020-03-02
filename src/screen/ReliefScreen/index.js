@@ -9,6 +9,7 @@ import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'reac
 //import Spinner from 'react-native-loading-spinner-overlay';
 //import LoginApi from '../../../util/ApiCollection';
 //import AwesomeAlert from 'react-native-awesome-alerts';
+import CommanStyle from '../../util/Header';
 var radio_props = [
     { label: 'Male', value: '0', },
     { label: 'Female', value: '1' }
@@ -107,19 +108,19 @@ export default class ReliefScreen extends React.Component {
     }
     render() {
         return (
-            <View style={{ flex: 1 }}>
+            <View style={CommanStyle.MainView}>
                 {/* <Spinner
                     visible={this.state.spinner}
                     textContent={'Loading...'}
                     textStyle={RegStyle.spinnerTextStyle}
                 /> */}
-                <View style={RegStyle.HeaderBackground}>
+                <View style={CommanStyle.HeaderBackground}>
                     <TouchableOpacity
                         onPress={this.getback} >
-                        <Image source={require('../../images/arrow.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+                        <Image source={require('../../images/back.png')} style={{ width: 20, height: 20, marginRight: 20 }} />
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'column' }}>
-                        <Text style={RegStyle.headerItem}>Relief Phase</Text>
+                        <Text style={CommanStyle.headerItem}>Relief Phase</Text>
                     </View>
                 </View>
                 <ScrollView style={{ flex: 1, padding: 10 }}>
@@ -131,48 +132,43 @@ export default class ReliefScreen extends React.Component {
                                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
                                 onPress={() => this.getbeneficial()}>
                                 <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
+                                    <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+                                    <Text style={{ fontSize: 16, color: '#000' }}>Beneficiary list</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
+
+                            <TouchableOpacity
+                                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                onPress={() => this.getbeneficial()}>
+                                <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
 
                                     <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
 
-                                    <Text style={{ fontSize: 16, color: '#000' }}>Beneficiary list</Text>
+                                    <Text style={{ fontSize: 16, color: '#000' }}>Verify List</Text>
 
                                 </View>
 
                             </TouchableOpacity>
                         </View>
 
-
                         <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
 
-<TouchableOpacity
-    hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-    onPress={() => this.getbeneficial()}>
-    <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
+                            <TouchableOpacity
+                                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                onPress={() => this.getbeneficial()}>
+                                <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
 
-        <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+                                    <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
 
-        <Text style={{ fontSize: 16, color: '#000' }}>Verify List</Text>
+                                    <Text style={{ fontSize: 16, color: '#000' }}>Final List</Text>
 
-    </View>
+                                </View>
 
-</TouchableOpacity>
-</View>
-
-<View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
-
-<TouchableOpacity
-    hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-    onPress={() => this.getbeneficial()}>
-    <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
-
-        <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
-
-        <Text style={{ fontSize: 16, color: '#000' }}>Final List</Text>
-
-    </View>
-
-</TouchableOpacity>
-</View>
+                            </TouchableOpacity>
+                        </View>
 
 
 

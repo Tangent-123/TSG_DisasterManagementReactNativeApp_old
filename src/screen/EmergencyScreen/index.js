@@ -6,7 +6,8 @@ import {
     ScrollView,
     TouchableOpacity,
     StyleSheet,
-    View
+    View,
+    ToastAndroid
 } from 'react-native';
 // import Axios from 'axios';
 import { TextField } from 'react-native-material-textfield';
@@ -16,7 +17,8 @@ import LoginStyle from './style';
 import colors from '../../util/Color_Value';
 // import LoginApi from '../../../util/ApiCollection';
 // import Spinner from 'react-native-loading-spinner-overlay';
-export default class EmergencyScreen  extends React.Component {
+import CommanStyle from '../../util/Header';
+export default class EmergencyScreen extends React.Component {
     static navigationOptions = {
         header: null
     }
@@ -32,7 +34,7 @@ export default class EmergencyScreen  extends React.Component {
         this.props.navigation.navigate('DashboardStack')
         if (this.state.Name !== '') {
             if (this.state.password !== '') {
-               
+
                 //  this.getApiLogin();
             } else {
                 //  Toast.show('Please Enter Vaild Password');
@@ -80,74 +82,103 @@ export default class EmergencyScreen  extends React.Component {
     }
     render() {
         return (
-            <View style={MFStyle.mainContent}>
+            <View style={CommanStyle.MainView}>
                 {/* <Spinner
                     visible={this.state.spinner}
                     textContent={'Loading...'}
                     textStyle={LoginStyle.spinnerTextStyle}
                 /> */}
-              <View style={MFStyle.HeaderBackground}>
-                <TouchableOpacity
-                    onPress={this.getback} >
-                    <Image source={require('../../images/arrow.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
-                </TouchableOpacity>
-                <View style={{ flexDirection: 'column' }}>
-                    <Text style={MFStyle.HeaderText}>Emergency</Text>
+                <View style={CommanStyle.HeaderBackground}>
+                    <TouchableOpacity
+                        onPress={this.getback} >
+                        <Image source={require('../../images/back.png')} style={{ width: 20, height: 20, marginRight: 20 }} />
+                    </TouchableOpacity>
+                    <View style={{ flexDirection: 'column' }}>
+                        <Text style={CommanStyle.headerItem}>Emergency Phase</Text>
+                    </View>
                 </View>
-            </View>
-                {/* <ScrollView style={{ flex: 1, marginTop: 10 }}>
-                    <View style={MFStyle.containersecond}>
-                        <Text style={{ fontSize: 22, alignItems: 'center', color: '#001630', fontFamily: "Gilroy-Bold", }}>Login</Text>
-                        <TextField
-                            label="Enter Username"
-                            value={this.state.Name}
-                            returnKeyType='next'
-                            labelFontSize={14}
-                            labelTextStyle={{ fontFamily: 'Gilroy-Medium' }}
-                            tintColor={'#70AFA7'}
-                            style={{ color: '#001630', fontSize: 14 }}
-                            keyboardType='email-address'
-                            onChangeText={(Name) => {
-                                this.setState({ Name })
-                            }}
-                        />
-                        <TextField
-                            value={this.state.password}
-                            label="Password"
-                            TextInput="password"
-                            secureTextEntry={true}
-                            returnKeyType='done'
-                            labelFontSize={14}
-                            labelTextStyle={{ fontFamily: 'Gilroy-Medium' }}
-                            tintColor={'#70AFA7'}
-                            style={{ color: '#001630', fontSize: 14 }}
-                            onChangeText={(password) => {
-                                this.setState({ password })
-                            }} />
-                        <TouchableOpacity
-                            onPress={this.getforget}>
-                            <Text style={MFStyle.TextFoget}>Problem with login ?</Text>
-                        </TouchableOpacity>
-                        <View style={{ alignItems: 'center' }}>
+                <ScrollView style={{ flex: 1, padding: 10 }}>
+                    <View style={{ flex: 1 }}>
+
+                        <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
+
                             <TouchableOpacity
-                                style={MFStyle.AddToCardBtn}
-                                onPress={this.getlogin}>
-                                <Text style={MFStyle.TextStyle}>Secure Login</Text>
+                                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                onPress={() => this.getbeneficial()}>
+                                <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
+                                    <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+                                    <Text style={{ fontSize: 16, color: '#000' }}>Activities</Text>
+                                </View>
                             </TouchableOpacity>
                         </View>
+
+                        <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
+
+                            <TouchableOpacity
+                                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                onPress={() => this.getbeneficial()}>
+                                <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
+
+                                    <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+
+                                    <Text style={{ fontSize: 16, color: '#000' }}>Volunteer Team</Text>
+
+                                </View>
+
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
+
+                            <TouchableOpacity
+                                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                onPress={() => this.getbeneficial()}>
+                                <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
+
+                                    <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+
+                                    <Text style={{ fontSize: 16, color: '#000' }}>Photographs</Text>
+
+                                </View>
+
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 6, width: '94%', marginEnd: 10 }}>
+
+                            <TouchableOpacity
+                                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                onPress={() => this.getbeneficial()}>
+                                <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
+
+                                    <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+
+                                    <Text style={{ fontSize: 16, color: '#000' }}>Connect Galleries</Text>
+
+                                </View>
+
+                            </TouchableOpacity>
+                        </View>
+
+
+
+
                     </View>
                     <StatusBar
-                        backgroundColor='#3386FF'
-                        barStyle='light-content'
+                        backgroundColor="#3386FF"
+                        barStyle='dark-content'
                     />
-                </ScrollView> */}
-                {/* <View style={{ alignItems: 'center' }}>
-                            <TouchableOpacity
-                                style={MFStyle.AddToCardBtn}
-                                onPress={this.getlogin}>
-                                <Text style={MFStyle.TextStyle}>Secure Login</Text>
-                            </TouchableOpacity>
-                        </View> */}
+                </ScrollView>
+                <View>
+                    <TouchableOpacity
+                        hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                        onPress={() => console.log('bfbv')}>
+                        <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', marginEnd: 10, padding: 10 }}>
+                            <Text style={{ backgroundColor: '#3386FF', fontSize: 14, color: '#fff', justifyContent: 'center', marginLeft: 40, padding: 10, alignItems: 'center', borderRadius: 10 }}>
+                                Add
+                       </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -171,7 +202,7 @@ const MFStyle = StyleSheet.create({
         alignItems: 'center',
         padding: 14,
         backgroundColor: '#3386FF',
-      //  marginLeft: 4,
+        //  marginLeft: 4,
         height: 60,
 
     },
@@ -194,7 +225,7 @@ const MFStyle = StyleSheet.create({
         borderRadius: 1,
         shadowRadius: 10,
         elevation: 1,
-         marginTop: 4,
+        marginTop: 4,
     },
     button2: {
         // width: '48%',
@@ -206,8 +237,8 @@ const MFStyle = StyleSheet.create({
         borderRadius: 1,
         shadowRadius: 10,
         elevation: 1,
-         marginTop: 4,
-         marginLeft:20,
+        marginTop: 4,
+        marginLeft: 20,
     },
     TextInputStyle: {
         width: '86%',
