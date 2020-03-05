@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import {
     Image,
     StatusBar,
@@ -9,7 +9,6 @@ import {
     View
 } from 'react-native';
 import Axios from 'axios';
-import { TextField } from 'react-native-material-textfield';
 import AsyncStorage from '@react-native-community/async-storage';
 import BuyNFOStyle from './style';
 import LoginApi from '../../util/ApiCollection';
@@ -17,7 +16,6 @@ import Toast from 'react-native-simple-toast';
 import Spinner from 'react-native-loading-spinner-overlay';
 import CommanStyle from '../../util/Header';
 import qs from 'qs';
-import PasswordInputText from 'react-native-hide-show-password-input';
 import ColorCode from '../../util/Color_Value';
 import RNPickerSelect from 'react-native-picker-select';
 
@@ -42,6 +40,8 @@ export default class AddBeneficialScreen extends React.Component {
             ResponseCode: '',
             USER_ID: '',
             FIRST_NAME: '',
+            BtnLevel: 'Add Beneficial ',
+            CREATED_BY:'',
         }
     }
 
@@ -65,7 +65,7 @@ export default class AddBeneficialScreen extends React.Component {
                                     .then(FIRST_NAME => {
                                         this.setState({
                                             AccessToken: access_token,
-                                            USER_ID: USER_ID,
+                                            CREATED_BY: USER_ID,
                                             FIRST_NAME: FIRST_NAME,
                                             ResponseCode: ResponseCode,
                                         });
@@ -92,17 +92,18 @@ export default class AddBeneficialScreen extends React.Component {
         this.setState({
             spinner: true
         })
-        const data = JSON.stringify({
-            FAMILY_HEAD_MALE: this.state.FAMILYHEADFEMALE,
-            FAMILY_HEAD_FEMALE: this.state.FAMILYHEADFEMALE,
-            ID_TYPE: this.state.IDTYPE,
-            ID_NUMBER: this.state.IDNUMBER,
-            MOBILE_NO: this.state.MOBILENO,
-            RESPONSE_LOCATION_MAPPING_SYS_ID: '4',
-            IMAGE: this.state.IMAGE,
-            CREATED_BY: 2,
+       // if (this.state.BtnLevel == 'Add Benefical')
+            const data = JSON.stringify({
+                FAMILY_HEAD_MALE: this.state.FAMILYHEADFEMALE,
+                FAMILY_HEAD_FEMALE: this.state.FAMILYHEADFEMALE,
+                ID_TYPE: this.state.IDTYPE,
+                ID_NUMBER: this.state.IDNUMBER,
+                MOBILE_NO: this.state.MOBILENO,
+                RESPONSE_LOCATION_MAPPING_SYS_ID: '4',
+                IMAGE: this.state.IMAGE,
+                CREATED_BY: this.state.CREATED_BY,
 
-        });
+            });
         const headers = {
             'content-type': 'application/json',
             'Authorization': 'bearer ' + this.state.AccessToken
@@ -152,9 +153,9 @@ export default class AddBeneficialScreen extends React.Component {
         // }
 
     }
-    getback=()=>{
+    getback = () => {
         this.props.navigation.navigate('BeneficiallistStack');
-        }
+    }
     resposecode = (value) => {
         console.log('jkfbebfe' + value)
         // AsyncStorage.setItem('ID', value)

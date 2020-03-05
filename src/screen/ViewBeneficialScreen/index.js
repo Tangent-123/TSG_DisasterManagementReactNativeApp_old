@@ -7,7 +7,7 @@ import Axios from 'axios';
 import Toast from 'react-native-simple-toast';
 import CommanStyle from '../../util/Header';
 import AsyncStorage from '@react-native-community/async-storage';
-import URLLINK from '../../util/ApiCollection';
+import BaseUrl from '../../util/ApiCollection';
 export default class BeneficialListScreen extends Component {
     static navigationOptions = { header: null };
     constructor(props) {
@@ -30,7 +30,7 @@ export default class BeneficialListScreen extends Component {
                             AccessToken: access_token,
                             ResponseCode: ResponseCode,
                         })
-                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-response-beneficiary?beneficiary_sys_id=1&response_code=MAH_DR_FEB_2019&location_mapping_id=2&status=Approved", {
+                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-response-beneficiary?response_code=" + ResponseCode, {
                             headers: {
                                 'Authorization': 'bearer ' + this.state.AccessToken
                             }
@@ -57,6 +57,39 @@ export default class BeneficialListScreen extends Component {
     AddMapping = () => {
         this.props.navigation.navigate('AddBeneFicialStack');
     }
+    DeleteNotice(item) {
+        this.setState({ spinner: true })
+        const data = JSON.stringify({
+            BENEFICIARY_SYS_ID: JSON.stringify(item.BENEFICIARY_SYS_ID),
+            MODIFIED_BY: (item.POSTED_BY),
+        });
+        const headers = {
+            'content-type': 'application/json',
+            'Authorization': 'bearer ' + this.state.AccessToken
+        };
+        Axios.post(BaseUrl.DeleteResponseBeneficiary,
+            data,
+            { headers }
+        ).then(p => {
+            console.log('riohrigh' + JSON.stringify(p.data))
+            if (p.data.status == 'true') {
+                Toast.show(p.data.response);
+                this.getNoticeList();
+                //this.props.navigation.navigate('Dashboard');
+                this.setState({
+                    spinner: false,
+                });
+
+            } else {
+                Toast.show(p.data.response);
+                this.setState({
+                    spinner: false,
+                });
+            }
+
+        }).catch()
+
+    }
     render() {
         return (
             <View style={CommanStyle.MainView}>
@@ -82,10 +115,21 @@ export default class BeneficialListScreen extends Component {
                                 }>
                                 <View style={{ margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 10, borderWidth: .5, borderStartColor: '#3386FF' }}>
                                     <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginRight: 8 }}>
-                                        <View style={{ flexDirection: 'row', width: '98%', justifyContent: 'flex-start', paddingTop: 4, paddingHorizontal: 4, paddingVertical: 4 }}>
-                                            <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', marginRight: 10 }}>Family Head Male Name:</Text>
-                                            <Text style={{ fontSize: 14, color: '#000', fontWeight: '400' }}>{item.FAMILY_HEAD_MALE}</Text>
+                                        <View style={{ flexDirection: 'row', marginBottom: 4, justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <View style={{ flexDirection: 'row', width: '76%', justifyContent: 'flex-start', paddingTop: 4, paddingHorizontal: 4, paddingVertical: 4 }}>
+                                                <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', marginRight: 10 }}>Family Head:</Text>
+                                                <Text style={{ fontSize: 14, color: '#000', fontWeight: '400' }}>{item.FAMILY_HEAD_MALE}</Text>
+                                            </View>
+                                            <TouchableOpacity
+                                                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                                onPress={() => this.DeleteNotice(item)}>
+                                                <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', }}>
+                                                    <Text style={{ backgroundColor: '#3386FF', fontSize: 10, color: '#fff', justifyContent: 'center', padding: 8, alignItems: 'center', borderRadius: 8 }}>
+                                                        Delete  </Text>
+                                                </View>
+                                            </TouchableOpacity>
                                         </View>
+
                                         <View style={{ flexDirection: 'row', width: '98%', justifyContent: 'flex-start', paddingHorizontal: 4, paddingVertical: 4 }}>
                                             <Text style={{ fontSize: 16, color: '#000', fontWeight: 'bold', marginRight: 10 }}>Identity Type:</Text>
                                             <Text style={{ fontSize: 14, color: '#000', fontWeight: '400' }}>{item.ID_TYPE}</Text>

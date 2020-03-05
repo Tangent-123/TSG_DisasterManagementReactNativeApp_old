@@ -1,23 +1,21 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import SplashScreen from '../screen/splashScreen';
-import LoginScreen from '../screen/loginScreen';
+import SplashScreen from '../screen/SplashScreen';
+import LoginScreen from '../screen/LoginScreen';
 import DashboardScreen from '../screen/DashboardScreen';
 import ProfileScreen from '../screen/ProfileScreen';
 import NewPostActivityScreen from '../screen/PostMyActivityScreen';
 import MyActivityScreen from '../screen/MyActivityScreen';
-import LocationMapping from '../screen/LocationScreen';
 import GuidlineScreen from '../screen/GuidlineScreen';
-import NoticeBoardScreen from '../screen/NoticeBoardScreen';
-import TeamScreen from '../screen/TeamScreen';
+import NoticeBoardScreen from '../screen/ViewNoticeBoardScreen';
+import TeamScreen from '../screen/ViewTeamScreen';
 import EmergencyScreen from '../screen/EmergencyScreen';
 import AddNoticeScreen from '../screen/AddNoticeScreen';
-import MappingListScreen from '../screen/MappingListScreen';
+import MappingListScreen from '../screen/ViewMappingScreen';
 import AddMappingScreen from '../screen/AddMappingScreen';
-//import UpdateLocationMappingScreen from '../screen/UpdateLocationMapping';
 import ReliefScreen from '../screen/ReliefScreen';
-import AddBeneFicialScreen from '../screen/AddbeneficialScreen';
-import BeneficiallistScreen from '../screen/BeneficialList';
+import AddBeneFicialScreen from '../screen/AddBeneficialScreen';
+import BeneficiallistScreen from '../screen/ViewBeneficialScreen';
 import BeneficalDetailsScreen from '../screen/BeneficalDetailscScreen';
 
 
@@ -56,13 +54,13 @@ const MyActivityStack = createStackNavigator({
 
 }
 );
-const LocationMappingStack = createStackNavigator({
-  LocationMapping: {
-    screen: LocationMapping
-  },
+// const LocationMappingStack = createStackNavigator({
+//   LocationMapping: {
+//     screen: LocationMapping
+//   },
 
-}
-);
+// }
+// );
 const AddNoticeStack = createStackNavigator({
   AddNoticeScreen:{
     screen:AddNoticeScreen,
@@ -141,7 +139,7 @@ const AuthStack = createSwitchNavigator(
     AddNoticeStack:AddNoticeStack,
     MyActivityStack: MyActivityStack,
     GuidlineStack:GuidlineStack,
-    LocationMappingStack:LocationMappingStack,
+   // LocationMappingStack:LocationMappingStack,
     MappingListStack:MappingListStack,
     NoticeBoardStack:NoticeBoardStack,
     AddMappingStack:AddMappingStack,

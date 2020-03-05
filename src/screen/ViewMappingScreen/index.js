@@ -19,7 +19,7 @@ export default class MappingListScreen extends Component {
             FIRST_NAME: '',
             MappingListArray: [],
             ResponseCode: '',
-            Spinner:true,
+            Spinner: true,
         }
     }
     componentWillMount() {
@@ -43,13 +43,13 @@ export default class MappingListScreen extends Component {
                                 console.log('rohit jain aaxad' + response.data.response);
                                 this.setState({
                                     MappingListArray: response.data.response,
-                                    spinner:false
+                                    spinner: false
                                 })
 
                             } else {
                                 Toast.show(response.data.response)
                                 this.setState({
-                                    spinner:false
+                                    spinner: false
                                 })
                             }
                         })
@@ -61,22 +61,54 @@ export default class MappingListScreen extends Component {
         this.props.navigation.navigate('DashboardStack')
     }
     AddMapping = () => {
-        AsyncStorage.setItem('MappingUpdateData','')
+        AsyncStorage.setItem('Mapping_ID', '');
+        AsyncStorage.setItem('StateName', '');
+        AsyncStorage.setItem('STATE_SYS_ID', '')
+        AsyncStorage.setItem('DistricName', '');
+        AsyncStorage.setItem('DISTRICT_SYS_ID', '')
+        AsyncStorage.setItem('BlockName', '');
+        AsyncStorage.setItem('BLOCK_SYS_ID', '')
+        AsyncStorage.setItem('GramName', '');
+        AsyncStorage.setItem('GRAM_PANCHAYAT_SYS_ID', '')
+        AsyncStorage.setItem('VillageName', '');
+        AsyncStorage.setItem('VILLAGE_SYS_ID','')
+        AsyncStorage.setItem('HamletName', '');
+        AsyncStorage.setItem('HEMLET_SYS_ID','')
+        AsyncStorage.setItem('PartnerName', '');
+        AsyncStorage.setItem('PARTNER_SYS_ID', '')
+        AsyncStorage.setItem('RESPONSE_CODE', '')
         this.props.navigation.navigate('AddMappingStack');
     }
+
     UpdateData(item) {
-        console.log('rohit Mapping'+JSON.stringify(item))
-        AsyncStorage.setItem('MappingUpdateData', JSON.stringify(item));
-        this.props.navigation.navigate('AddMappingStack');
+        console.log('rohitj' + JSON.stringify(item))
+        AsyncStorage.setItem('Mapping_ID', JSON.stringify(item.RESPONSE_LOCATION_MAPPING_SYS_ID));
+        AsyncStorage.setItem('StateName', item.STATE_NAME);
+        AsyncStorage.setItem('STATE_SYS_ID',JSON.stringify(item.STATE_SYS_ID));
+        AsyncStorage.setItem('DistricName', item.DISTRICT_NAME);
+        AsyncStorage.setItem('DISTRICT_SYS_ID',JSON.stringify(item.DISTRICT_SYS_ID));
+        AsyncStorage.setItem('BlockName', item.BLOCK_NAME);
+        AsyncStorage.setItem('BLOCK_SYS_ID',JSON.stringify(item.BLOCK_SYS_ID));
+        AsyncStorage.setItem('GramName', item.GRAM_PANCHAYAT_NAME);
+        AsyncStorage.setItem('GRAM_PANCHAYAT_SYS_ID',JSON.stringify(item.GRAM_PANCHAYAT_SYS_ID));
+        AsyncStorage.setItem('VillageName', item.VILLAGE_NAME);
+        AsyncStorage.setItem('VILLAGE_SYS_ID',JSON.stringify(item.VILLAGE_SYS_ID));
+        AsyncStorage.setItem('HamletName', item.HAMLET_NAME);
+        AsyncStorage.setItem('HEMLET_SYS_ID', JSON.stringify(item.HEMLET_SYS_ID));
+        AsyncStorage.setItem('PartnerName', item.PARTNER_NAME);
+        AsyncStorage.setItem('PARTNER_SYS_ID', JSON.stringify(item.PARTNER_SYS_ID));
+        AsyncStorage.setItem('RESPONSE_CODE', item.RESPONSE_CODE);
+       // AsyncStorage.setItem('Posted_By',JSON.stringify(item.pos))
+        this.props.navigation.navigate('AddMappingStack')
     }
-    DeleteMapping(item){
+    DeleteMapping(item) {
         console.log(item.RESPONSE_LOCATION_MAPPING_SYS_ID)
 
     }
     render() {
         return (
             <View style={CommanStyle.MainView}>
-                  <Spinner
+                <Spinner
                     visible={this.state.spinner}
                     textContent={'Loading...'}
                     textStyle={styles.spinnerTextStyle}

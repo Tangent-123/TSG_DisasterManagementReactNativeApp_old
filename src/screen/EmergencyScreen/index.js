@@ -77,6 +77,14 @@ export default class EmergencyScreen extends React.Component {
     //         });
 
     // }
+    getFunctionData(item) {
+        switch (item) {
+            case 'Activity': return this.props.navigation.navigate('GuidlineStack')
+            case 'Team': return this.props.navigation.navigate('TeamStack')
+            case 'Gallary': return 'Working';
+
+        }
+    }
     getback = () => {
         this.props.navigation.navigate('DashboardStack')
     }
@@ -104,7 +112,7 @@ export default class EmergencyScreen extends React.Component {
 
                             <TouchableOpacity
                                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-                                onPress={() => this.getbeneficial()}>
+                                onPress={() => this.getFunctionData('Activity')}>
                                 <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
                                     <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
                                     <Text style={{ fontSize: 16, color: '#000' }}>Activities</Text>
@@ -116,7 +124,7 @@ export default class EmergencyScreen extends React.Component {
 
                             <TouchableOpacity
                                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-                                onPress={() => this.getbeneficial()}>
+                                onPress={() => this.getFunctionData('Team')}>
                                 <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
 
                                     <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
@@ -132,7 +140,7 @@ export default class EmergencyScreen extends React.Component {
 
                             <TouchableOpacity
                                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-                                onPress={() => this.getbeneficial()}>
+                                onPress={() => this.getFunctionData('Photo')}>
                                 <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
 
                                     <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
@@ -147,7 +155,7 @@ export default class EmergencyScreen extends React.Component {
 
                             <TouchableOpacity
                                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-                                onPress={() => this.getbeneficial()}>
+                                onPress={() => this.getFunctionData('Gallary')}>
                                 <View style={{ flexDirection: 'row', height: 70, alignItems: 'center', marginLeft: 6, marginRight: 8, width: '90%' }}>
 
                                     <Image source={require('../../images/appointment2.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
@@ -163,10 +171,7 @@ export default class EmergencyScreen extends React.Component {
 
 
                     </View>
-                    <StatusBar
-                        backgroundColor="#3386FF"
-                        barStyle='dark-content'
-                    />
+
                 </ScrollView>
                 <View>
                     <TouchableOpacity
@@ -179,6 +184,10 @@ export default class EmergencyScreen extends React.Component {
                         </View>
                     </TouchableOpacity>
                 </View>
+                <StatusBar
+                    backgroundColor="#3386FF"
+                    barStyle='dark-content'
+                />
             </View>
         );
     }

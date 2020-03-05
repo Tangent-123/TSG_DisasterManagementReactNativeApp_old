@@ -24,6 +24,7 @@
     "react-native-exit-app": "^1.1.0",
     "react-native-gesture-handler": "^1.5.2",
     "react-native-hide-show-password-input": "^1.1.0",
+    "react-native-image-picker": "^2.3.1",
     "react-native-image-slider": "^2.0.3",
     "react-native-image-slider-box": "^1.0.12",
     "react-native-imagepicker": "^2.0.0",

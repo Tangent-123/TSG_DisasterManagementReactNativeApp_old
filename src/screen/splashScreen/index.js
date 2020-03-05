@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, View, Text, StatusBar } from 'react-native';
-// import ViewPager from '@react-native-community/viewpager';
 import AsyncStorage from '@react-native-community/async-storage';
-//import AppIntroSlider from 'react-native-app-intro-slider';
-import { SliderBox } from "react-native-image-slider-box";
-import ColorCode from '../../util/Color_Value';
 
+import ColorCode from '../../util/Color_Value';
+import { SliderBox } from "react-native-image-slider-box";
 const images = [
     {
         image: require('../../images/imgone.jpg'),

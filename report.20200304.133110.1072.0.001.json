@@ -4,15 +4,14 @@
     "reportVersion": 1,
     "event": "Allocation failed - JavaScript heap out of memory",
     "trigger": "FatalError",
-    "filename": "report.20200302.165648.1692.0.001.json",
-    "dumpEventTime": "2020-03-02T16:56:50Z",
-    "dumpEventTimeStamp": "1583148410884",
-    "processId": 1692,
+    "filename": "report.20200304.133110.1072.0.001.json",
+    "dumpEventTime": "2020-03-04T13:31:10Z",
+    "dumpEventTimeStamp": "1583308870748",
+    "processId": 1072,
     "cwd": "F:\\FinalAppCode\\TSGAPP",
     "commandLine": [
       "C:\\Program Files\\nodejs\\node.exe",
-      "C:\\Users\\Rohit Jain\\AppData\\Roaming\\npm/node_modules/react-native-cli/index.js",
-      "run-android"
+      "F:\\FinalAppCode\\TSGAPP\\node_modules\\jetifier\\src\\worker.js"
     ],
     "nodejsVersion": "v12.15.0",
     "wordSize": 64,
@@ -51,38 +50,38 @@
       {
         "model": "Intel(R) Core(TM) i3-2328M CPU @ 2.20GHz",
         "speed": 2195,
-        "user": 1266328,
+        "user": 891328,
         "nice": 0,
-        "sys": 1211421,
-        "idle": 3977046,
-        "irq": 52359
+        "sys": 1025812,
+        "idle": 5656671,
+        "irq": 44890
       },
       {
         "model": "Intel(R) Core(TM) i3-2328M CPU @ 2.20GHz",
         "speed": 2195,
-        "user": 1299984,
+        "user": 892375,
         "nice": 0,
-        "sys": 1147062,
-        "idle": 4007546,
-        "irq": 6406
+        "sys": 877343,
+        "idle": 5803890,
+        "irq": 5296
       },
       {
         "model": "Intel(R) Core(TM) i3-2328M CPU @ 2.20GHz",
         "speed": 2195,
-        "user": 1426781,
+        "user": 982078,
         "nice": 0,
-        "sys": 1210437,
-        "idle": 3817375,
-        "irq": 5859
+        "sys": 1043421,
+        "idle": 5548109,
+        "irq": 4968
       },
       {
         "model": "Intel(R) Core(TM) i3-2328M CPU @ 2.20GHz",
         "speed": 2195,
-        "user": 1400718,
+        "user": 943625,
         "nice": 0,
-        "sys": 1233781,
-        "idle": 3820093,
-        "irq": 4515
+        "sys": 785078,
+        "idle": 5844906,
+        "irq": 3375
       }
     ],
     "host": "DESKTOP-5G2O1UL"
@@ -95,79 +94,179 @@
   },
   "nativeStack": [
     {
-      "pc": "0x00007ff756621759",
+      "pc": "0x00007ff7d46d1759",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff756625b7c",
+      "pc": "0x00007ff7d46d5b7c",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff756624b38",
+      "pc": "0x00007ff7d46d4b38",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff75671446b",
+      "pc": "0x00007ff7d47c446b",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff756f18d9e",
+      "pc": "0x00007ff7d4fc8d9e",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff756f00de1",
+      "pc": "0x00007ff7d4fb0de1",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff756dce6ac",
+      "pc": "0x00007ff7d4e7e6ac",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff756dd67b1",
+      "pc": "0x00007ff7d4e867b1",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff756dcbe13",
+      "pc": "0x00007ff7d4e7be13",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff756dca5e4",
+      "pc": "0x00007ff7d4e7a5e4",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff756deb8b5",
+      "pc": "0x00007ff7d4e9b8b5",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff756b57b89",
+      "pc": "0x00007ff7d4c07b89",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff757344d3d",
+      "pc": "0x00007ff7d53f4d3d",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff757345c71",
+      "pc": "0x00007ff7d539bb73",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff757380577",
+      "pc": "0x00007ff7d53748cc",
       "symbol": ""
     },
     {
-      "pc": "0x00007ff7573318e5",
+      "pc": "0x00007ff7d536dc7c",
       "symbol": ""
     },
     {
-      "pc": "0x00000342eceeda5c",
+      "pc": "0x00007ff7d53748cc",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d536dc7c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d53748cc",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d53748cc",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d5371e81",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d5371a6c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d4ed6d93",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d4ed6716",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d4fa798b",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d483e35d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d483e621",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d4837b63",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d473f470",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d473fc6c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d473ae75",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d485de62",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d485ded7",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d4860cef",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d486ad9c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d486b0c4",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d478c8f2",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d47ea9e3",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d46a674c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7d54a7e28",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007fff5f6137e4",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007fff6204cb81",
       "symbol": ""
     }
   ],
   "javascriptHeap": {
-    "totalMemory": 14557184,
-    "totalCommittedMemory": 14557184,
-    "usedMemory": 12010408,
-    "availableMemory": 2186630680,
+    "totalMemory": 5005312,
+    "totalCommittedMemory": 5005312,
+    "usedMemory": 3113816,
+    "availableMemory": 2195444448,
     "memoryLimit": 2197815296,
     "heapSpaces": {
       "read_only_space": {
@@ -181,90 +280,93 @@
         "memorySize": 1048576,
         "committedMemory": 1048576,
         "capacity": 1047488,
-        "used": 1047480,
-        "available": 8
+        "used": 1047456,
+        "available": 32
       },
       "old_space": {
-        "memorySize": 10072064,
-        "committedMemory": 10072064,
-        "capacity": 10000768,
-        "used": 8373288,
-        "available": 1627480
+        "memorySize": 2469888,
+        "committedMemory": 2469888,
+        "capacity": 2462536,
+        "used": 1409696,
+        "available": 1052840
       },
       "code_space": {
         "memorySize": 425984,
         "committedMemory": 425984,
-        "capacity": 339040,
-        "used": 318816,
-        "available": 20224
+        "capacity": 401408,
+        "used": 153248,
+        "available": 248160
       },
       "map_space": {
-        "memorySize": 1052672,
-        "committedMemory": 1052672,
-        "capacity": 1050752,
-        "used": 602960,
-        "available": 447792
+        "memorySize": 528384,
+        "committedMemory": 528384,
+        "capacity": 527488,
+        "used": 202320,
+        "available": 325168
       },
       "large_object_space": {
-        "memorySize": 1646592,
-        "committedMemory": 1646592,
-        "capacity": 1632016,
-        "used": 1632016,
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 0,
+        "used": 0,
         "available": 0
       },
       "code_large_object_space": {
-        "memorySize": 49152,
-        "committedMemory": 49152,
-        "capacity": 3552,
-        "used": 3552,
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 0,
+        "used": 0,
         "available": 0
       },
       "new_large_object_space": {
-        "memorySize": 0,
-        "committedMemory": 0,
+        "memorySize": 270336,
+        "committedMemory": 270336,
         "capacity": 1047488,
-        "used": 0,
-        "available": 1047488
+        "used": 268800,
+        "available": 778688
       }
     }
   },
   "resourceUsage": {
-    "userCpuSeconds": 2.921,
-    "kernelCpuSeconds": 2.046,
-    "cpuConsumptionPercent": 2.05248,
-    "maxRss": 37089280,
+    "userCpuSeconds": 0.187,
+    "kernelCpuSeconds": 0.078,
+    "cpuConsumptionPercent": 26.5,
+    "maxRss": 20418560,
     "pageFaults": {
-      "IORequired": 35813,
+      "IORequired": 7616,
       "IONotRequired": 0
     },
     "fsActivity": {
-      "reads": 525,
+      "reads": 7,
       "writes": 5
     }
   },
   "libuv": [
   ],
   "environmentVariables": {
-    "=C:": "C:\\",
     "ALLUSERSPROFILE": "C:\\ProgramData",
     "ANDROID_HOME": "C:\\Users\\Rohit Jain\\AppData\\Local\\Android\\Sdk",
     "APPDATA": "C:\\Users\\Rohit Jain\\AppData\\Roaming",
     "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
     "ChocolateyLastPathUpdate": "132262633240760669",
+    "COLORTERM": "truecolor",
     "CommonProgramFiles": "C:\\Program Files\\Common Files",
     "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
     "CommonProgramW6432": "C:\\Program Files\\Common Files",
     "COMPUTERNAME": "DESKTOP-5G2O1UL",
     "ComSpec": "C:\\Windows\\system32\\cmd.exe",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
     "HOMEDRIVE": "C:",
     "HOMEPATH": "\\Users\\Rohit Jain",
     "JAVA_HOME": "C:\\Program Files\\Java\\jdk-11.0.6",
+    "LANG": "en_US.UTF-8",
     "LOCALAPPDATA": "C:\\Users\\Rohit Jain\\AppData\\Local",
     "LOGONSERVER": "\\\\DESKTOP-5G2O1UL",
     "NUMBER_OF_PROCESSORS": "4",
     "OneDrive": "C:\\Users\\Rohit Jain\\OneDrive",
     "OS": "Windows_NT",
-    "Path": "C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\Java\\jdk-11.0.6\\bin;C:\\ProgramData\\chocolatey\\bin;C:\\Users\\Rohit Jain\\AppData\\Local\\Microsoft\\WindowsApps;;C:\\Users\\Rohit Jain\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\Rohit Jain\\AppData\\Roaming\\npm",
+    "Path": "F:\\FinalAppCode\\TSGAPP\\node_modules\\.bin;F:\\FinalAppCode\\node_modules\\.bin;F:\\node_modules\\.bin;C:\\Program Files\\nodejs;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\Java\\jdk-11.0.6\\bin;C:\\ProgramData\\chocolatey\\bin;C:\\Users\\Rohit Jain\\AppData\\Local\\Microsoft\\WindowsApps;;C:\\Users\\Rohit Jain\\AppData\\Roaming\\npm;C:\\Users\\Rohit Jain\\AppData\\Local\\Programs\\Microsoft VS Code\\bin",
     "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL",
     "PROCESSOR_ARCHITECTURE": "AMD64",
     "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 42 Stepping 7, GenuineIntel",
@@ -280,16 +382,14 @@
     "SystemDrive": "C:",
     "SystemRoot": "C:\\Windows",
     "TEMP": "C:\\Users\\ROHITJ~1\\AppData\\Local\\Temp",
+    "TERM_PROGRAM": "vscode",
+    "TERM_PROGRAM_VERSION": "1.42.1",
     "TMP": "C:\\Users\\ROHITJ~1\\AppData\\Local\\Temp",
     "USERDOMAIN": "DESKTOP-5G2O1UL",
     "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-5G2O1UL",
     "USERNAME": "Rohit Jain",
     "USERPROFILE": "C:\\Users\\Rohit Jain",
-    "windir": "C:\\Windows",
-    "TERM_PROGRAM": "vscode",
-    "TERM_PROGRAM_VERSION": "1.42.1",
-    "LANG": "en_US.UTF-8",
-    "COLORTERM": "truecolor"
+    "windir": "C:\\Windows"
   },
   "sharedObjects": [
     "C:\\Program Files\\nodejs\\node.exe",
@@ -299,9 +399,7 @@
     "C:\\Windows\\SYSTEM32\\apphelp.dll",
     "C:\\Windows\\System32\\WS2_32.dll",
     "C:\\Windows\\System32\\RPCRT4.dll",
-    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
     "C:\\Windows\\System32\\ADVAPI32.dll",
-    "C:\\Windows\\System32\\ucrtbase.dll",
     "C:\\Windows\\System32\\msvcrt.dll",
     "C:\\Windows\\System32\\sechost.dll",
     "C:\\Windows\\System32\\USER32.dll",
@@ -309,15 +407,17 @@
     "C:\\Windows\\System32\\GDI32.dll",
     "C:\\Windows\\System32\\gdi32full.dll",
     "C:\\Windows\\System32\\msvcp_win.dll",
+    "C:\\Windows\\System32\\ucrtbase.dll",
     "C:\\Windows\\System32\\PSAPI.DLL",
     "C:\\Windows\\System32\\CRYPT32.dll",
     "C:\\Windows\\System32\\MSASN1.dll",
+    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
     "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
     "C:\\Windows\\SYSTEM32\\USERENV.dll",
+    "C:\\Windows\\System32\\profapi.dll",
     "C:\\Windows\\SYSTEM32\\bcrypt.dll",
     "C:\\Windows\\SYSTEM32\\WINMM.dll",
-    "C:\\Windows\\System32\\profapi.dll",
-    "C:\\Windows\\SYSTEM32\\winmmbase.dll",
+    "C:\\Windows\\SYSTEM32\\WINMMBASE.dll",
     "C:\\Windows\\System32\\cfgmgr32.dll",
     "C:\\Windows\\System32\\IMM32.DLL",
     "C:\\Windows\\System32\\combase.dll",
@@ -327,10 +427,6 @@
     "C:\\Windows\\system32\\uxtheme.dll",
     "C:\\Windows\\system32\\mswsock.dll",
     "C:\\Windows\\System32\\kernel.appcore.dll",
-    "C:\\Windows\\System32\\NSI.dll",
-    "C:\\Windows\\system32\\pnrpnsp.dll",
-    "C:\\Windows\\SYSTEM32\\DNSAPI.dll",
-    "C:\\Windows\\System32\\winrnr.dll",
-    "C:\\Windows\\system32\\NLAapi.dll"
+    "C:\\Windows\\system32\\napinsp.dll"
   ]
 }

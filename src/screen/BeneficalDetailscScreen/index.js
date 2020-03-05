@@ -4,12 +4,8 @@ import { View, Text, ScrollView, Image, StatusBar, TextInput, Picker, TouchableO
 import AsyncStorage from '@react-native-community/async-storage';
 import Axios from 'axios';
 import Toast from 'react-native-simple-toast';
-import DatePicker from 'react-native-datepicker';
 import BaseUrl from '../../util/ApiCollection';
-import Colors from '../../util/Color_Value';
 import BuyNFOStyle from './style';
-import WebApi from '../../util/ApiCollection';
-import { TextField } from 'react-native-material-textfield';
 export default class BeneficalDetailsScreen extends React.Component {
     static navigationOptions = { header: null };
     constructor(props) {
@@ -136,7 +132,7 @@ export default class BeneficalDetailsScreen extends React.Component {
                     <TouchableOpacity
                         hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
                         onPress={this.getback} >
-                        <Image source={require('../../images/arrow.png')} style={{ width: 30, height: 20, marginRight: 10 }} />
+                        <Image source={require('../../images/back.png')} style={{ width: 30, height: 20, marginRight: 10 }} />
                     </TouchableOpacity>
                     <Text style={{ fontSize: 18, marginLeft: 10, color: 'white' }}>Add Notice</Text>
                 </View>

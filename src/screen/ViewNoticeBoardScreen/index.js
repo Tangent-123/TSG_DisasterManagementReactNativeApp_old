@@ -4,14 +4,12 @@ import { Text, Picker, Linking, Alert, TextInput, StatusBar, View, FlatList, Dim
 import AsyncStorage from '@react-native-community/async-storage';
 import Colors from '../../util/Color_Value';
 import Toast from 'react-native-simple-toast';
-import SOAStyle from './style';
-import BaseUrl from '../../util/ApiCollection';
 import Spinner from 'react-native-loading-spinner-overlay';
 import CommanStyle from '../../util/Header';
 
 
 var folio_number = [];
-export default class NoticeScreen extends React.Component {
+export default class ViewNoticeBoardScreen extends React.Component {
     static navigationOptions = { header: null };
     constructor(props, ctx) {
         super(props, ctx);
@@ -77,7 +75,7 @@ export default class NoticeScreen extends React.Component {
     }
 
     getNoticeList() {
-        //this.setState({spinner:true})
+        this.setState({spinner:true})
         Axios.get("http://Devapi.tatadisasterresponse.com/api/view-notice-board?response_code=" + this.state.ResponseCode, {
             headers: {
                 'Authorization': 'bearer ' + this.state.AccessToken

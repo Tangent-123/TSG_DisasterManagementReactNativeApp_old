@@ -101,7 +101,7 @@ export default class GuidlineScreen extends React.Component {
             <View style={styles.HeaderBackground}>
                 <TouchableOpacity
                     onPress={this.getback} >
-                    <Image source={require('../../images/arrow.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+                    <Image source={require('../../images/back.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
                 </TouchableOpacity>
                 <View style={{ flexDirection: 'column' }}>
                     <Text style={styles.HeaderText}>Guidelines</Text>

@@ -28,70 +28,72 @@ export default class ClientBuyScreenNFOScreen extends React.Component {
     }
 
     componentWillMount() {
-        AsyncStorage.getItem('NoticeID')
-            .then(NoticeID => {
-                AsyncStorage.getItem('DesCription')
-                    .then(DesCription => {
-                        AsyncStorage.getItem('RESPONSE_CODE')
-                            .then(RESPONSE_CODE => {
-                                AsyncStorage.getItem('POSTED_BY')
-                                    .then(POSTED_BY => {
-                                        console.log('kbd' + POSTED_BY)
-                                        if (POSTED_BY == null) {
-                                            Toast.show('Dekho black')
-                                            this.setState({
-                                                NOTICE_SYS_ID: '',
-                                                RESPONSE_CODE: '',
-                                                DESCRIPTION: '',
-                                                POSTED_BY: '',
-                                                CREATED_DATE: '',
-                                                BtnLevel: 'Add Notice',
-
-                                            })
-                                        } else {
-                                            Toast.show('UpdateNotice')
-                                            this.setState({
-                                                NOTICE_SYS_ID: NoticeID,
-                                                RESPONSE_CODE: RESPONSE_CODE,
-                                                DESCRIPTION: DesCription,
-                                                POSTED_BY: POSTED_BY,
-                                                // CREATED_DATE: UpdateNotice.CREATED_DATE,
-                                                BtnLevel: 'Update Notice'
-
-                                            })
-                                        }
-
-                                    })
-
-                            })
-                    })
-            })
-
         AsyncStorage.getItem('access_token')
             .then(access_token => {
                 AsyncStorage.getItem('ResponseCode')
                     .then(ResponseCode => {
                         AsyncStorage.getItem('USER_ID')
                             .then(USER_ID => {
-                                this.setState({
-                                    AccessToken: access_token,
-                                    RESPONSE_CODE: ResponseCode,
-                                    POSTED_BY: USER_ID,
-                                })
-                            })
+                                AsyncStorage.getItem('NoticeID')
+                                    .then(NoticeID => {
+                                        AsyncStorage.getItem('DesCription')
+                                            .then(DesCription => {
+                                                AsyncStorage.getItem('RESPONSE_CODE')
+                                                    .then(RESPONSE_CODE => {
+                                                        AsyncStorage.getItem('POSTED_BY')
+                                                            .then(POSTED_BY => {
+                                                                console.log('kbd' + POSTED_BY)
+                                                                if (POSTED_BY == null) {
+                                                                    Toast.show('Dekho black')
+                                                                    this.setState({
+                                                                        NOTICE_SYS_ID: '',
+                                                                        RESPONSE_CODE: '',
+                                                                        DESCRIPTION: '',
+                                                                        POSTED_BY: '',
+                                                                        CREATED_DATE: '',
+                                                                        BtnLevel: 'Add Notice',
+                                                                        AccessToken: access_token,
+                                                                        RESPONSE_CODE: ResponseCode,
+                                                                        POSTED_BY: USER_ID,
 
-                    })
-            })
-    }
+                                                                    })
+                                                                } else {
+                                                                    Toast.show('UpdateNotice')
+                                                                    this.setState({
+                                                                        NOTICE_SYS_ID: NoticeID,
+                                                                        RESPONSE_CODE: RESPONSE_CODE,
+                                                                        DESCRIPTION: DesCription,
+                                                                        POSTED_BY: POSTED_BY,
+                                                                        // CREATED_DATE: UpdateNotice.CREATED_DATE,
+                                                                        BtnLevel: 'Update Notice',
+                                                                        AccessToken: access_token,
+                                                                        // RESPONSE_CODE: ResponseCode,
+
+
+                                                                    })
+                                                                }
+
+                                                            })
+
+                                                    })
+                                            })
+
+                                    })
+
+                            })
+             
+                       })
+                               })
+            }
 
     getback = () => {
-        this.props.navigation.navigate('NoticeBoardStack');
-    }
+                    this.props.navigation.navigate('NoticeBoardStack');
+                }
     // [{"NOTICE_SYS_ID":"1","RESPONSE_CODE":"AWS12","DESCRIPTION":"XXsdfh","POSTED_BY":1}]	
 
     AddNoticeData() {
-        // Toast.show(this.state.BtnLevel)
-        if (this.state.BtnLevel == 'Update Notice') {
+                // Toast.show(this.state.BtnLevel)
+                if(this.state.BtnLevel == 'Update Notice') {
             const data = JSON.stringify({
                 NOTICE_SYS_ID: this.state.NOTICE_SYS_ID,
                 RESPONSE_CODE: this.state.RESPONSE_CODE,

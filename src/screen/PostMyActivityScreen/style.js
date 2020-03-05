@@ -32,7 +32,8 @@ export default PostActivity = StyleSheet.create({
     headerItem1: {
         fontSize: 16,
         color: '#000',
-        fontFamily: "Gilroy-Bold",
+        paddingVertical:4,
+        //fontFamily: "Gilroy-SemiBold",
        marginTop:10,
     },
     headerItemSecond: {
@@ -140,7 +141,7 @@ export default PostActivity = StyleSheet.create({
     containersecond: {
         flex: 1,
        // paddingTop: 20,
-        paddingLeft: 20,
+        paddingLeft: 10,
        // marginTop:10,
         paddingRight: 20,
         backgroundColor: '#fff',

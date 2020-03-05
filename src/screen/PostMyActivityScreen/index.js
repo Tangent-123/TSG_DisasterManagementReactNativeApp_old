@@ -7,14 +7,25 @@ import RegStyle from './style';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 //import Axios from 'axios';
 import DatePicker from 'react-native-datepicker';
+import ImagePicker from 'react-native-image-picker';
 //import Spinner from 'react-native-loading-spinner-overlay';
 import Axios from 'axios';
 //import LoginApi from '../../../util/ApiCollection';
 //import AwesomeAlert from 'react-native-awesome-alerts';
+import commanStyle from '../../util/Header';
 var radio_props = [
     { label: 'Emergency Phase', value: '0', },
     { label: 'Relief Phase', value: '1' }
 ];
+const options = {
+    title: 'Select Photo',
+    customButtons: [{ name: 'fb', title: 'Choose Photo from Gallery' }],
+    storageOptions: {
+        skipBackup: false,
+        path: 'images',
+    },
+};
+let count = 0;
 export default class PostMyActivityScreen extends React.Component {
     static navigationOptions = { header: null };
     constructor(props) {
@@ -35,8 +46,9 @@ export default class PostMyActivityScreen extends React.Component {
             EmergencyName: '',
             EmergencyConatct: '',
             bloodgroup: '',
-            startTime: '',
+            StartDate: '',
             Description: '',
+            EndDate:'',
         }
     }
 
@@ -119,10 +131,39 @@ export default class PostMyActivityScreen extends React.Component {
         }
 
     }
-
+    getImage() {
+        count++;
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            } else {
+                let SourceImage = { uri: response.uri, type: response.type, name: response.fileName };
+                if (SourceImage == '') {
+                    console.log('SourceImage' + SourceImage)
+                } else {
+                    console.log('count' + count)
+                    if (count == 1) {
+                        let SourceImage = { uri: response.uri, type: response.type, name: response.fileName };
+                        const source = { uri: 'data:image/jpg;base64,' + response.data };
+                        
+                       // this.UploadingCommanAPIFirst();
+                        // this.setState({
+                        //     avatarSourceOne: response.data,
+                        //     ImageNameOne: response.fileName,
+                        // })
+                    }
+                }
+            }
+        })
+    }
     render() {
         return (
-            <View style={RegStyle.container}>
+            <View style={commanStyle.MainView}>
                 {/* <Spinner
                     visible={this.state.spinner}
                     textContent={'Loading...'}
@@ -131,7 +172,7 @@ export default class PostMyActivityScreen extends React.Component {
                 <View style={RegStyle.HeaderBackground}>
                     <TouchableOpacity
                         onPress={this.getback} >
-                        <Image source={require('../../images/arrow.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
+                        <Image source={require('../../images/back.png')} style={{ width: 30, height: 20, marginRight: 20 }} />
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'column' }}>
                         <Text style={RegStyle.headerItem}>Post My Activity</Text>
@@ -155,10 +196,10 @@ export default class PostMyActivityScreen extends React.Component {
                             <RadioForm
                                 radio_props={radio_props}
                                 initial={0}
-                                buttonSize={10}
+                                buttonSize={8}
                                 selectedButtonColor={'#3386FF'}
                                 buttonColor={'#dddedb'}
-                                labelStyle={{ fontSize: 14, marginRight: 10, color: '#001630', fontFamily: "Gilroy-Medium", alignItems: 'center', marginRight: 48 }}
+                                labelStyle={{ fontSize: 15, marginRight: 10, color: '#001630', fontFamily: "Gilroy-Medium", alignItems: 'center', marginRight: 20 }}
                                 formHorizontal={true}
                                 animation={true}
                                 onPress={(Value) => { this.getRedio(Value) }}>
@@ -166,7 +207,7 @@ export default class PostMyActivityScreen extends React.Component {
                         </View>
                         <View style={{ alignItems: 'center', marginTop: 10, flexDirection: 'row', }}>
                             <DatePicker
-                                date={this.state.startTime}
+                                date={this.state.StartDate}
                                 mode="date"
                                 placeholder="Start Date"
                                 format="YYYY-MM-DD"
@@ -191,7 +232,7 @@ export default class PostMyActivityScreen extends React.Component {
                                     }
                                     // ... You can check the source to find the other keys.
                                 }}
-                                onDateChange={(lumsumorderDate) => { this.setState({ lumsumorderDate: lumsumorderDate }) }}
+                                onDateChange={(StartDate) => { this.setState({ StartDate: StartDate }) }}
                             />
                             <Image source={require('../../images/dates.png')} style={{ width: 26, height: 26, }} resizeMode={'stretch'} />
                         </View>
@@ -223,7 +264,7 @@ export default class PostMyActivityScreen extends React.Component {
                                     }
                                     // ... You can check the source to find the other keys.
                                 }}
-                                onDateChange={(lumsumorderDate) => { this.setState({ lumsumorderDate: lumsumorderDate }) }}
+                                onDateChange={(EndDate) => { this.setState({ EndDate: EndDate }) }}
                             />
                             <Image source={require('../../images/dates.png')} style={{ width: 26, height: 26, }} resizeMode={'stretch'} />
                         </View>
