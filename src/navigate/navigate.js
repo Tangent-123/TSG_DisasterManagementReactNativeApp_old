@@ -16,9 +16,7 @@ import AddMappingScreen from '../screen/AddMappingScreen';
 import ReliefScreen from '../screen/ReliefScreen';
 import AddBeneFicialScreen from '../screen/AddBeneficialScreen';
 import BeneficiallistScreen from '../screen/ViewBeneficialScreen';
-import BeneficalDetailsScreen from '../screen/BeneficalDetailscScreen';
-
-
+import CountBeneficaryScreen from '../screen/CountBeneficaryScreen';
 import React from 'react';
 const AuthStart = createStackNavigator({
   LoginScreen: {
@@ -30,7 +28,6 @@ const DashboardStack = createStackNavigator({
   DashboardScreen: {
     screen: DashboardScreen
   },
-
 }
 );
 const ProfileStack = createStackNavigator({
@@ -51,16 +48,15 @@ const MyActivityStack = createStackNavigator({
   MyActivityScreen: {
     screen: MyActivityScreen
   },
+}
+);
+const CountBeneficaryStack = createStackNavigator({
+  CountBeneficaryScreen: {
+    screen: CountBeneficaryScreen
+  },
 
 }
 );
-// const LocationMappingStack = createStackNavigator({
-//   LocationMapping: {
-//     screen: LocationMapping
-//   },
-
-// }
-// );
 const AddNoticeStack = createStackNavigator({
   AddNoticeScreen:{
     screen:AddNoticeScreen,
@@ -70,7 +66,6 @@ const GuidlineStack = createStackNavigator({
   GuidlineScreen: {
     screen: GuidlineScreen
   },
-
 }
 );
 const AddBeneFicialStack = createStackNavigator({
@@ -79,11 +74,11 @@ const AddBeneFicialStack = createStackNavigator({
   }
 })
 
-const BeneficalDetailsStack = createStackNavigator({
-  BeneficalDetailsScreen:{
-    screen:BeneficalDetailsScreen
-  }
-})
+// const BeneficalDetailsStack = createStackNavigator({
+//   BeneficalDetailsScreen:{
+//     screen:BeneficalDetailsScreen
+//   }
+// })
 const ReliefStack = createStackNavigator({
   ReliefScreen:{
     screen:ReliefScreen
@@ -105,7 +100,6 @@ const TeamStack = createStackNavigator({
   TeamScreen: {
     screen: TeamScreen
   },
-
 }
 );
 const BeneficiallistStack = createStackNavigator({
@@ -139,6 +133,7 @@ const AuthStack = createSwitchNavigator(
     AddNoticeStack:AddNoticeStack,
     MyActivityStack: MyActivityStack,
     GuidlineStack:GuidlineStack,
+    CountBeneficaryStack:CountBeneficaryStack,
    // LocationMappingStack:LocationMappingStack,
     MappingListStack:MappingListStack,
     NoticeBoardStack:NoticeBoardStack,

@@ -104,7 +104,7 @@ export default class ReliefScreen extends React.Component {
         this.props.navigation.navigate('DashboardStack');
     }
     getbeneficial = () => {
-        this.props.navigation.navigate('BeneficiallistStack');
+        this.props.navigation.navigate('CountBeneficaryStack');
     }
     render() {
         return (

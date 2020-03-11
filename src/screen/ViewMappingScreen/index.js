@@ -71,9 +71,9 @@ export default class MappingListScreen extends Component {
         AsyncStorage.setItem('GramName', '');
         AsyncStorage.setItem('GRAM_PANCHAYAT_SYS_ID', '')
         AsyncStorage.setItem('VillageName', '');
-        AsyncStorage.setItem('VILLAGE_SYS_ID','')
+        AsyncStorage.setItem('VILLAGE_SYS_ID', '')
         AsyncStorage.setItem('HamletName', '');
-        AsyncStorage.setItem('HEMLET_SYS_ID','')
+        AsyncStorage.setItem('HEMLET_SYS_ID', '')
         AsyncStorage.setItem('PartnerName', '');
         AsyncStorage.setItem('PARTNER_SYS_ID', '')
         AsyncStorage.setItem('RESPONSE_CODE', '')
@@ -84,21 +84,21 @@ export default class MappingListScreen extends Component {
         console.log('rohitj' + JSON.stringify(item))
         AsyncStorage.setItem('Mapping_ID', JSON.stringify(item.RESPONSE_LOCATION_MAPPING_SYS_ID));
         AsyncStorage.setItem('StateName', item.STATE_NAME);
-        AsyncStorage.setItem('STATE_SYS_ID',JSON.stringify(item.STATE_SYS_ID));
+        AsyncStorage.setItem('STATE_SYS_ID', JSON.stringify(item.STATE_SYS_ID));
         AsyncStorage.setItem('DistricName', item.DISTRICT_NAME);
-        AsyncStorage.setItem('DISTRICT_SYS_ID',JSON.stringify(item.DISTRICT_SYS_ID));
+        AsyncStorage.setItem('DISTRICT_SYS_ID', JSON.stringify(item.DISTRICT_SYS_ID));
         AsyncStorage.setItem('BlockName', item.BLOCK_NAME);
-        AsyncStorage.setItem('BLOCK_SYS_ID',JSON.stringify(item.BLOCK_SYS_ID));
+        AsyncStorage.setItem('BLOCK_SYS_ID', JSON.stringify(item.BLOCK_SYS_ID));
         AsyncStorage.setItem('GramName', item.GRAM_PANCHAYAT_NAME);
-        AsyncStorage.setItem('GRAM_PANCHAYAT_SYS_ID',JSON.stringify(item.GRAM_PANCHAYAT_SYS_ID));
+        AsyncStorage.setItem('GRAM_PANCHAYAT_SYS_ID', JSON.stringify(item.GRAM_PANCHAYAT_SYS_ID));
         AsyncStorage.setItem('VillageName', item.VILLAGE_NAME);
-        AsyncStorage.setItem('VILLAGE_SYS_ID',JSON.stringify(item.VILLAGE_SYS_ID));
+        AsyncStorage.setItem('VILLAGE_SYS_ID', JSON.stringify(item.VILLAGE_SYS_ID));
         AsyncStorage.setItem('HamletName', item.HAMLET_NAME);
         AsyncStorage.setItem('HEMLET_SYS_ID', JSON.stringify(item.HEMLET_SYS_ID));
         AsyncStorage.setItem('PartnerName', item.PARTNER_NAME);
         AsyncStorage.setItem('PARTNER_SYS_ID', JSON.stringify(item.PARTNER_SYS_ID));
         AsyncStorage.setItem('RESPONSE_CODE', item.RESPONSE_CODE);
-       // AsyncStorage.setItem('Posted_By',JSON.stringify(item.pos))
+        // AsyncStorage.setItem('Posted_By',JSON.stringify(item.pos))
         this.props.navigation.navigate('AddMappingStack')
     }
     DeleteMapping(item) {

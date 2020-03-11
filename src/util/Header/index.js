@@ -1,5 +1,13 @@
 import { StyleSheet, Platform } from 'react-native';
 export default CommanStyle = StyleSheet.create({
+ 
+    Responcelevel:{
+        alignItems: 'center',
+        borderRadius:10,
+        padding: 14,
+        height: 40
+
+    },
     HeaderBackground: {
         flexDirection: 'row',
         alignItems: 'center',

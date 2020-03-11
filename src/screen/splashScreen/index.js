@@ -81,8 +81,8 @@ export default class SplashScreen extends React.Component {
                     dotColor="#3386FF"
                     inactiveDotColor="#fff"
                     // paginationBoxVerticalPadding={20}
-                    autoplay
-                    circleLoop
+                    autoplay={true}
+                
                     resizeMethod={'resize'}
                     resizeMode={'cover'}
                     paginationBoxStyle={{

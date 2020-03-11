@@ -21,6 +21,8 @@ export default class BeneficialListScreen extends Component {
         }
     }
     componentWillMount() {
+        const BeneficiaryUpdate = this.props.navigation.getParam('RESPONSE_LOCATION_MAPPING_SYS_ID');
+        console.log('hu' + BeneficiaryUpdate)
         AsyncStorage.getItem('access_token')
             .then(access_token => {
                 AsyncStorage.getItem('ResponseCode')
@@ -155,17 +157,6 @@ export default class BeneficialListScreen extends Component {
                     barStyle='dark-content'
                 />
 
-                <View>
-                    <TouchableOpacity
-                        hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-                        onPress={() => this.AddMapping()}>
-                        <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', marginEnd: 10, padding: 10 }}>
-                            <Text style={{ backgroundColor: '#008800', fontSize: 14, color: '#fff', justifyContent: 'center', marginLeft: 40, padding: 10, alignItems: 'center', borderRadius: 10 }}>
-                                Add
-                       </Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
             </View>
         );
     }
