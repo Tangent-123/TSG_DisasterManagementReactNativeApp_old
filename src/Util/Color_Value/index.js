@@ -1,0 +1,21 @@
+export default Colors = {
+    Black:'#000000',
+    AllbtnBackColor: '#70AFA7',
+    TextColorone: '#4E5764',
+    BackgroundGray: '#FAFAFA',
+    TextColorSecond:'#303031',
+    TextLevelColor:'#CDD2DA',
+    Appcolor: '#4E5764',
+    ButtonTextcolor: '#fff',
+    textcolor: '#000',
+    transparent: '#e5e5e5',
+    red: '#c50000',
+    primary: '#F97D09',
+    secondry: '#278D27',
+    grey: '#5a6771',
+    lightgrey: '#dddedb',
+    orange: '#FA725A',
+    blue: '#0306F9',
+    tabbackground: '#74B2AA',
+    StatusBar:"#3386FF"
+}
