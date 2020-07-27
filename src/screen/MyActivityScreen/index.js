@@ -6,9 +6,11 @@ import {
 import Axios from 'axios';
 import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-community/async-storage';
-import URLLINK from '../../Util/ApiCollection';
+import BaseUrl from '../../Util/ApiCollection';
 import CommonStyle from '../../Util/Header';
 import StatusBar from '../../Assets/StatusBar';
+import Constants from '../../Util/Config/Constants';
+
 export default class MyActivityScreen extends Component {
     static navigationOptions = { header: null };
     constructor(props) {
@@ -20,20 +22,14 @@ export default class MyActivityScreen extends Component {
             MappingListArray: [],
             ResponseCode: '',
         }
+        this.loaddata();
     }
-    componentWillMount() {
-        AsyncStorage.getItem('access_token')
-            .then(access_token => {
-                AsyncStorage.getItem('ResponseCode')
-                    .then(ResponseCode => {
-                        console.log('jajaj' + ResponseCode)
-                        this.setState({
-                            AccessToken: access_token,
-                            ResponseCode: ResponseCode,
-                        })
-                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-response-location-mapping-details?response_code=" + this.state.ResponseCode, {
+    loaddata=async()=> {
+         let token= await AsyncStorage.getItem(Constants.access_token)
+        let responsecode = await  AsyncStorage.getItem(Constants.responseCode)
+                        Axios.get(BaseUrl.ViewResponselocationMappingDetails + responsecode, {
                             headers: {
-                                'Authorization': 'bearer ' + this.state.AccessToken
+                                'Authorization': 'bearer ' + token
                             }
                         }).then((response) => {
                             console.log('rohit jain aa' + JSON.stringify(response.data));
@@ -48,21 +44,20 @@ export default class MyActivityScreen extends Component {
                                 Toast.show(response.data.response)
                             }
                         })
-                    })
-            })
+            
 
     }
     getback = () => {
-        this.props.navigation.navigate('DashboardStack')
+        this.props.navigation.navigate('DashboardScreen')
     }
     AddMapping = () => {
-        this.props.navigation.navigate('AddMappingStack'
+        this.props.navigation.navigate('AddMappingScreen'
 
         );
     }
     UpdateData(item) {
-        AsyncStorage.setItem('UpdateData', item);
-        this.props.navigation.navigate('AddMappingStack');
+        AsyncStorage.setItem(Constants.updatedata, item);
+        this.props.navigation.navigate('AddMappingScreen');
     }
     render() {
         return (

@@ -12,6 +12,7 @@ import Axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
 import qs from 'qs';
 import ProfileStyle from './style';
+import Constants from '../../Util/Config/Constants';
 
 var radio_props = [
     { label: 'Male', value: '0', },
@@ -48,50 +49,21 @@ export default class ProfileScreen extends React.Component {
            // initvalue:0,
         }
 
-        
+        this.loaddata();
     }
-    componentWillMount() {
-        AsyncStorage.getItem('access_token')
-            .then(access_token => {
-                AsyncStorage.getItem('USER_ID')
-                    .then(USER_ID => {
-                        AsyncStorage.getItem('FIRST_NAME')
-                            .then(FIRST_NAME => {
-                                AsyncStorage.getItem('GENDER')
-                                    .then(GENDER => {
-                                        AsyncStorage.getItem('EmergencyName')
-                                            .then(EmergencyName => {
-                                                AsyncStorage.getItem('EmergencyNumber')
-                                                    .then(EmergencyNumber => {
-                                                        AsyncStorage.getItem('MobileNumber')
-                                                            .then(MobileNumber => {
-                                                                                        this.setState({
-                                                                    AccessToken: access_token,
-                                                                    USER_ID: USER_ID,
-                                                                    firstName: FIRST_NAME,
-                                                                    Sex: GENDER,
-                                                                    EmergencyName: EmergencyName,
-                                                                    EmergencyNumber: EmergencyNumber,
-                                                                    Mobile: MobileNumber,
-                                                                });
-                                                                //Toast.show(this.state.Sex)
-                                                               // Toast.show(this.state.initvalue)
-
-                                                               
-
- //Toast.show(this.state.initvalue)
-                                                            })
-
-
-                                                    })
-                                            })
-
-                                    })
-                            })
-                    })
-
-            })
-
+    loaddata=async()=> {
+        let token= await AsyncStorage.getItem(Constants.access_token)
+        let responsecode = await AsyncStorage.getItem(Constants.responseCode)
+        let fname = await AsyncStorage.getItem(Constants.firstname)
+        let gender = await  AsyncStorage.getItem(Constants.gender)
+        let emergencyname =  await AsyncStorage.getItem(Constants.emergencyname)
+        let emergencynumber =  await AsyncStorage.getItem(Constants.emergencynumber)
+        let mobilenumber =  await AsyncStorage.getItem(Constants.mobilenumber)
+        let userID =  await AsyncStorage.getItem(Constants.user_id)
+        this.setState({AccessToken: token,USER_ID: userID,firstName: fname,Sex: gender,
+        EmergencyName: emergencyname,EmergencyNumber: emergencynumber,Mobile: mobilenumber});
+                                                        
+console.log('fffffffffffffff'+(token))
     }
     componentdidMount(){
          if(this.state.Sex == 'Male'){
@@ -104,10 +76,13 @@ export default class ProfileScreen extends React.Component {
                        }
     }
     getUpdateData() {
-        AsyncStorage.setItem('GENDER', this.state.Sex);
-        AsyncStorage.setItem('EmergencyName', this.state.EmergencyName);
-        AsyncStorage.setItem('EmergencyNumber', this.state.EmergencyNumber);
-        AsyncStorage.setItem('MobileNumber', this.state.Mobile);
+        this.setState({
+            spinner:true
+        })
+        AsyncStorage.setItem(Constants.gender, this.state.Sex);
+        AsyncStorage.setItem(Constants.emergencyname, this.state.EmergencyName);
+        AsyncStorage.setItem(Constants.emergencynumber, this.state.EmergencyNumber);
+        AsyncStorage.setItem(Constants.mobilenumber, this.state.Mobile);
         if (this.state.Mobile !== '') {
             if (this.state.EmergencyName !== '') {
                 if (this.state.EmergencyNumber !== '') {
@@ -129,9 +104,10 @@ export default class ProfileScreen extends React.Component {
                         data,
                         { headers }
                     ).then(p => {
-                        if (p.data.status == true) {
+                        console.log('jjjjjjjjjjjjjj'+JSON.stringify(p.data.status))
+                        if (p.data.status == 'true') {
                             Toast.show(p.data.response);
-                           // this.props.navigation.navigate('DashboardStack');
+                            this.props.navigation.navigate('DashboardStack');
                             this.setState({
                                 spinner: false,
                             });
@@ -144,6 +120,7 @@ export default class ProfileScreen extends React.Component {
                         }
 
                     }).catch(function (error) {
+                        console.log('tttttttttttt'+error)
 
                     })
                 } else {
@@ -157,7 +134,7 @@ export default class ProfileScreen extends React.Component {
         }
     }
     getback = () => {
-        this.props.navigation.navigate('DashboardStack')
+        this.props.navigation.navigate('DashboardScreen')
     }
     getRedio(value) {
         console.log('rohit' + value)

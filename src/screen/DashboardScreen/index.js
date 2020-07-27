@@ -1,29 +1,18 @@
-import AsyncStorage from '@react-native-community/async-storage';
 
 import React, { Component } from 'react';
-
-import { View, Text, TouchableOpacity, TextInput, Picker, StyleSheet, Image, Alert, ScrollView } from 'react-native';
-
+import { View, Text, TouchableOpacity, TextInput, Picker, StyleSheet, Image, Alert, StatusBar, ScrollView } from 'react-native';
+ import Colors from '../../Util/Color_Value';
 import AwesomeAlert from 'react-native-awesome-alerts';
-
 import RNExitApp from 'react-native-exit-app';
-
+import AsyncStorage from '@react-native-community/async-storage';
 import Spinner from 'react-native-loading-spinner-overlay';
-
 import RadioForm from 'react-native-simple-radio-button';
-
 import Toast from 'react-native-simple-toast';
-
 import Modal from 'react-native-modal';
-
-import Axios from 'axios';
-
-import RNPickerSelect from 'react-native-picker-select';
-
-import StatusBar from '../../Assets/StatusBar';
-import ReactTab from '../../Componenet/ReactView';
 import BaseUrl from '../../Util/ApiCollection';
-import Colors from '../../Util/Color_Value';
+import Axios from 'axios';
+import RNPickerSelect from 'react-native-picker-select';
+import Constants from '../../Util/Config/Constants';
 var radio_props = [
     { label: 'Male', value: '0', },
     { label: 'Female', value: '1' }
@@ -48,87 +37,45 @@ export default class DashboardScreen extends React.Component {
             Sex: '',
             USER_ID: '',
             Mobile: '',
-            Term: "Lorem ipsum dolor sit amet" +
-                "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam"
-                + "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit"
-                + "in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui"
-                + "officia deserunt mollit anim id est laborum."
-                + "Curabitur pretium tincidunt lacus.Nulla gravida orci a odio.Nullam varius,"
-                + "turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin"
-                + "mauris.Integer in mauris eu nibh euismod gravida.Duis ac tellus et risus vulputate "
-                + "vehicula.Donec lobortis risus a elit.Etiam tempor.Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis,"
-                + "id tincidunt sapien risus a quam.Maecenas fermentum consequat mi.Donec fermentum.Pellentesque malesuada nulla a mi.Duis sapien sem,"
-                + "aliquet nec, commodo eget, consequat quis, neque.Aliquam faucibus, elit ut dictum aliquet,"
-                + "felis nisl adipiscing sapien, sed malesuada diam lacus eget erat.Cras mollis scelerisque nunc."
-                + "Nullam arcu.Aliquam consequat.Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi.Aenean magna nisl,"
-                + "mollis quis, molestie eu, feugiat in, orci.In hac habitasse platea dictumst",
             //  spinner: true,
         }
+        this.loaddata();
     }
 
-    componentWillMount() {
-        AsyncStorage.getItem('ResponseCode')
-            .then(ResponseCode => {
-                if (ResponseCode == null) {
-                    Alert.alert(
-                        'Alert Message',
-                        'Please Select Response Code',
-                        [
-                            // { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
-                            // {
-                            //     text: 'Cancel',
-                            //     onPress: () => console.log('Cancel Pressed'),
-                            //     style: 'cancel',
-                            // },
-                            { text: 'OK', onPress: () => console.log('OK Pressed') },
-                        ],
-                        { cancelable: false },
-                    );
-                }
-            })
+    loaddata=async()=> {
+    let ResponseCode= await AsyncStorage.getItem(Constants.responseCode);
+    let EMERGENCY_CONTACT= await AsyncStorage.getItem(Constants.emergencynumber)
+    let EMERGENCY_NAME = await  AsyncStorage.getItem(Constants.emergencyname)
+    let mobilenumber = await   AsyncStorage.getItem(Constants.mobilenumber)
+    let token =await  AsyncStorage.getItem(Constants.access_token);
+    let user_id= await  AsyncStorage.getItem(Constants.user_id)
+    let fname = await AsyncStorage.getItem(Constants.firstname)
+    this.setState({EmergencyName: EMERGENCY_NAME,EmergencyNumber: EMERGENCY_CONTACT,Mobile: mobilenumber
+    ,AccessToken: token,USER_ID: user_id, FIRST_NAME: fname,ResponseCode: ResponseCode,
+});
+                    if (ResponseCode == null) {
+                        Alert.alert(
+                            'Alert Message',
+                            'Please Select Response Code',
+                            [
+                                // { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
+                                // {
+                                //     text: 'Cancel',
+                                //     onPress: () => console.log('Cancel Pressed'),
+                                //     style: 'cancel',
+                                // },
+                                { text: 'OK', onPress: () => console.log('OK Pressed') },
+                            ],
+                            { cancelable: false },
+                        );
 
-        AsyncStorage.getItem('EmergencyNumber')
-            .then(EMERGENCY_CONTACT => {
-                AsyncStorage.getItem('EmergencyName')
-                    .then(EMERGENCY_NAME => {
-                        AsyncStorage.getItem('MobileNumber')
-                            .then(MobileNumber => {
-                                console.log('ji ji' + EMERGENCY_NAME);
-                                console.log('ko ko' + EMERGENCY_CONTACT)
-                                this.setState({
+                    } else {
 
-                                    EmergencyName: EMERGENCY_NAME,
-                                    EmergencyNumber: EMERGENCY_CONTACT,
-                                    Mobile: MobileNumber,
-                                })
-                            })
-                    })
-            })
-
-
-        AsyncStorage.getItem('ResponseCode')
-            .then(ResponseCode => {
-                AsyncStorage.getItem('access_token')
-                    .then(access_token => {
-                        AsyncStorage.getItem('USER_ID')
-                            .then(USER_ID => {
-                                AsyncStorage.getItem('FIRST_NAME')
-                                    .then(FIRST_NAME => {
-                                        console.log('kapil pro'+access_token)
-
-                                        this.setState({
-                                            AccessToken: access_token,
-                                            USER_ID: USER_ID,
-                                            FIRST_NAME: FIRST_NAME,
-                                            ResponseCode: ResponseCode,
-
-                                        });
-                                        console.log('bdj' + this.state.AccessToken);
-
-                                        console.log('tolekn' + this.state.USER_ID)
-                                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-generate-code?userid=" + this.state.USER_ID, {
+                    }
+        
+                                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-generate-code?userid=" + user_id, {
                                             headers: {
-                                                'Authorization': 'bearer ' + this.state.AccessToken
+                                                'Authorization': 'bearer ' + token
                                             }
                                         }).then((response) => {
                                             console.log('rohit jain aa' + response.data);
@@ -140,15 +87,16 @@ export default class DashboardScreen extends React.Component {
                                                 })
 
                                             }
-                                        })
-                                    })
+                                    
+            
 
-                            })
+                        
 
-                    })
+                
 
 
             })
+
 
     }
     // componentDidMount(){
@@ -162,21 +110,37 @@ export default class DashboardScreen extends React.Component {
     // }
     getValueSerial(ValueBrand) {
         switch (ValueBrand) {
-            case 'Profile': return this.props.navigation.navigate('ProfileStack');
-            case 'MYActivity': return this.props.navigation.navigate('MyActivityStack');
-            case 'Guidelines': return this.props.navigation.navigate('GuidlineStack');
-            case 'MYActivity': return this.props.navigation.navigate('MyActivityStack')
-            case 'TEAM': return this.props.navigation.navigate('TeamStack');
-            case 'Emergency': return this.props.navigation.navigate('EmergencyStack');
-            case 'LocationMapping': return this.props.navigation.navigate('MappingListStack')
-            case 'Notice': return this.props.navigation.navigate('NoticeBoardStack')
-            case 'Relief': return this.props.navigation.navigate('ReliefStack');
-            case 'PostGraph': return this.props.navigation.navigate('PostStack');
-            case 'Gallary': return this.props.navigation.navigate('GallaryStack');
+            // case 'Profile': return this.props.navigation.navigate('ProfileStack');
+            // case 'MYActivity': return this.props.navigation.navigate('MyActivityStack');
+            // case 'Guidelines': return this.props.navigation.navigate('GuidlineStack');
+            // case 'MYActivity': return this.props.navigation.navigate('MyActivityStack')
+            // case 'TEAM': return this.props.navigation.navigate('TeamStack');
+            // case 'Emergency': return this.props.navigation.navigate('EmergencyStack');
+            // case 'LocationMapping': return this.props.navigation.navigate('MappingListStack')
+            // case 'Notice': return this.props.navigation.navigate('NoticeBoardStack')
+            // case 'Relief': return this.props.navigation.navigate('ReliefStack');
+            // case 'Close': return RNExitApp.exitApp();
+             case 'Profile': return this.props.navigation.navigate('ProfileScreen');
+            case 'Guidelines': return this.props.navigation.navigate('GuidlineScreen');
+            case 'TEAM': return this.props.navigation.navigate('TeamScreen');
+           // case 'Chaspan' : return this.props.navigation.navigate('ChaspanScreen');
+            case 'Emergency': return this.props.navigation.navigate('EmergencyScreen');
+            case 'LocationMapping': return this.props.navigation.navigate('MappingListScreen')
+            case 'Notice': return this.props.navigation.navigate('NoticeBoardScreen')
+            case 'Relief': return this.props.navigation.navigate('ReliefScreen');
+            case 'PostGraph': return this.props.navigation.navigate('PostScreen');
+            case 'Gallary': return this.props.navigation.navigate('GallaryScreen');
+           case 'Dashboard': return this.props.navigation.navigate('DashboardMainScreen');
+
+           // case 'Verify': return this.props.navigation.navigate('VerifyListScreen');
+           // case 'Final': return this.props.navigation.navigate('FinalListScreen');
+           // case 'Dashboard': return this.props.navigation.navigate('DashboardMainScreen');
             case 'Close': return RNExitApp.exitApp();
         }
     }
-
+    getback = () => {
+        this.props.navigation.goBack(null);
+    }
     renderview = () => {
         if (this.state.ResponseArray == undefined) {
 
@@ -194,10 +158,9 @@ export default class DashboardScreen extends React.Component {
     }
     setlog = () => {
         AsyncStorage.clear();
-
-        AsyncStorage.setItem('NAME', '');
-        AsyncStorage.setItem('mobile', '');
-        this.props.navigation.navigate('AuthStart');
+        AsyncStorage.setItem(Constants.firstname, '');
+        AsyncStorage.setItem(Constants.mobilenumber, '');
+        this.props.navigation.navigate('LoginScreen');
     }
     resposecode(value) {
         console.log('jkfbebfe' + value)
@@ -208,9 +171,9 @@ export default class DashboardScreen extends React.Component {
                 // console.log('bfjd' + item.STATE_NAME)
                 if (item.RESPONSE_CODE == value) {
                     console.log('bfjd' + item.STATE_SYS_ID)
-                    AsyncStorage.setItem('ResponseCode', value);
-                    AsyncStorage.setItem('StateName', item.STATE_NAME);
-                    AsyncStorage.setItem('State_ID', JSON.stringify(item.STATE_SYS_ID));
+                    AsyncStorage.setItem(Constants.responseCode, value);
+                    AsyncStorage.setItem(Constants.statename, item.STATE_NAME);
+                    AsyncStorage.setItem(Constants.stateId, JSON.stringify(item.STATE_SYS_ID));
                     this.setState({ ResponseCode: value })
                 } else {
                     console.log('not wual')
@@ -224,10 +187,10 @@ export default class DashboardScreen extends React.Component {
         this.setState({
             spinner: true
         })
-        AsyncStorage.setItem('GENDER', this.state.Sex);
-        AsyncStorage.setItem('EmergencyName', this.state.EmergencyName);
-        AsyncStorage.setItem('EmergencyNumber', this.state.EmergencyNumber);
-        AsyncStorage.setItem('MobileNumber', this.state.Mobile);
+        AsyncStorage.setItem(Constants.gender, this.state.Sex);
+        AsyncStorage.setItem(Constants.emergencyname, this.state.EmergencyName);
+        AsyncStorage.setItem(Constants.emergencynumber, this.state.EmergencyNumber);
+        AsyncStorage.setItem(Constants.mobilenumber, this.state.Mobile);
         if (this.state.EmergencyName !== '') {
             if (this.state.EmergencyNumber !== '') {
                 const data = JSON.stringify({
@@ -306,9 +269,9 @@ export default class DashboardScreen extends React.Component {
                         <Text style={{ color: '#3386FF', fontSize: 22, fontWeight: 'bold' }}>Hi {this.state.FIRST_NAME}</Text>
                     </View>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'center', width: '99%', alignItems: 'center' }}>
+                <View style={{  flexDirection: 'row', justifyContent: 'center', width: '99%',alignItems:'center' }}>
                     <View style={{ width: '36%' }}>
-                        <Text style={{ color: '#3386FF', fontSize: 16, fontWeight: '600', marginLeft: 6 }}>Response Code:</Text>
+                        <Text style={{ color: '#3386FF', fontSize: 16, fontWeight: '600',marginLeft:6 }}>Response Code:</Text>
                     </View>
                     <View style={{ width: '63%', flexDirection: 'column' }}>
                         <Picker
@@ -355,15 +318,15 @@ export default class DashboardScreen extends React.Component {
                                     </TouchableOpacity>
                                 </View>
                                 <View style={MFStyle.button1}>
-                                    <TouchableOpacity
+                                  {/*  <TouchableOpacity
                                         onPress={() => {
                                             this.getValueSerial('Dashboard')
-                                        }}>
+                                        }}>*/}
                                         <View style={{ flexDirection: 'column', padding: 4, alignItems: 'center', justifyContent: 'center', margin: 4, marginLeft: 4 }}>
                                             <Image style={{ alignItems: 'center', width: 40, height: 40 }} resizeMode={'stretch'} source={require('../../images/emergency.png')} />
                                             <Text style={MFStyle.TextStyle1} numberOfLines={2}>Dashboard</Text>
                                         </View>
-                                    </TouchableOpacity>
+                                    {/*</TouchableOpacity>*/}
                                 </View>
 
                             </View>
@@ -463,7 +426,7 @@ export default class DashboardScreen extends React.Component {
                                 </View>
 
                                 <View style={MFStyle.button1}>
-                                 <TouchableOpacity
+                                <TouchableOpacity
                                         onPress={() => {
                                             this.getValueSerial('Gallary')
                                         }}>
@@ -471,12 +434,12 @@ export default class DashboardScreen extends React.Component {
                                         <Image style={{ alignItems: 'center', width: 42, height: 42 }} resizeMode={'stretch'} source={require('../../images/usrNme5.png')} />
                                         <Text style={MFStyle.TextStyle1} numberOfLines={2}>My Gallery</Text>
                                     </View>
-                                     </TouchableOpacity>
+                                    </TouchableOpacity>
                                 </View>
                                 <View style={MFStyle.button1}>
-                                 <TouchableOpacity
+                                    <TouchableOpacity
                                         onPress={() => {
-                                            this.getValueSerial('Notice')
+                                            this.getValueSerial('ConnectGallary')
                                         }}>
                                     <View style={{ flexDirection: 'column', padding: 4, alignItems: 'center', justifyContent: 'center', margin: 4, marginLeft: 4 }}>
                                         <Image style={{ alignItems: 'center', width: 40, height: 40 }} resizeMode={'stretch'} source={require('../../images/Notice_board.png')} />
@@ -628,14 +591,6 @@ const MFStyle = StyleSheet.create({
     spinnerTextStyle: {
         color: '#FFF'
     },
-    ViewLevel: {
-        flexDirection: 'row',
-        width: '98%',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: 4,
-        height: 90
-    },
     text: {
         color: '#000',
         fontSize: 18,
@@ -763,7 +718,9 @@ const MFStyle = StyleSheet.create({
         flex: 1,
         padding: 4,
     },
-
+    spinnerTextStyle: {
+        color: '#FFF'
+    },
     mainContent2: {
         flex: 1,
         padding: 4,

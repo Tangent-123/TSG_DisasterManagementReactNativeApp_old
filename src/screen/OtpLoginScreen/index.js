@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
 
 import {
     Image,
-
     Text,
     ScrollView,
     TouchableOpacity,
@@ -10,7 +9,6 @@ import {
     TextInput
 } from 'react-native';
 import Axios from 'axios';
-//import { TextField, OutlinedTextField } from 'react-native-material-textfield';
 import AsyncStorage from '@react-native-community/async-storage';
 import LoginStyle from './style';
 import LoginApi from '../../Util/ApiCollection';
@@ -19,55 +17,55 @@ import Toast from 'react-native-simple-toast';
 import Spinner from 'react-native-loading-spinner-overlay';
 import qs from 'qs';
 import Modal from 'react-native-modal';
-//import PasswordInputText from 'react-native-hide-show-password-input';
 import ColorCode from '../../Util/Color_Value';
-var Count = 0;
+import Constants from '../../Util/Config/Constants';
+import { connect } from 'react-redux';
 
-export default class LoginActivity extends React.Component {
-    _isMounted = false;
-    static navigationOptions = {
-        header: null
-    }
-    constructor(props) {
-        super(props);
-        this.state = {
-            Name: '',
-            password: '',
-            BtnName: 'Login',
-            TermVisible: false,
-            spinner: false,
-        }
-    }
-    componentWillMount() {
-        const Username = this.props.navigation.getParam('USERNAME')
-        this.setState({
-            Name: Username
-        })
-    }
-    componentDidMount() {
-        this._isMounted = true;
+   export default function LoginActivity({navigation}) {
+
+    const[Name,setName] = useState('')
+    const[password,setpassword]=useState('')
+    const[BtnName,setBtnName] =useState('Login')
+    const[TermVisible,setTermVisible] =useState(false)
+    const[spinner,setspinner] =useState(false)
+    const[Term,setTerm] =useState("Lorem ipsum dolor sit amet" +
+                "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam"
+                + "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit"
+                + "in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui"
+                + "officia deserunt mollit anim id est laborum."
+                + "Curabitur pretium tincidunt lacus.Nulla gravida orci a odio.Nullam varius,"
+                + "turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin"
+                + "mauris.Integer in mauris eu nibh euismod gravida.Duis ac tellus et risus vulputate "
+                + "vehicula.Donec lobortis risus a elit.Etiam tempor.Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis,"
+                + "id tincidunt sapien risus a quam.Maecenas fermentum consequat mi.Donec fermentum.Pellentesque malesuada nulla a mi.Duis sapien sem,"
+                + "aliquet nec, commodo eget, consequat quis, neque.Aliquam faucibus, elit ut dictum aliquet,"
+                + "felis nisl adipiscing sapien, sed malesuada diam lacus eget erat.Cras mollis scelerisque nunc."
+                + "Nullam arcu.Aliquam consequat.Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi.Aenean magna nisl,"
+                + "mollis quis, molestie eu, feugiat in, orci.In hac habitasse platea dictumst")
+   
+    useEffect(()=> {
+        const Username = navigation.getParam('USERNAME')
+       setName(Username)
+    })
+    
+    logicdata=() =>{
+    setTermVisible(false)
+    navigation.navigate('DashboardScreen');
     }
 
-    componentWillUnmount() {
-        this._isMounted = false;
-    }
-    logicdata() {
-        this.setState({
-            // LoginValue:'',
-            TermVisible: false
-        });
-        this.props.navigation.navigate('DashboardScreen');
-
-    }
-    submitbtn() {
-        if (this.state.Name !== '') {
-            if (this.state.password !== '') {
-                this.setState({
-                    spinner: true
-                })
+      submitbtn = () =>{
+       // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+        if (Name == '') {
+            Toast.show('Please enter valid e-mail address.')
+        } else if(password == ''){
+            Toast.show('Please enter password.')
+    
+        } else{
+        
+           setspinner(true)
                 const data = qs.stringify({
-                    username: this.state.Name,
-                    password: this.state.password,
+                     username: Name,
+                     password: password,
                     grant_type: 'password',
                 });
                 const headers = {
@@ -79,56 +77,90 @@ export default class LoginActivity extends React.Component {
                     {headers}
                 ).then(p => {
                     if (p.data.status == 'TRUE') {
-                        console.log('rohit'+JSON.stringify(p.data));
-                        
-                        // AsyncStorage.setItem('ProfileData',p.data.access_token);
-                        AsyncStorage.setItem('access_token', p.data.access_token);
-                        AsyncStorage.setItem('token_type', p.data.token_type)
-                        AsyncStorage.setItem('USER_ID', p.data.USER_ID);
-                        AsyncStorage.setItem('FIRST_NAME', p.data.FIRST_NAME);
-                        AsyncStorage.setItem('SYSTEM_ROLE_CODE', p.data.SYSTEM_ROLE_CODE);
-                        AsyncStorage.setItem('EmergencyName', p.data.EMERGENCY_NAME);
-                        AsyncStorage.setItem('MobileNumber', p.data.MOBILE_NO);
-                        AsyncStorage.setItem('EmergencyNumber', p.data.EMERGENCY_CONTACT);
+                        console.log('hhhhhhhhhh'+(p.data.USER_ID))
+                        AsyncStorage.setItem(Constants.access_token, p.data.access_token);
+                        AsyncStorage.setItem(Constants.tokentype, p.data.token_type)
+                        AsyncStorage.setItem(Constants.user_id, p.data.USER_ID);
+                        AsyncStorage.setItem(Constants.firstname, p.data.FIRST_NAME);
+                        AsyncStorage.setItem(Constants.system_roll_code, p.data.SYSTEM_ROLE_CODE);
+                        AsyncStorage.setItem(Constants.emergencyname, p.data.EMERGENCY_NAME);
+                        AsyncStorage.setItem(Constants.mobilenumber, p.data.MOBILE_NO);
+                        AsyncStorage.setItem(Constants.emergencynumber, p.data.EMERGENCY_CONTACT);
                         if (p.data.DATA_PRIVACY == 'Y') {
-                             this.props.navigation.navigate('DashboardScreen');
-                            this.setState({
-                                TermVisible: false
-                            })
+                             navigation.navigate('DashboardScreen');
+                                setTermVisible(false)
+            
                         }else{
-                             this.setState({
-                                TermVisible: true
-                            })
+                             setTermVisible(true)
                         }
-
-                        this.setState({
-                            spinner: false,
-
-                        });
+                            setspinner(false)
 
                     } else {
                         Toast.show(p.data.error_description);
-                        this.setState({
-                            spinner: false,
-                        });
+                        setspinner(false)
                     }
                 }).catch(Error);
 
-            } else {
-                Toast.show('Please Enter Vaild OTP');
-            }
-        } else {
-            Toast.show('Please Enter Vaild Email id');
         }
 
     }
+    // submitbtn=()=> {
+    //     if (Name !== '') {
+    //         if (password !== '') {
+    //            setspinner(true)
+    //             const data = qs.stringify({
+    //                 username: Name,
+    //                 password: password,
+    //                 grant_type: 'password',
+    //             });
+    //             const headers = {
+    //                 // 'Accept': 'application/x-www-form-urlencoded',
+    //                 'Content-Type': 'application/x-www-form-urlencoded',
+    //             };
+    //             Axios.post(LoginApi.LoginUrl,
+    //                 data,
+    //                 {headers}
+    //             ).then(p => {
+    //                 if (p.data.status == 'TRUE') {
+    //                     console.log('hhhhhhhhhh'+JSON.stringify(p.data))
+    //                     AsyncStorage.setItem(Constants.token, p.data.access_token);
+    //                     AsyncStorage.setItem(Constants.tokentype, p.data.token_type)
+    //                     AsyncStorage.setItem(Constants.user_id, p.data.USER_ID);
+    //                     AsyncStorage.setItem(Constants.firstname, p.data.FIRST_NAME);
+    //                     AsyncStorage.setItem(Constants.system_roll_code, p.data.SYSTEM_ROLE_CODE);
+    //                     AsyncStorage.setItem(Constants.emergencyname, p.data.EMERGENCY_NAME);
+    //                     AsyncStorage.setItem(Constants.mobilenumber, p.data.MOBILE_NO);
+    //                     AsyncStorage.setItem(Constants.emergencynumber, p.data.EMERGENCY_CONTACT);
+    //                     if (p.data.DATA_PRIVACY == 'Y') {
+    //                          navigation.navigate('DashboardScreen');
+    //                             setTermVisible(false)
+            
+    //                     }else{
+    //                          setTermVisible(true)
+    //                     }
+    //                         setspinner(false)
+
+    //                 } else {
+    //                     Toast.show(p.data.error_description);
+    //                     setspinner(false)
+    //                 }
+    //             }).catch(Error);
+
+    //         } else {
+    //             Toast.show('Please Enter Vaild OTP');
+    //         }
+    //     } else {
+    //         Toast.show('Please Enter Vaild Email id');
+    //     }
+
+    // }
 
 
-    render() {
+
         return (
             <View style={LoginStyle.ViewContain}>
                 <Spinner
-                    visible={this.state.spinner}
+                    visible={spinner}
                     textContent={'Loading...'}
                     textStyle={LoginStyle.spinnerTextStyle}
                 />
@@ -141,53 +173,27 @@ export default class LoginActivity extends React.Component {
 
                     <View style={{ padding: 4, borderColor: ColorCode.StatusBar }}>
                         <Text style={{ fontSize: 20, marginTop: 16, alignItems: 'center', color: ColorCode.StatusBar, fontFamily: "Gilroy-Bold", }}>Login</Text>
-                        {/* <TextInput
-                            PlaceHolder="Enter Username"
-                            value={this.state.Name}
-                            returnKeyType='next'
-                            labelFontSize={14}
-                            editable={false}
-                            labelTextStyle={{ color: ColorCode.StatusBar, }}
-                            tintColor={'#70AFA7'}
-                            style={{ color: '#001630', fontSize: 14 }}
-                            keyboardType='email-address'
-                            onChangeText={(Name) => {
-                                this.setState({ Name })
-                            }}
-                        /> */}
+                        
                         <TextInput
                             placeholder="Enter Username"
-                            defaultValue={this.state.Name}
+                            defaultValue={Name}
                             //labelFontSize={14}
                             editable={false}
                             style={{ color: '#001630', fontSize: 14 }}
                             keyboardType='email-address'
                             onChangeText={(Name) => {
-                                this.setState({ Name })
+                                setName(Name)
                             }}
                         />
 <View style={{backgroundColor:'#001630',width:'99%',alignItems:'center', height: 1}}></View>
-                        {/* <OutlinedTextField
-                            label="Enter OTP"
-                            value={this.state.password}
-                            returnKeyType='done'
-                            labelFontSize={14}
-                            labelTextStyle={{ color: ColorCode.StatusBar, }}
-                            tintColor={'#70AFA7'}
-                            style={{ color: '#001630', fontSize: 14 }}
-                            keyboardType='number-pad'
-                            onChangeText={(password) => {
-                                this.setState({ password })
-                            }}
-                        /> */}
                         <TextInput
                             placeholder="Enter OTP"
-                            //value={this.state.Name}
+                            value={password}
                             //labelFontSize={14}
                             style={{ color: '#001630', fontSize: 14 }}
                             keyboardType='number-pad'
                             onChangeText={(password) => {
-                                this.setState({ password })
+                        setpassword(password)
                             }}
                         />
 <View style={{backgroundColor:'#001630',width:'99%',alignItems:'center', height: 1}}></View>
@@ -195,7 +201,7 @@ export default class LoginActivity extends React.Component {
                             <TouchableOpacity
                                 style={LoginStyle.AddToCardBtn}
                                 onPress={() => this.submitbtn()}>
-                                <Text style={LoginStyle.TextStyle}>{this.state.BtnName}</Text>
+                                <Text style={LoginStyle.TextStyle}>{BtnName}</Text>
                             </TouchableOpacity>
                         </View>
                         {/* </View> */}
@@ -203,11 +209,11 @@ export default class LoginActivity extends React.Component {
                 </View>
                 <StatusBar/>
                 <View>
-                    <Modal isVisible={this.state.TermVisible}>
+                    <Modal isVisible={TermVisible}>
                         <View style={{ width: '100%', borderRadius: 10, justifyContent: 'center', backgroundColor: '#fff' }}>
                             <ScrollView style={{ margin: 10, padding: 10 }}>
                                 <View style={{ justifyContent: 'center', marginTop: 4, alignItems: 'center' }}>
-                                    <Text style={{ width: '99%', height: '99%' }}>{this.state.Term}</Text>
+                                    <Text style={{ width: '99%', height: '99%' }}>{Term}</Text>
                                 </View>
                             </ScrollView>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10 }}>
@@ -251,6 +257,7 @@ export default class LoginActivity extends React.Component {
             </View>
         );
     }
-}
+
+
 
 

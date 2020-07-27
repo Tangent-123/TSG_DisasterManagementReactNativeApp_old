@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
 import {
     FlatList,
     StyleSheet, Text, TouchableOpacity, Image, View
@@ -9,48 +9,34 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import CommanStyle from '../../Util/Header';
 import LevelStore from '../../Componenet/ReactString';
 import StoreHeader from '../../Header';
+import Constants from '../../Util/Config/Constants';
+
 import StatusBar from '../../Assets/StatusBar';
-export default class ConnectGallaryScreen extends React.Component {
-    static navigationOptions = { header: null };
-    constructor(props) {
-        super(props);
-        this.state = {
-            AccessToken: '',
-            USER_ID: '',
-            FIRST_NAME: '',
-            TeamArray: [],
-            ResponseCode: '',
-            spinner: true,
-        }
-    }
-    componentWillMount() {
-        AsyncStorage.getItem('access_token')
-            .then(access_token => {
-                AsyncStorage.getItem('ResponseCode')
-                    .then(ResponseCode => {
-                        console.log('jajaj' + ResponseCode)
-                        this.setState({
-                            AccessToken: access_token,
-                            ResponseCode: ResponseCode,
-                        })
-                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-generate-team?responce_code=" + this.state.ResponseCode, {
+export default function ConnectGallaryScreen({navigation}) {
+    const [AccessToken,setAccessToken] = useState('')
+    const [USER_ID,setUSER_ID] = useState('')
+    const [FIRST_NAME,setFIRST_NAME] = useState('')
+    const [TeamArray,setTeamArray] = useState([])
+    const [ResponseCode,setResponseCode] = useState('')
+    const [spinner,setspinner] = useState(true)
+
+
+    useEffect() {
+         let token= AsyncStorage.getItem(Constants.access_token)
+        let responsecode =  AsyncStorage.getItem(Constants.responseCode)
+                        Axios.get("http://uatapi.tatadisasterresponse.com/api/view-generate-team?responce_code=" + responsecode, {
                             headers: {
-                                'Authorization': 'bearer ' + this.state.AccessToken
+                                'Authorization': 'bearer ' + token
                             }
                         }).then((response) => {
                             console.log('rohit jain aa' + response.data);
                             console.log('rohit jain aa' +JSON.stringify(response));
                             if (response.data.status == 'true') {
                                 console.log('rohit jain aaxad' + response.data.response);
-                                this.setState({
-                                    TeamArray: response.data.response,
-                                    spinner: false
-                                })
-
+                                    setTeamArray(response.data.response)
+                                    setspinner(false)
                             } else {
-                                this.setState({
-                                    spinner: false
-                                })
+                                    setspinner(false)
                             }
                         })
                     })
@@ -58,19 +44,19 @@ export default class ConnectGallaryScreen extends React.Component {
 
     }
     getback = () => {
-        this.props.navigation.navigate('DashboardStack')
+        navigation.navigate('DashboardScreen')
     }
-    render() {
+    
         return (
             <View style={CommanStyle.MainView}>
                 <Spinner
-                    visible={this.state.spinner}
+                    visible={spinner}
                     textContent={'Loading...'}
                     textStyle={{ color: '#fff' }}
                 />
                <StoreHeader title='Connect Gallary' onPress={this.getback}/>
                 <FlatList
-                    data={this.state.TeamArray}
+                    data={TeamArray}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) =>
                         <View style={{ elevation: 10, margin: 10, padding: 10, backgroundColor: '#FAFAFA', borderRadius: 8, }}>
@@ -116,5 +102,5 @@ export default class ConnectGallaryScreen extends React.Component {
                <StatusBar/>
             </View>
         );
-    }
+    
 }

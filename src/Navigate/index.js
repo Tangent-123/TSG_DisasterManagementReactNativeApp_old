@@ -20,148 +20,121 @@ import CountBeneficaryScreen from '../screen/CountBeneficaryScreen';
 import OtpLoginScreen from '../screen/OtpLoginScreen';
 import PDFVIEWSCREEN from '../screen/PDFViewScreen';
 import GallaryScreen from '../screen/GallaryScreen';
+import GallaryDetailsScreen from '../screen/GallaryDetailsScreen';
+import DashboardMainScreen from '../screen/DashboardMainScreen';
+import ChaspanScreen from '../screen/ChaspanScreen';
+import VerifyListScreen from '../screen/VerifyListScreen';
+import FinalListScreen from '../screen/FinalListScreen';
 import React from 'react';
+
+// const SplashScreen = StackNavigator({
+//   SplashScreen: { screen: SplashScreen },
+// },
+// {
+//   headerMode: 'none',
+//   navigationOptions: {
+//     headerVisible: false,
+//   }
+//  }
+// );
+const ViewNoticeStack = createStackNavigator({
+    NoticeBoardScreen: {
+    screen: NoticeBoardScreen
+  },
+})
 const AuthStart = createStackNavigator({
   LoginScreen: {
     screen: LoginScreen
   },
-});
-
-
-const DashboardStack = createStackNavigator({
-  DashboardScreen: {
+ DashboardScreen: {
     screen: DashboardScreen
   },
-}
-);
-const PDFVIEWStack = createStackNavigator({
   PDFVIEWSCREEN:{
     screen:PDFVIEWSCREEN
   },
-});
-
-const GallaryStack = createStackNavigator({
-  GallaryScreen:{
+   GallaryScreen:{
     screen:GallaryScreen
   },
-});
-const ProfileStack = createStackNavigator({
   ProfileScreen: {
     screen: ProfileScreen
   },
-
-}
-);
-
-const MyActivityStack = createStackNavigator({
+   BeneficiallistScreen :{
+    screen:BeneficiallistScreen
+  },
+   MappingListScreen:{
+    screen:MappingListScreen
+  },
   MyActivityScreen: {
     screen: MyActivityScreen
   },
-}
-);
-const PostStack = createStackNavigator({
   PostScreen:{
     screen:PostScreen
-  }
-})
-const CountBeneficaryStack = createStackNavigator({
-  CountBeneficaryScreen: {
+  },
+   GallaryDetailsScreen:{
+    screen:GallaryDetailsScreen
+  },
+ 
+   CountBeneficaryScreen: {
     screen: CountBeneficaryScreen
   },
-
-}
-);
-const AddNoticeStack = createStackNavigator({
   AddNoticeScreen:{
     screen:AddNoticeScreen,
-  }
-});
-const GuidlineStack = createStackNavigator({
+  },
   GuidlineScreen: {
     screen: GuidlineScreen
   },
-}
-);
-const AddBeneFicialStack = createStackNavigator({
   AddBeneFicialScreen :{
     screen:AddBeneFicialScreen
-  }
-})
-
-// const BeneficalDetailsStack = createStackNavigator({
-//   BeneficalDetailsScreen:{
-//     screen:BeneficalDetailsScreen
-//   }
-// })
-const ReliefStack = createStackNavigator({
+  },
+  DashboardMainScreen:{
+    screen:DashboardMainScreen
+  },
   ReliefScreen:{
     screen:ReliefScreen
   },
-});
-const OtpLoginStack = createStackNavigator({
+  FinalListScreen:{
+    screen:FinalListScreen
+  },
+  VerifyListScreen:{
+    screen:VerifyListScreen
+  },
   OtpLoginScreen:{
     screen:OtpLoginScreen
-  }
-})
-const NoticeBoardStack = createStackNavigator({
-  NoticeBoardScreen: {
-    screen: NoticeBoardScreen
   },
-
-}
-);
-const TeamStack = createStackNavigator({
-  TeamScreen: {
+   TeamScreen: {
     screen: TeamScreen
   },
-}
-);
-const BeneficiallistStack = createStackNavigator({
-  BeneficiallistScreen :{
-    screen:BeneficiallistScreen
-  }
-})
-const MappingListStack = createStackNavigator({
-  MappingListScreen:{
-    screen:MappingListScreen
-  }
-});
-const AddMappingStack = createStackNavigator({
   AddMappingScreen:{
     screen:AddMappingScreen
-  }
-});
-const EmergencyStack = createStackNavigator({
+  },
   EmergencyScreen:{
     screen:EmergencyScreen,
-  }
-})
+  },
+  ChaspanScreen:{
+    screen:ChaspanScreen
+  },
+},
+   {
+    headerMode: 'none',
+    navigationOptions: {
+    headerVisible: false,
+   // initialRouteName: 'AuthLoading',
+    }
+}
+);
 
 const AuthStack = createSwitchNavigator(
   {
     AuthLoading: SplashScreen,
-    AuthStart: AuthStart,
-    DashboardStack: DashboardStack,
-    ProfileStack: ProfileStack,
-GallaryStack:GallaryStack,
-    AddNoticeStack:AddNoticeStack,
-    MyActivityStack: MyActivityStack,
-    GuidlineStack:GuidlineStack,
-    CountBeneficaryStack:CountBeneficaryStack,
-    OtpLoginStack:OtpLoginStack,
-    MappingListStack:MappingListStack,
-    NoticeBoardStack:NoticeBoardStack,
-    AddMappingStack:AddMappingStack,
-    TeamStack:TeamStack,
-    EmergencyStack:EmergencyStack,
-    ReliefStack:ReliefStack,
-    PDFVIEWStack:PDFVIEWStack,
-    AddBeneFicialStack:AddBeneFicialStack,
-    BeneficiallistStack:BeneficiallistStack,
-    PostStack:PostStack,
+     AuthStart: AuthStart,
+     ViewNotice:ViewNoticeStack,
   },
   {
+    headerMode: 'none',
+    navigationOptions: {
+    headerVisible: false,
     initialRouteName: 'AuthLoading',
+    }
   }
 );
 

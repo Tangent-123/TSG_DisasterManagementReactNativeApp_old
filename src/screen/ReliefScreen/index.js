@@ -40,7 +40,7 @@ export default class ReliefScreen extends React.Component {
     }
 
     getReg = () => {
-        this.props.navigation.navigate('DashboardStack')
+        this.props.navigation.navigate('DashboardScreen')
         // if (this.state.FullName !== '') {
         //     if (this.state.City !== '') {
         //         if (this.state.Mobile !== '') {
@@ -103,10 +103,10 @@ export default class ReliefScreen extends React.Component {
 
     // }
     getback = () => {
-        this.props.navigation.navigate('DashboardStack');
+        this.props.navigation.navigate('DashboardScreen');
     }
     getbeneficial = () => {
-        this.props.navigation.navigate('CountBeneficaryStack');
+        this.props.navigation.navigate('CountBeneficaryScreen');
     }
     render() {
         return (

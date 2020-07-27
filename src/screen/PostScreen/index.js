@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { ScrollView,TextInput, View, Image, Text, TouchableOpacity } from 'react-native';
+import { ScrollView,TextInput,FlatList, View, Image, Text, TouchableOpacity } from 'react-native';
 import Colors from '../../Util/Color_Value';
 import Toast from 'react-native-simple-toast';
 import RegStyle from './style';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import DatePicker from 'react-native-datepicker';
-import ImagePicker from 'react-native-image-picker';
 import StatusBar from '../../Assets/StatusBar';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Axios from 'axios';
@@ -15,6 +14,9 @@ import FlatButton from '../../Button';
 import LoginApi from '../../Util/ApiCollection';
 import commanStyle from '../../Util/Header';
 import AsyncStorage from '@react-native-community/async-storage';
+import ImagePicker from 'react-native-image-crop-picker'
+import Constants from '../../Util/Config/Constants';
+
 var radio_props = [
     { label: 'Emergency Phase', value: '0', },
     { label: 'Relief Phase', value: '1' }
@@ -33,6 +35,7 @@ export default class PostMyActivityScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+                        dataSource: [],
             Arn_number: '',
             ActivityName: '',
             ActivityPhase:'',
@@ -51,14 +54,13 @@ export default class PostMyActivityScreen extends React.Component {
             EndDate:'',
             AccessToken:''
         }
+        this.loaddata()
     }
-  componentWillMount() {
-        AsyncStorage.getItem('access_token')
-            .then(access_token => {
+  loaddata=async()=> {
+       let token= await AsyncStorage.getItem(Constants.access_token)
                 this.setState({
-                    AccessToken:access_token
+                    AccessToken:token
                 });
-            })
   }
     getPostGallary = () => {
         if (this.state.ActivityName !== '') {
@@ -89,7 +91,7 @@ export default class PostMyActivityScreen extends React.Component {
                                                     ).then(p => {
                                                         console.log('kfnnk' + JSON.stringify(p.data.status))
                                                         if (p.data.status == 'true') {
-                       this.props.navigation.navigate('DashboardStack')
+                       this.props.navigation.navigate('DashboardScreen')
                                                            // this.props.navigation.navigate('Count//BeneficaryScreen');
                                                             Toast.show(p.data.response)
                                                             this.setState({
@@ -124,7 +126,7 @@ export default class PostMyActivityScreen extends React.Component {
     }
 
     getback = () => {
-        this.props.navigation.navigate('DashboardStack');
+        this.props.navigation.navigate('DashboardScreen');
     }
     getRedio(value) {
         if (value == '0') {
@@ -139,36 +141,27 @@ export default class PostMyActivityScreen extends React.Component {
         }
 
     }
-    getImage() {
-        count++;
-        ImagePicker.showImagePicker(options, (response) => {
-            console.log('Response = ', response);
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            } else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
-            } else {
-                let SourceImage = { uri: response.uri, type: response.type, name: response.fileName };
-                if (SourceImage == '') {
-                    console.log('SourceImage' + SourceImage)
-                } else {
-                    console.log('count' + count)
-                    if (count == 1) {
-                        let SourceImage = { uri: response.uri, type: response.type, name: response.fileName };
-                        const source = { uri: 'data:image/jpg;base64,' + response.data };
-                        
-                       // this.UploadingCommanAPIFirst();
-                        // this.setState({
-                        //     avatarSourceOne: response.data,
-                        //     ImageNameOne: response.fileName,
-                        // })
-                    }
-                }
-            }
-        })
+    openImagePicker = () => {
+        ImagePicker.openPicker({
+            multiple: true,
+            waitAnimationEnd: false,
+            includeExif: true,
+            forceJpg: true,
+            maxFiles: 2,
+            compressImageQuality: 0.8,
+            mediaType: 'photo'
+        }).then(images => {
+            this.setState({
+                dataSource: images
+            })
+
+            console.log('dataSource : ', this.state.dataSource);
+
+
+            console.log('images : ', images[0].path);
+        }).catch(e => alert(e));
     }
+
     render() {
         return (
             <View style={RegStyle.container}>
@@ -279,32 +272,39 @@ export default class PostMyActivityScreen extends React.Component {
                             value={this.state.Description}
                         />
                        <View style={{ height: 1, backgroundColor: '#000', width: '100%', marginBottom: 4 }} />
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 10, height: 50, marginTop: 18 }}>
+                        <View style={{ flexDirection: 'row', width: '98%', justifyContent: 'space-around' }}>
+                            <Text style={{ fontSize: 16, color: '#06541c', justifyContent: 'center', paddingVertical: 6, fontFamily: 'sans-serif-medium' }}>
+                                Select Image</Text>
                             <TouchableOpacity
-                                onPress={() => this.getImage()}>
-                                <View style={{ flexDirection: 'column', marginLeft: 4, alignItems: 'center' }}>
-                                    <Image style={{ width: 50, height: 50, borderRadius: 10, alignItems: 'center', padding: 8, marginLeft: 4, marginRight: 10 }} source={require('../../images/camera.png')} />
-                                    {/* <Text style={styles.TextStyleheader1}>Add Image</Text> */}
-                                </View>
+                                style={{ backgroundColor: 'transparent', }}
+
+                                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                                onPress={() => this.openImagePicker()}>
+
+                                <Image style={{ alignItems: 'center', width: 30, height: 30, justifyContent: 'center' }}
+                                    source={require('../../images/edit.png')}
+                                    resizeMode={'contain'}
+                                />
                             </TouchableOpacity>
-                            {/* <TouchableOpacity
-                                onPress={() => this.getImage()}>
-                                <View style={{ flexDirection: 'column', marginLeft: 4, alignItems: 'center' }}>
-                                    <Image style={{ width: 50, height: 50, borderRadius: 10, alignItems: 'center', padding: 8, marginLeft: 4, marginRight: 10 }} source={require('../../images/camera.png')} />
-                                    {/* <Text style={styles.TextStyleheader1}>Add Image</Text> */}
-                                {/* </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.getImage()}>
-                                <View style={{ flexDirection: 'column', marginLeft: 4, alignItems: 'center' }}>
-                                    <Image style={{ width: 50, height: 50, borderRadius: 10, alignItems: 'center', padding: 8, marginLeft: 4, marginRight: 10 }} source={require('../../images/camera.png')} />
-                                    {/* <Text style={styles.TextStyleheader1}>Add Image</Text> */}
-                                {/* </View>
-                            </TouchableOpacity> */}
                          </View> 
                     </View>
  {/* <FlatButton title='Post' onPress={this.Reg} /> */}
-                   
+                    <FlatList
+                            style={{ height: 300, marginTop: 20 }}
+                            data={this.state.dataSource}
+                            numColumns={3}
+                            ItemSeparatorComponent={this.FlatListItemSeparator}
+                            renderItem={({ item }) =>
+
+                                // <Text onPress={this.GetFlatListItem.bind(this, item.path)} > {item.path} </Text>
+
+                                <Image
+                                    source={{ uri: item.path }}
+                                    style={{ height: 150, width: 150, margin: 2 }}
+                                />
+                            }
+                            keyExtractor={(item, index) => index}
+                        />
                     <View style={RegStyle.container2}>
                         <TouchableOpacity
                             style={RegStyle.AddToCardBtn}

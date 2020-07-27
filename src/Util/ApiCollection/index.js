@@ -1,4 +1,4 @@
-let BasicUrl = 'http://Devapi.tatadisasterresponse.com/'
+let BasicUrl = 'http://devapi.tatadisasterresponse.com/'
 export default BASEURLS = {
     LoginUrl: BasicUrl + 'Api/app-user-login',
     UpdateUser: BasicUrl + 'api/app-update-user-profile',
@@ -25,10 +25,20 @@ export default BASEURLS = {
     AddNoticeComment: BasicUrl + 'api/add-notice-comment',
     Distric:BasicUrl + 'api/get-district?state_id=',
     GetBlockReport: BasicUrl + 'api/get-block-report?district_sys_id=',
-    PostGallaryAdd:BasicUrl + '/api/post-image-gallery',
-    getImageGallary: BasicUrl +'/api/get-image-gallery?created_by=',
-    //GetGramPanchayatReport
-
-
-
+    PostGallaryAdd:BasicUrl + 'api/post-image-gallery',
+    getImageGallary: BasicUrl +'api/get-image-gallery?created_by=',
+    getTeamlist:BasicUrl + 'api/view-generate-team?responce_code=',
+    getNoticCommentView:BasicUrl + 'api/view_notice_comment?notice_sys_id=',
+    ViewNoticeView: BasicUrl + 'api/view-notice-board?response_code=',
+    DeleteNoticeBoard : BasicUrl +'api/delete-notice-notice-board',
+    get_gram_panchayat_report: BasicUrl +'api/get-gram-panchayat-report?block_sys_id=',
+    getVillageReport : BasicUrl + 'api/get-village-report?village_sys_id=',
+    getHemletReport : BasicUrl + 'api/get-hemlet-report?village_sys_id=',
+    ViewPartnerName : BasicUrl + 'api/view-partner-name?hemlet_sys_id=',
+    ViewBeneficiaryCount : BasicUrl +'api/view-beneficiary-count?response_code=',
+    ViewGenerateCode : BasicUrl +'api/view-generate-code?userid=',
+    getAppOtpGenerate: BasicUrl +'api/get-app-otp-generate?email=',
+    ViewResponselocationMappingDetails: BasicUrl +'api/view-response-location-mapping-details?response_code=',
+    ViewResponseBeneficiary: BasicUrl + 'api/view-response-beneficiary?response_code=',
+    DeleteMappinglocationlist:BasicUrl + 'api/delete-mapping-location-list?location_mapping_sys_id=',
 }

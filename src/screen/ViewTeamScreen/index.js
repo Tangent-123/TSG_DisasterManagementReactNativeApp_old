@@ -10,11 +10,12 @@ import {
 import Axios from 'axios';
 
 import Spinner from 'react-native-loading-spinner-overlay';
-
+import BaseApi from '../../Util/ApiCollection';
 import StoreHeader from '../../Header';
 import StatusBar from '../../Assets/StatusBar';
 import LevelStore from '../../Componenet/ReactString';
 import CommanStyle from '../../Util/Header';
+import Constants from '../../Util/Config/Constants';
 export default class TeamScreen extends Component {
     static navigationOptions = { header: null };
     constructor(props) {
@@ -27,20 +28,18 @@ export default class TeamScreen extends Component {
             ResponseCode: '',
             spinner: true,
         }
+        this.loaddata();
     }
-    componentWillMount() {
-        AsyncStorage.getItem('access_token')
-            .then(access_token => {
-                AsyncStorage.getItem('ResponseCode')
-                    .then(ResponseCode => {
-                        console.log('jajaj' + ResponseCode)
+    loaddata=async()=> {
+    let token = await AsyncStorage.getItem(Constants.access_token);
+    let responsecode = await AsyncStorage.getItem(Constants.responseCode);
                         this.setState({
-                            AccessToken: access_token,
-                            ResponseCode: ResponseCode,
+                            AccessToken: token,
+                            ResponseCode: responsecode,
                         })
-                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-generate-team?responce_code=" + this.state.ResponseCode, {
+                        Axios.get(BaseApi.getTeamlist + responsecode, {
                             headers: {
-                                'Authorization': 'bearer ' + this.state.AccessToken
+                                'Authorization': 'bearer ' + token
                             }
                         }).then((response) => {
                             console.log('rohit jain aa' + response.data);
@@ -57,13 +56,13 @@ export default class TeamScreen extends Component {
                                     spinner: false
                                 })
                             }
-                        })
-                    })
-            })
+                    
+                
+    })
 
     }
     getback = () => {
-        this.props.navigation.navigate('DashboardStack')
+        this.props.navigation.navigate('DashboardScreen')
     }
     render() {
         return (
@@ -108,16 +107,7 @@ export default class TeamScreen extends Component {
                             </View>
                         </View>
                     }
-                // "RESPONSE_TEAM_SYS_ID": 9,
-                // "PERSON_NAME": "Aahna Srikanth",
-                // "PERSON_PROFILE": "Volunteer",
-                // "PERSON_ORGANISATION": "Tangent Tech Solutions",
-                // "RESPONSE_CODE": "WES_FL_JAN_2020",
-                // "EMAIL": "saurabh.mishra@tangenttechsolutions.com",
-                // "MOBILE_NO": "9007872846",
-                // "CREATED_DATE": "16-01-2020",
-                // "ISACTIVE": 1,
-                // "NAME": "Saurabh"
+        
                 />
 
                 <StatusBar />

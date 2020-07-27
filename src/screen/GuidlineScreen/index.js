@@ -21,162 +21,105 @@ import colors from '../../Util/Color_Value';
 import CommanStyle from '../../Util/Header';
 
 import styles from './style';
-// class Expandable_ListView extends Component {
 
-//     constructor() {
+var SOAPdf = [
+{ image: require('../../Util/File/SOA-1.png')},
+{ image: require('../../Util/File/SOA-2.png')}];
 
-//         super();
-
-//         this.state = {
-
-//             layout_Height: 0
-
-//         }
-//     }
-
-//     componentWillReceiveProps(nextProps) {
-//         if (nextProps.item.expanded) {
-//             this.setState(() => {
-//                 return {
-//                     layout_Height: null
-//                 }
-//             });
-//         }
-//         else {
-//             this.setState(() => {
-//                 return {
-//                     layout_Height: 0
-//                 }
-//             });
-//         }
-//     }
-
-//     shouldComponentUpdate(nextProps, nextState) {
-//         if (this.state.layout_Height !== nextState.layout_Height) {
-//             return true;
-//         }
-//         return false;
-//     }
-
-//     show_Selected_Category = (item) => {
-
-//         // Write your code here which you want to execute on sub category selection.
-//         Alert.alert(item);
-
-//     }
-
-//     render() {
-//         return (
-//             <View style={styles.Panel_Holder}>
-
-//                 <TouchableOpacity activeOpacity={0.8} onPress={this.props.onClickFunction} style={styles.category_View}>
-
-//                     <Text style={styles.category_Text}>{this.props.item.category_Name} </Text>
-
-//                     <Image
-//                         source={{ uri: 'https://reactnativecode.com/wp-content/uploads/2019/02/arrow_right_icon.png' }}
-//                         style={styles.iconStyle} />
-
-//                 </TouchableOpacity>
-
-//                 <View style={{ height: this.state.layout_Height, overflow: 'hidden' }}>
-
-//                     {
-//                         this.props.item.sub_Category.map((item, key) => (
-
-//                             <TouchableOpacity key={key} style={styles.sub_Category_Text} onPress={this.show_Selected_Category.bind(this, item.name)}>
-
-//                                 <Text> {item.name} </Text>
-
-//                                 <View style={{ width: '98%', marginLeft: 6, marginEnd: 10, marginTop: 2, height: 1, backgroundColor: 'gray' }} />
-
-//                             </TouchableOpacity>
-
-//                         ))
-//                     }
-
-//                 </View>
-
-//             </View>
-
-//         );
-//     }
-// }
+var GuidelinesPdf = [
+{ image: require('../../Util/File/guidlines-01.png')},
+{ image: require('../../Util/File/guidlines-02.png')},
+{ image: require('../../Util/File/guidlines-03.png')},
+{ image: require('../../Util/File/guidlines-04.png')},
+{ image: require('../../Util/File/guidlines-05.png')},
+{ image: require('../../Util/File/guidlines-06.png')},
+{ image: require('../../Util/File/guidlines-07.png')},
+{ image: require('../../Util/File/guidlines-08.png')},
+{ image: require('../../Util/File/guidlines-09.png')},
+{ image: require('../../Util/File/guidlines-10.png')},
+{ image: require('../../Util/File/guidlines-11.png')},
+{ image: require('../../Util/File/guidlines-12.png')},
+{ image: require('../../Util/File/guidlines-13.png')},
+{ image: require('../../Util/File/guidlines-14.png')},
+{ image: require('../../Util/File/guidlines-15.png')},
+{ image: require('../../Util/File/guidlines-16.png')},
+{ image: require('../../Util/File/guidlines-17.png')},
+{ image: require('../../Util/File/guidlines-18.png')},
+{ image: require('../../Util/File/guidlines-19.png')},
+{ image: require('../../Util/File/guidlines-20.png')},
+{ image: require('../../Util/File/guidlines-21.png')},
+{ image: require('../../Util/File/guidlines-22.png')},
+{ image: require('../../Util/File/guidlines-23.png')},
+{ image: require('../../Util/File/guidlines-24.png')},
+{ image: require('../../Util/File/guidlines-25.png')},
+{ image: require('../../Util/File/guidlines-26.png')},
+{ image: require('../../Util/File/guidlines-27.png')},
+{ image: require('../../Util/File/guidlines-28.png')},
+{ image: require('../../Util/File/guidlines-29.png')},
+{ image: require('../../Util/File/guidlines-30.png')},
+{ image: require('../../Util/File/guidlines-31.png')},
+{ image: require('../../Util/File/guidlines-32.png')},
+{ image: require('../../Util/File/guidlines-33.png')},
+{ image: require('../../Util/File/guidlines-34.png')},
+{ image: require('../../Util/File/guidlines-35.png')},
+{ image: require('../../Util/File/guidlines-36.png')},
+{ image: require('../../Util/File/guidlines-37.png')},
+{ image: require('../../Util/File/guidlines-38.png')},
+{ image: require('../../Util/File/guidlines-39.png')},
+{ image: require('../../Util/File/guidlines-40.png')},
+{ image: require('../../Util/File/guidlines-41.png')},
+{ image: require('../../Util/File/guidlines-42.png')},
+{ image: require('../../Util/File/guidlines-43.png')},
+{ image: require('../../Util/File/guidlines-44.png')},
+{ image: require('../../Util/File/guidlines-45.png')},
+{ image: require('../../Util/File/guidlines-46.png')},
+{ image: require('../../Util/File/guidlines-47.png')},
+{ image: require('../../Util/File/guidlines-48.png')},
+{ image: require('../../Util/File/guidlines-49.png')},
+{ image: require('../../Util/File/guidlines-50.png')},
+{ image: require('../../Util/File/guidlines-51.png')},
+{ image: require('../../Util/File/guidlines-52.png')},
+{ image: require('../../Util/File/guidlines-53.png')},
+{ image: require('../../Util/File/guidlines-54.png')},
+{ image: require('../../Util/File/guidlines-55.png')},
+{ image: require('../../Util/File/guidlines-56.png')},
+{ image: require('../../Util/File/guidlines-57.png')},
+{ image: require('../../Util/File/guidlines-58.png')},
+{ image: require('../../Util/File/guidlines-59.png')},
+{ image: require('../../Util/File/guidlines-60.png')},
+{ image: require('../../Util/File/guidlines-61.png')},
+{ image: require('../../Util/File/guidlines-62.png')},
+{ image: require('../../Util/File/guidlines-63.png')},
+{ image: require('../../Util/File/guidlines-64.png')},
+{ image: require('../../Util/File/guidlines-65.png')},
+{ image: require('../../Util/File/guidlines-66.png')},
+{ image: require('../../Util/File/guidlines-67.png')},
+{ image: require('../../Util/File/guidlines-68.png')},
+{ image: require('../../Util/File/guidlines-69.png')},
+{ image: require('../../Util/File/guidlines-70.png')},
+{ image: require('../../Util/File/guidlines-71.png')},
+{ image: require('../../Util/File/guidlines-72.png')},
+{ image: require('../../Util/File/guidlines-73.png')}];
 export default class GuidlineScreen extends React.Component {
     static navigationOptions = {
         header: null
     }
     constructor() {
-        super();
-
-        // if (Platform.OS === 'android') {
-
-        //     UIManager.setLayoutAnimationEnabledExperimental(true)
-
-        // }
-
-        //     const array = [
-
-        //         {
-        //             expanded: false, category_Name: "1. Insert A Topic Sentence", sub_Category:
-        //                 [{ id: 1, name: 'Encapsulates and organizes an entire paragraph'},
-        //                 { id: 2, name: 'in academic essays they often appear at the beginning' },
-        //                 { id: 3, name: 'What point are your trying to make?' },
-        //                 { id: 4, name: 'Why you chosen to include the information you have?' },
-        //                 { id: 5, name: 'Although most paragraphs should have a topic sentence' }]
-        //         },
-
-        //         {
-        //             expanded: false, category_Name: "2. Explain Your Topic Sentence:", sub_Category:
-        //                 [{ id: 8, name: 'Does your topic sentence require further explanation?' },
-        //                 { id: 9, name: 'add another 1-2 sentences explaining your topic sentence here' },
-        //                 { id: 10, name: 'Corbett, one of Americas most distinguished rhetoricians' },
-        //                 { id: 11, name: 'Explain what the quote means and why its important to your argument.' }]
-        //         },
-
-        //         {
-        //             expanded: false, category_Name: "3. Computer Accessories", sub_Category: [{ id: 12, name: 'Pendrive' }, { id: 13, name: 'Bag' },
-        //             { id: 14, name: 'Mouse' }, { id: 15, name: 'Keyboard' }]
-        //         },
-
-        //         {
-        //             expanded: false, category_Name: "4. Home Entertainment", sub_Category: [{ id: 16, name: 'Home Audio Speakers' },
-        //             { id: 17, name: 'Home Theatres' }, { id: 18, name: 'Bluetooth Speakers' }, { id: 19, name: 'DTH Set Top Box' }]
-        //         },
-
-        //         {
-        //             expanded: false, category_Name: "5. TVs by brand", sub_Category: [{ id: 20, name: 'Mi' },
-        //             { id: 21, name: 'Thomson' }, { id: 22, name: 'LG' }, { id: 23, name: 'SONY' }]
-        //         },
-
-        //         {
-        //             expanded: false, category_Name: "6. Kitchen Appliances", sub_Category: [{ id: 24, name: 'Microwave Ovens' },
-        //             { id: 25, name: 'Oven Toaster Grills (OTG)' }, { id: 26, name: 'Juicer/Mixer/Grinder' }, { id: 27, name: 'Electric Kettle' }]
-        //         }
-        //     ];
-
-        //     this.state = { AccordionData: [...array] }
-        // }
-
-        // update_Layout = (index) => {
-
-        //     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-
-        //     const array = [...this.state.AccordionData];
-
-        //     array[index]['expanded'] = !array[index]['expanded'];
-
-        //     this.setState(() => {
-        //         return {
-        //             AccordionData: array
-        //         }
-        //     });
+        super();  
     }
     submitbtn(itemname) {
-        // Toast.show(itemname)
-        this.props.navigation.navigate('PDFVIEWSCREEN', {
-            PDFTYPE: itemname
+if(itemname == 'Guidelines'){
+ this.props.navigation.navigate('PDFVIEWSCREEN', {
+            PDFTYPE: GuidelinesPdf
         })
+}else{
+ this.props.navigation.navigate('PDFVIEWSCREEN', {
+            PDFTYPE: SOAPdf
+        })
+}
+
+        // Toast.show(itemname)
+       
     }
     getback = () => {
         this.props.navigation.navigate('DashboardScreen');

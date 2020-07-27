@@ -1,68 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import StatusBar from '../../Assets/StatusBar';
 import ColorCode from '../../Util/Color_Value';
 import { SliderBox } from "react-native-image-slider-box";
+import Constants from '../../Util/Config/Constants';
+
 const images = [
     {
         image: require('../../images/imgone.jpg'),
         backgroundColor: '#3386FF',
         // imageStyle:{styles}
-
     },
     {
         image: require('../../images/img_2.jpg'),
         backgroundColor: '#3386FF',
-
     },
     {
         image: require('../../images/img_3.jpg'),
         backgroundColor: '#3386FF',
-
     },
     {
         image: require('../../images/img_4.jpg'),
         backgroundColor: '#3386FF',
     },
 ];
-export default class SplashScreen extends React.Component {
-    static navigationOptions = { header: null };
-    constructor(props) {
-        super(props);
-        this.state = {
-            UpdateFalse: false,
-            UpdateTrue: false,
-            connection_Status: '',
-            images: [
+export default function SplashScreen({navigation}){
+      //const navigation = useNavigation();
+   const [images, setimages] = useState([ 
                 require('../../images/imgone.jpg'),
                 require('../../images/img_2.jpg'),
                 require('../../images/img_3.jpg'),
-                require('../../images/img_4.jpg'),
-
-            ]
-        }
-    }
-    componentWillMount() {
-
-    }
-    _renderDoneButton = (index) => {
+                require('../../images/img_4.jpg')])
+   
+    _renderDoneButton=(index)=> {
         console.log('rohit ' + index)
         if (index == 3) {
-            AsyncStorage.getItem('FIRST_NAME')
+            AsyncStorage.getItem(Constants.firstname)
                 .then(FIRST_NAME => {
                     console.log('rohit jaoj' + FIRST_NAME)
                     if (FIRST_NAME == null) {
-                        this.props.navigation.navigate('AuthStart');
+                        navigation.navigate('LoginScreen');
                     } else {  //AuthStart
-                         this.props.navigation.navigate('DashboardStack');
+                         navigation.navigate('DashboardScreen');
                     }
 
                 })
         }
 
     }
-    render() {
         return (
             <View style={{ flex: 1, width: '100%', backgroundColor: '#FFFFFF' }}>
             
@@ -73,7 +59,7 @@ export default class SplashScreen extends React.Component {
                     </View>
                     <View style={{ width: '90%', height: '80%', alignItems: 'center', justifyContent: 'center', marginTop: 26 }}>
                         <SliderBox
-                            images={this.state.images}
+                            images={images}
 
                             sliderBoxHeight={'100%'}
                             currentImageEmitter={index =>
@@ -117,8 +103,7 @@ export default class SplashScreen extends React.Component {
                <StatusBar/>
             </View>
         );
-    }
-}
+
 const styles = StyleSheet.create({
     viewPager: {
         flex: 1,
@@ -126,5 +111,6 @@ const styles = StyleSheet.create({
 
     image: {
         width: '90%', height: '90%', alignItems: 'center', justifyContent: 'center'
-    }
+    },
 });
+}

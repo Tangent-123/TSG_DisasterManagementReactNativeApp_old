@@ -19,6 +19,7 @@ import LevelStore from '../../Componenet/ReactString';
 import BaseUrl from '../../Util/ApiCollection';
 import Colors from '../../Util/Color_Value';
 import CommanStyle from '../../Util/Header';
+import Constants from '../../Util/Config/Constants';
 
 import BuyNFOStyle from './style';
 
@@ -38,26 +39,23 @@ export default class AddNoticeScreen extends React.Component {
             FIRST_NAME: '',
             Comment: '',
         }
+        this.loaddata();
     }
 
-    componentWillMount() {
-        AsyncStorage.getItem('access_token')
-            .then(access_token => {
-                AsyncStorage.getItem('ResponseCode')
-                    .then(ResponseCode => {
-                        AsyncStorage.getItem('USER_ID')
-                            .then(USER_ID => {
-                                AsyncStorage.getItem('FIRST_NAME')
-                                    .then(FIRST_NAME => {
-                                        const DataType = this.props.navigation.getParam('DataType');
-                                        const DataDetails = this.props.navigation.getParam('DataDetails')
-                                        console.log('data details' + JSON.stringify(DataDetails))
-                                        if (DataType == 'Add') {
+    loaddata=async()=> {
+        const DataType = this.props.navigation.getParam('DataType');
+        const DataDetails = this.props.navigation.getParam('DataDetails')
+        let token= await AsyncStorage.getItem(Constants.access_token)
+        let responsecode = await  AsyncStorage.getItem(Constants.responseCode)
+        let statename = await AsyncStorage.getItem(Constants.statename)
+        let fname = await  AsyncStorage.getItem(Constants.firstname)
+        let userID =  await AsyncStorage.getItem(Constants.user_id)
+        if (DataType == 'Add') {
                                             this.setState({
-                                                RESPONSE_CODE: ResponseCode,
-                                                AccessToken: access_token,
-                                                POSTED_BY: USER_ID,
-                                                FIRST_NAME: FIRST_NAME,
+                                                RESPONSE_CODE: responsecode,
+                                                AccessToken: token,
+                                                POSTED_BY: userID,
+                                                FIRST_NAME: fname,
                                             })
 
                                         } else if (DataType == 'Update') {
@@ -65,10 +63,10 @@ export default class AddNoticeScreen extends React.Component {
                                                 NOTICE_SYS_ID: DataDetails.NOTICE_SYS_ID,
                                                 RESPONSE_CODE: DataDetails.RESPONSE_CODE,
                                                 DESCRIPTION: DataDetails.DESCRIPTION,
-                                                POSTED_BY: DataDetails.POSTED_BY,
+                                                POSTED_BY: userID,
                                                 BtnLevel: 'Update Notice',
-                                                AccessToken: access_token,
-                                                FIRST_NAME: FIRST_NAME
+                                                AccessToken: token,
+                                                FIRST_NAME: fname
                                             })
 
                                         } else if (DataType == 'Comment') {
@@ -76,27 +74,26 @@ export default class AddNoticeScreen extends React.Component {
                                                 NOTICE_SYS_ID: DataDetails.NOTICE_SYS_ID,
                                                 RESPONSE_CODE: DataDetails.RESPONSE_CODE,
                                                 DESCRIPTION: DataDetails.DESCRIPTION,
-                                                POSTED_BY: DataDetails.POSTED_BY,
+                                                 POSTED_BY: userID,
                                                 BtnLevel: 'Add Comment',
-                                                AccessToken: access_token,
-                                                FIRST_NAME: FIRST_NAME,
+                                                AccessToken: token,
+                                                FIRST_NAME: fname,
                                             })
                                         } else {
 
                                         }
 
-                                    })
-                            })
-                    })
-            })
+                            
+                        
+    
     }
 
     getback = () => {
-        this.props.navigation.navigate('NoticeBoardStack');
+        this.props.navigation.navigate('NoticeBoardScreen');
     }
-    // [{"NOTICE_SYS_ID":"1","RESPONSE_CODE":"AWS12","DESCRIPTION":"XXsdfh","POSTED_BY":1}]	
 
     AddNoticeData() {
+    console.log('ji ji'+this.state.BtnLevel)
         if (this.state.BtnLevel == 'Update Notice') {
             const data = JSON.stringify({
                 NOTICE_SYS_ID: this.state.NOTICE_SYS_ID,
@@ -115,14 +112,16 @@ export default class AddNoticeScreen extends React.Component {
                 { headers }
             ).then(p => {
                 console.log('Kapil j ' + (p.data.status))
-                if (p.data.status == true) {
+                if (p.data.status == 'true') {
+                   // console.log('Kapil j ' + (p.data.response))
                     Toast.show(p.data.response);
-                    this.props.navigation.navigate('NoticeBoardScreen')
+                    this.props.navigation.navigate('ViewNotice');
                     this.setState({
                         spinner: false,
                     });
 
                 } else {
+                     console.log('Kapil j ' + (p.data.response))
                     Toast.show(p.data.response);
                     this.setState({
                         spinner: false,
@@ -134,12 +133,15 @@ export default class AddNoticeScreen extends React.Component {
             })
 
         } else if (this.state.BtnLevel == 'ADD Notice') {
+            this.setState({spinner:true})
+            console.log('respo'+this.state.RESPONSE_CODE)
+            console.log('DESCRIPTION'+this.state.DESCRIPTION)
+            console.log('POSTED_BY'+this.state.POSTED_BY)
             const data = JSON.stringify({
                 RESPONSE_CODE: this.state.RESPONSE_CODE,
                 DESCRIPTION: this.state.DESCRIPTION,
                 POSTED_BY: this.state.POSTED_BY,
             });
-            console.log('rohit jain' + data)
             const headers = {
                 'content-type': 'application/json',
                 'Authorization': 'bearer ' + this.state.AccessToken
@@ -149,16 +151,17 @@ export default class AddNoticeScreen extends React.Component {
                 data,
                 { headers }
             ).then(p => {
-                console.log('Kapil j ' + (p.data.status))
-                if (p.data.status == true) {
+                console.log('Kapil j fdssfdsf ' + JSON.stringify(p))
+                if (p.data.status == 'true') {
                     Toast.show(p.data.response);
-                    this.props.navigation.navigate('NoticeBoardScreen')
+                    this.props.navigation.navigate('ViewNotice');
                     this.setState({
                         spinner: false,
                     });
 
                 } else {
                     Toast.show(p.data.response);
+                    // this.props.navigation.navigate('NoticeBoardScreen');
                     this.setState({
                         spinner: false,
                     });
@@ -188,9 +191,11 @@ export default class AddNoticeScreen extends React.Component {
                 if (p.data.status == 'true') {
                     Toast.show(p.data.response);
                     //this.getNoticeList();
-                    this.props.navigation.navigate('NoticeBoardScreen');
+
+                    this.props.navigation.navigate('ViewNotice');
                     this.setState({
                         spinner: false,
+            
                     });
 
                 } else {

@@ -12,6 +12,8 @@ import BaseUrl from '../../Util/ApiCollection';
 import StatusBar from '../../Assets/StatusBar';
 import LevelStore from '../../Componenet/ReactString';
 import StoreHeader from '../../Header';
+import Constants from '../../Util/Config/Constants';
+
 export default class BeneficialListScreen extends Component {
     static navigationOptions = { header: null };
     constructor(props) {
@@ -31,11 +33,12 @@ export default class BeneficialListScreen extends Component {
             HamletName: '',
             showAlert: false,
         }
+        this.loaddata();
     } 
-    componentWillMount() {
+    loaddata=async()=> {
         const ItemData = this.props.navigation.getParam('ItemData');
-       // Toast.show(JSON.stringify(ItemData))
-        console.log('kapiphwjd'+ItemData.RESPONSE_LOCATION_MAPPING_SYS_ID)
+        let token = await AsyncStorage.getItem(Constants.access_token)
+        let responsecode = await AsyncStorage.getItem(Constants.responseCode)
         this.setState({
             StateName: ItemData.STATE_NAME,
             DsitrictName: ItemData.DISTRICT_NAME,
@@ -43,47 +46,43 @@ export default class BeneficialListScreen extends Component {
             GRAMPANCHAYATNAME: ItemData.GRAM_PANCHAYAT_NAME,
             VillageName: ItemData.VILLAGE_NAME,
             HamletName: ItemData.HAMLET_NAME,
+            AccessToken: token,
+            ResponseCode: responsecode,
             SyS_ID:ItemData.RESPONSE_LOCATION_MAPPING_SYS_ID,
         });
         this.getBeneficiarylist();
     }
     getBeneficiarylist() {
-        AsyncStorage.getItem('access_token')
-            .then(access_token => {
-                AsyncStorage.getItem('ResponseCode')
-                    .then(ResponseCode => {
-                        console.log('jajaj' + ResponseCode)
-                        this.setState({
-                            AccessToken: access_token,
-                            ResponseCode: ResponseCode,
-                        })
+       
+                      
                         console.log('rrr' + this.state.SYS_ID)
-                        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-response-beneficiary?response_code=" + ResponseCode + "&location_mapping_id=" + this.state.SyS_ID, {
+                        Axios.get(BaseUrl.ViewResponseBeneficiary +this.state.ResponseCode + "&location_mapping_id=" + this.state.SyS_ID, {
                             headers: {
                                 'Authorization': 'bearer ' + this.state.AccessToken
                             }
                         }).then((response) => {
-                            console.log('rohit jain aa' + JSON.stringify(response.data));
+                            console.log('rohit jain aa' + JSON.stringify(response.data.status));
                             console.log('rohit jain aa' + response);
                             if (response.data.status == 'true') {
-                                console.log('rohit jain aaxad' + response.data.response);
+                                console.log('rohit jain aaxad' + response.data.status);
                                 this.setState({
-                                    MappingListArray: response.data.response
+                                    MappingListArray: response.data.response,
+                                    spinner:false
                                 })
 
                             } else {
                                 Toast.show(response.data.response)
                             }
                         })
-                    })
-            })
+                
+        
 
     }
     getback = () => {
-        this.props.navigation.navigate('DashboardStack')
+        this.props.navigation.navigate('DashboardScreen')
     }
     AddMapping = () => {
-        this.props.navigation.navigate('AddBeneFicialStack');
+        this.props.navigation.navigate('AddBeneFicialScreen');
     }
     DeleteNotice() {
         this.setState({ spinner: true })

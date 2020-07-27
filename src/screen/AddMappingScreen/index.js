@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Image, FlatList, TextInput, Picker, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -13,6 +12,7 @@ import BuyNFOStyle from './style';
 import Spinner from 'react-native-loading-spinner-overlay';
 import CommanStyle from '../../Util/Header';
 import StatusBar from '../../Assets/StatusBar';
+import Constants from '../../Util/Config/Constants';
 
 
 export default class AddMappingScreen extends React.Component {
@@ -49,7 +49,7 @@ export default class AddMappingScreen extends React.Component {
         }
     }
     componentWillMount() {
-        AsyncStorage.getItem('access_token')
+        AsyncStorage.getItem(Constants.access_token)
         .then(access_token => {
         const MappingUpdateData = this.props.navigation.getParam('MappingUpdateData');
         console.log('Mapping' + JSON.stringify(MappingUpdateData));
@@ -76,11 +76,11 @@ export default class AddMappingScreen extends React.Component {
             })
         } else {
             //ResponseCode
-            AsyncStorage.getItem('ResponseCode')
+            AsyncStorage.getItem(Constants.responseCode)
             .then(ResponseCode => {
-            AsyncStorage.getItem('StateName')
+            AsyncStorage.getItem(Constants.statename)
             .then(StateName => {
-                AsyncStorage.getItem('State_ID')
+                AsyncStorage.getItem(Constants.stateId)
                 .then(State_ID => {
                     console.log('jjf'+State_ID)
                     this.setState({
@@ -278,7 +278,7 @@ export default class AddMappingScreen extends React.Component {
 
     AddMappingData() {
         this.setState({ spinner: true })
-        AsyncStorage.getItem('USER_ID')
+        AsyncStorage.getItem(Constants.user_id)
                 .then(USER_ID => {
         if (this.state.BtnLevel == 'Update Mapping Location') {
             // {"RESPONSE_LOCATION_MAPPING_SYS_ID":1,"PARTNER_NAME":"R jain",

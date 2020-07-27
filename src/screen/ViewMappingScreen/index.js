@@ -18,15 +18,17 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 import StoreHeader from '../../Header';
 import StatusBar from '../../Assets/StatusBar';
 import LevelStore from '../../Componenet/ReactString';
-import URLLINK from '../../Util/ApiCollection';
+import Baseurl from '../../Util/ApiCollection';
 import CommanStyle from '../../Util/Header';
+import Constants from '../../Util/Config/Constants';
+
 export default class MappingListScreen extends Component {
     static navigationOptions = { header: null };
     constructor(props) {
         super(props);
         this.state = {
             AccessToken: '',
-            USER_ID: '1',
+            USER_ID: '',
             FIRST_NAME: '',
             MappingListArray: [],
             ResponseCode: '',
@@ -34,17 +36,14 @@ export default class MappingListScreen extends Component {
             SyS_ID: '',
             showAlert: false,
         }
-    }
-    componentWillMount() {
-        this.getMappingList();
-
+ this.getMappingList();
     }
     DeleteLocation() {
         this.setState({
             spinner: true
         });
-
-        Axios.get("http://Devapi.tatadisasterresponse.com/api/delete-mapping-location-list?location_mapping_sys_id=" + this.state.SyS_ID + "&modified_by=" + this.state.USER_ID, {
+console.log('fhdjfhd'+this.state.SyS_ID)
+        Axios.get(Baseurl.DeleteMappinglocationlist + this.state.SyS_ID + "&modified_by=" + this.state.USER_ID, {
             headers: {
                 'Authorization': 'bearer ' + this.state.AccessToken
             }
@@ -74,22 +73,16 @@ export default class MappingListScreen extends Component {
 
 
     }
-    getMappingList() {
-        //Toast.show('hello ahain')
-        this.setState({ spinner: true })
-        AsyncStorage.getItem('USER_ID')
-            .then(USER_ID => {
-                AsyncStorage.getItem('access_token')
-                    .then(access_token => {
-                        AsyncStorage.getItem('ResponseCode')
-                            .then(ResponseCode => {
-                                console.log('jajaj' + ResponseCode)
+    getMappingList=async()=>{
+let user_id = await AsyncStorage.getItem(Constants.user_id)
+let token = await AsyncStorage.getItem(Constants.access_token)
+let responseCode = await AsyncStorage.getItem(Constants.responseCode)
                                 this.setState({
-                                    AccessToken: access_token,
-                                    ResponseCode: ResponseCode,
-                                    USER_ID: USER_ID,
+                                    AccessToken: token,
+                                    ResponseCode: responseCode,
+                                    USER_ID: user_id,
                                 })
-                                Axios.get("http://Devapi.tatadisasterresponse.com/api/view-response-location-mapping-details?response_code=" + this.state.ResponseCode, {
+                                Axios.get(Baseurl.ViewResponselocationMappingDetails + this.state.ResponseCode, {
                                     headers: {
                                         'Authorization': 'bearer ' + this.state.AccessToken
                                     }
@@ -109,16 +102,14 @@ export default class MappingListScreen extends Component {
                                             spinner: false
                                         })
                                     }
-                                })
-                            })
-                    })
+                                
             })
     }
     getback = () => {
-        this.props.navigation.navigate('DashboardStack')
+        this.props.navigation.navigate('DashboardScreen')
     }
     AddMapping = () => {
-        this.props.navigation.navigate('AddMappingScreen');
+        this.props.navigation.navigate('AddMappingScreen')
     }
 
     UpdateData(item) {

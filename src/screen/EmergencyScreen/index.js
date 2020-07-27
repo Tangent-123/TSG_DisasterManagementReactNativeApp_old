@@ -19,6 +19,8 @@ import StoreHeader from '../../Header';
 // import LoginApi from '../../../util/ApiCollection';
 // import Spinner from 'react-native-loading-spinner-overlay';
 import CommanStyle from '../../Util/Header';
+import Constants from '../../Util/Config/Constants';
+
 export default class EmergencyScreen extends React.Component {
     static navigationOptions = {
         header: null
@@ -32,7 +34,7 @@ export default class EmergencyScreen extends React.Component {
         }
     }
     getlogin = () => {
-        this.props.navigation.navigate('DashboardStack')
+        this.props.navigation.navigate('DashboardScreen')
         if (this.state.Name !== '') {
             if (this.state.password !== '') {
 
@@ -80,14 +82,14 @@ export default class EmergencyScreen extends React.Component {
     // }
     getFunctionData(item) {
         switch (item) {
-            case 'Activity': return this.props.navigation.navigate('GuidlineStack')
-            case 'Team': return this.props.navigation.navigate('TeamStack')
+            case 'Activity': return this.props.navigation.navigate('GuidlineScreen')
+            case 'Team': return this.props.navigation.navigate('TeamScreen')
             case 'Gallary': return 'Working';
 
         }
     }
     getback = () => {
-        this.props.navigation.navigate('DashboardStack')
+        this.props.navigation.navigate('DashboardScreen')
     }
     render() {
         return (

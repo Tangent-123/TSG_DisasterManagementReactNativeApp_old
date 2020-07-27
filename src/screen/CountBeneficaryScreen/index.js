@@ -9,6 +9,9 @@ import CommanStyle from '../../Util/Header';
 import LevelStore from '../../Componenet/ReactString';
 import StoreHeader from '../../Header';
 import StatusBar from '../../Assets/StatusBar';
+import BaseUrl from '../../Util/ApiCollection';
+import Constants from '../../Util/Config/Constants';
+
 
 var folio_number = [];
 export default class CountBeneficaryScreen extends React.Component {
@@ -19,41 +22,39 @@ export default class CountBeneficaryScreen extends React.Component {
             ViewBeneficiaryCount: [],
             urlvalue: '',
             ResponseCode: '',
+            AccessToken:'',
+            FIRST_NAME:'',
         }
+        this.loaddata();
 
     }
-    componentWillMount() {
-        AsyncStorage.getItem('access_token')
-            .then(access_token => {
-                AsyncStorage.getItem('USER_ID')
-                    .then(USER_ID => {
-                        AsyncStorage.getItem('FIRST_NAME')
-                            .then(FIRST_NAME => {
-                                AsyncStorage.getItem('ResponseCode')
-                                    .then(ResponseCode => {
+    loaddata=async()=> {
+        let token= await AsyncStorage.getItem(Constants.access_token)
+        let responsecode = await  AsyncStorage.getItem(Constants.responseCode)
+        let statename = await AsyncStorage.getItem(Constants.statename)
+        let fname = await  AsyncStorage.getItem(Constants.firstname)
+        let userID =  await AsyncStorage.getItem(Constants.user_id)
                                         this.setState({
-                                            AccessToken: access_token,
-                                            USER_ID: USER_ID,
-                                            FIRST_NAME: FIRST_NAME,
-                                            ResponseCode: ResponseCode,
+                                            AccessToken: token,
+                                            USER_ID: userID,
+                                            FIRST_NAME: fname,
+                                            ResponseCode: responsecode,
                                         });
-
+console.log('FFFFFFFFF'+token)
                                         this.getCountBeneficiaryApi();
-                                    })
-                            })
-                    })
-            })
+                    
 
     }
 
     getCountBeneficiaryApi() {
+        console.log('FFFFFFFFFFFFFFF'+this.state.AccessToken)
         this.setState({ spinner: true })
-        Axios.get("http://Devapi.tatadisasterresponse.com/api/view-beneficiary-count?response_code=" + this.state.ResponseCode, {
+        Axios.get(BaseUrl.ViewBeneficiaryCount + this.state.ResponseCode, {
             headers: {
                 'Authorization': 'bearer ' + this.state.AccessToken
             }
         }).then((response) => {
-            console.log('rohit jain aa' + response.data);
+            console.log('rohit jainKKKKKKKKKKKKK aa' +JSON.stringify(response.data));
             console.log('rohit jain aa' + response.data.status);
             if (response.data.status == 'true') {
                 console.log('rohit jain aaxad' + JSON.stringify(response.data.response));
@@ -70,7 +71,7 @@ export default class CountBeneficaryScreen extends React.Component {
         })
     }
     GETAddBeneficiary=(sys_id)=>{
-        console.log('kapil '+sys_id)
+    console.log('jddsjkd'+sys_id)
         this.props.navigation.navigate('AddBeneFicialScreen',{
             SYS_ID:sys_id,
 
@@ -84,7 +85,7 @@ export default class CountBeneficaryScreen extends React.Component {
         })
     }
     getback = () => {
-        this.props.navigation.navigate('DashboardStack');
+        this.props.navigation.navigate('DashboardScreen');
     }
 
     render() {

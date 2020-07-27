@@ -19,6 +19,8 @@ import StatusBar from '../../Assets/StatusBar';
 import qs from 'qs';
 import ColorCode from '../../Util/Color_Value';
 import RNPickerSelect from 'react-native-picker-select';
+import Constants from '../../Util/Config/Constants';
+
 
 export default class AddBeneficialScreen extends React.Component {
     _isMounted = false;
@@ -76,11 +78,11 @@ export default class AddBeneficialScreen extends React.Component {
         this._isMounted = false;
     }
     AddBeneficial() {
-        AsyncStorage.getItem('ResponseCode')
+        AsyncStorage.getItem(Constants.responseCode)
             .then(ResponseCode => {
-                AsyncStorage.getItem('access_token')
+                AsyncStorage.getItem(Constants.access_token)
                     .then(access_token => {
-                        AsyncStorage.getItem('USER_ID')
+                        AsyncStorage.getItem(Constants.user_id)
                             .then(USER_ID => {
                                 if (this.state.FAMILYHEADMALE !== '') {
                                     if (this.state.FAMILYHEADFEMALE !== '') {

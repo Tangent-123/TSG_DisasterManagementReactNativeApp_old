@@ -33,77 +33,39 @@ export default class GuidlineScreen extends React.Component {
             pdfGuideline: '',
             ActivityName: '',
             typeData: '',
-            PdfType:'',
+            ImageArray:[],
         }
     }
     componentWillMount() {
         const PDFTYPE = this.props.navigation.getParam('PDFTYPE');
         this.setState({
-            PdfType:PDFTYPE
+            ImageArray:PDFTYPE
         })
     }
     getback = () => {
-        this.props.navigation.navigate('GuidlineStack');
+        this.props.navigation.navigate('GuidlineScreen');
 
     }
-
-renderview=()=>{
-if (this.state.PdfType =='Guidelines') {
-return(
-<Pdf   
-                    source={require('../../Util/File/guidlines.pdf') }
-                    onLoadComplete={(numberOfPages, filePath) => {
-                        console.log(`number of pages: ${numberOfPages}`);
-                    }}
-                    onPageChanged={(page, numberOfPages) => {
-                        console.log(`current page: ${page}`);
-                    }}
-                    onError={(error) => {
-                        console.log(error);
-                    }}
-                    onPressLink={(uri) => {
-                        console.log(`Link presse: ${uri}`)
-                    }}
-                    style={{
-                        flex: 1,
-                        width: Dimensions.get('window').width,
-                        height: Dimensions.get('window').height,
-                    }} />
-)
-}else{
-return(
-    <Pdf
-                    source={require('../../Util/File/SOA.pdf')}
-                    onLoadComplete={(numberOfPages, filePath) => {
-                        console.log(`number of pages: ${numberOfPages}`);
-                    }}
-                    onPageChanged={(page, numberOfPages) => {
-                        console.log(`current page: ${page}`);
-                    }}
-                    onError={(error) => {
-                        console.log(error);
-                    }}
-                    onPressLink={(uri) => {
-                        console.log(`Link presse: ${uri}`)
-                    }}
-                    style={{
-                        flex: 1,
-                        width: Dimensions.get('window').width,
-                        height: Dimensions.get('window').height,
-                    }} />
-)
-}
-}
     render() {
 
         return (
             <View style={{ flex: 1 }}>
                 <StoreHeader title='Disaster Response Guidelines' onPress={this.getback} />
-                {/* <View style={{flex:1}}> */}
+                 <View style={{flex:1,padding:1}}>
 
-                {this.renderview()}
-                
-                {/* </View> */}
+              <FlatList
+                    //style={{ height: Dimensions.get('window').height}}
+                    data={this.state.ImageArray}
+                    renderItem={({ item }) =>
+                        <Image
+                            source={item.image}
+                            resizeMode={'contain'}
+                            style={{ height: Dimensions.get('window').height, width: '100%', margin: 2 }}
+                        />
+                    }
+                    keyExtractor={(item, index) => index}
+                />
+                </View>
 
                 <StatusBar />
             </View>
